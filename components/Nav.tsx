@@ -2,13 +2,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const LINKS = [
-  { href: "#", label: "Thesis" },
-  { href: "#", label: "Data" },
-  { href: "#", label: "Stories" },
-  { href: "#", label: "Sources" },
-];
-
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);

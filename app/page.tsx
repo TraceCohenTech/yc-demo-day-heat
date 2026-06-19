@@ -1,101 +1,587 @@
-import Image from "next/image";
+"use client";
+
+import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  Cell, CartesianGrid, PieChart, Pie,
+} from "recharts";
+import { useState } from "react";
+
+/* ── DATA ── */
+
+type Company = {
+  name: string;
+  batch: string;
+  valuation: number;
+  raised: string;
+  category: "sleeper" | "hot-won" | "hot-failed" | "moderate";
+  story: string;
+  industry: string;
+};
+
+const COMPANIES: Company[] = [
+  // SLEEPERS — Ignored/struggled → Won Big
+  { name: "Airbnb", batch: "W09", valuation: 93.9, raised: "$6.4B", category: "sleeper", story: "7+ VC rejections. Sold cereal boxes to survive. Fred Wilson publicly passed.", industry: "Travel" },
+  { name: "Stripe", batch: "S09", valuation: 70, raised: "$9.4B", category: "hot-won", story: "First customer in 2 weeks via YC network. Sequoia early.", industry: "Fintech" },
+  { name: "Coinbase", batch: "S12", valuation: 63.3, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto" },
+  { name: "DoorDash", batch: "S13", valuation: 43.4, raised: "$2.5B", category: "sleeper", story: "Bottom half of batch at Demo Day. Nearly died in 2017–18.", industry: "Delivery" },
+  { name: "Cruise", batch: "W14", valuation: 30, raised: "$16B", category: "sleeper", story: "Not in TechCrunch's top 8 picks. Completely overlooked.", industry: "Autonomous" },
+  { name: "Scale AI", batch: "S16", valuation: 29, raised: "$1.6B", category: "hot-won", story: "19-year-old founder. Pivoted during batch. Raised Series A in 2017.", industry: "AI" },
+  { name: "Deel", batch: "W19", valuation: 17.3, raised: "$679M", category: "hot-won", story: "TechCrunch top 10 pick. Raised quickly post-Demo Day.", industry: "HR" },
+  { name: "Rippling", batch: "W17", valuation: 16.8, raised: "$2B", category: "moderate", story: "Zenefits baggage but closed seed in 2 weeks. 90% repeat backers.", industry: "HR" },
+  { name: "OpenSea", batch: "W18", valuation: 13, raised: "$427M", category: "sleeper", story: "Barely keeping lights on during crypto winter 2018–19.", industry: "Crypto" },
+  { name: "Faire", batch: "W17", valuation: 12.6, raised: "$1.7B", category: "hot-won", story: "Raised $3.4M seed from Khosla shortly after YC.", industry: "Wholesale" },
+  { name: "Brex", batch: "W17", valuation: 12.3, raised: "$1.5B", category: "hot-won", story: "Ribbit Capital led $7M Series A pre-Demo Day.", industry: "Fintech" },
+  { name: "Reddit", batch: "S05", valuation: 10.6, raised: "$1.3B", category: "sleeper", story: "19 years from YC to IPO. Longest timeline of any YC company.", industry: "Social" },
+  { name: "Instacart", batch: "S12", valuation: 9.3, raised: "$2.9B", category: "sleeper", story: "Applied late. Rejected multiple times. Delivered beer to Garry Tan's door.", industry: "Delivery" },
+  { name: "Gusto", batch: "W12", valuation: 9.5, raised: "$746M", category: "moderate", story: "Steady builder. No Demo Day hype. Grew into $9.5B company.", industry: "HR" },
+  { name: "GitLab", batch: "W15", valuation: 8.5, raised: "$414M", category: "sleeper", story: "All-remote model made fundraising difficult. Series B was a grind.", industry: "Dev Tools" },
+  { name: "Flexport", batch: "W14", valuation: 8, raised: "$2.7B", category: "moderate", story: "Logistics. Raised early from YC Continuity Fund.", industry: "Logistics" },
+  { name: "Flock Safety", batch: "S17", valuation: 7.5, raised: "$381M", category: "hot-won", story: "Garry Tan funded seed at Demo Day on the spot. 'Home run.'", industry: "Security" },
+  { name: "Dropbox", batch: "S07", valuation: 7.4, raised: "$1.7B", category: "hot-won", story: "Viral demo video. 5K→75K waitlist signups overnight.", industry: "Cloud" },
+  { name: "Razorpay", batch: "W15", valuation: 7, raised: "$816M", category: "moderate", story: "Payments for India. Steady growth to $7B valuation.", industry: "Fintech" },
+  { name: "Benchling", batch: "S12", valuation: 6.1, raised: "$412M", category: "moderate", story: "Biotech tools. Quiet grower to $6.1B valuation.", industry: "Biotech" },
+  { name: "Checkr", batch: "S14", valuation: 5.7, raised: "$679M", category: "hot-won", story: "Overwhelming investor interest. Landed Uber immediately.", industry: "HR" },
+  { name: "Fivetran", batch: "W13", valuation: 5.6, raised: "$853M", category: "moderate", story: "Data integration. Scaled steadily from YC check.", industry: "Data" },
+  { name: "Rappi", batch: "W16", valuation: 5.2, raised: "$2.3B", category: "moderate", story: "Latin American delivery super-app.", industry: "Delivery" },
+  { name: "Zapier", batch: "S12", valuation: 5, raised: "$1.4M", category: "sleeper", story: "Bootstrapped from Missouri. Only ever raised $1.3M total.", industry: "Automation" },
+  { name: "Webflow", batch: "S13", valuation: 4, raised: "$335M", category: "sleeper", story: "Credit card debt. Failed Kickstarter. 6 years to raise first VC.", industry: "Dev Tools" },
+  { name: "Meesho", batch: "S16", valuation: 3.9, raised: "$1.4B", category: "moderate", story: "Social commerce India. IPO'd Dec 2025.", industry: "E-commerce" },
+  { name: "EquipmentShare", batch: "W15", valuation: 3.8, raised: "$3.5B", category: "moderate", story: "Construction equipment rental. Quiet grower.", industry: "Construction" },
+  { name: "Whatnot", batch: "W20", valuation: 3.7, raised: "$485M", category: "sleeper", story: "100+ investor meetings. Raised from friends. Pivoted post-Demo Day.", industry: "E-commerce" },
+  { name: "GOAT Group", batch: "W11", valuation: 3.7, raised: "$493M", category: "sleeper", story: "Original YC company (GrubWithUs) failed. Years of middling ideas before pivot.", industry: "E-commerce" },
+  { name: "GrubMarket", batch: "W15", valuation: 3.5, raised: "$499M", category: "moderate", story: "Food marketplace. Steady growth.", industry: "Food" },
+  { name: "Segment", batch: "S11", valuation: 3.2, raised: "$284M", category: "sleeper", story: "Demo Day product was a classroom tool that flopped. Pivoted entirely.", industry: "Analytics" },
+  { name: "Groww", batch: "W18", valuation: 3, raised: "$393M", category: "moderate", story: "Indian investing platform.", industry: "Fintech" },
+  { name: "Podium", batch: "W16", valuation: 3, raised: "$419M", category: "moderate", story: "Customer engagement platform.", industry: "SaaS" },
+  { name: "Twitch", batch: "S07", valuation: 3.79, raised: "$35M", category: "moderate", story: "Started as Justin.tv. Pivoted to gaming streams. $970M Amazon exit.", industry: "Streaming" },
+  { name: "Algolia", batch: "W14", valuation: 2.25, raised: "$334M", category: "moderate", story: "Search API. $2.25B valuation.", industry: "Dev Tools" },
+  { name: "PagerDuty", batch: "S10", valuation: 1.93, raised: "$524M", category: "moderate", story: "Already had paying customers at YC. IPO'd.", industry: "DevOps" },
+  { name: "Mixpanel", batch: "S09", valuation: 1, raised: "$277M", category: "moderate", story: "Analytics. Same batch as Stripe.", industry: "Analytics" },
+  { name: "Amplitude", batch: "W12", valuation: 0.96, raised: "$336M", category: "moderate", story: "Product analytics. IPO'd.", industry: "Analytics" },
+  { name: "PlanGrid", batch: "W12", valuation: 0.875, raised: "$69M", category: "moderate", story: "Construction tech. Acquired by Autodesk for $875M.", industry: "Construction" },
+  { name: "Heroku", batch: "W08", valuation: 0.212, raised: "$13M", category: "moderate", story: "Cloud platform. Acquired by Salesforce for $212M.", industry: "Cloud" },
+  // HOT → FAILED
+  { name: "Zenefits", batch: "W13", valuation: 0, raised: "$584M", category: "hot-failed", story: "a16z Series A. $4.5B peak valuation. CEO ousted for fraud.", industry: "HR" },
+  { name: "Parker", batch: "W19", valuation: 0, raised: "$200M+", category: "hot-failed", story: "Peter Thiel's Valar Ventures led. $65M revenue. Chapter 7 bankruptcy.", industry: "Fintech" },
+  { name: "Embark Trucks", batch: "W16", valuation: 0, raised: "$317M", category: "hot-failed", story: "SPAC at $5.2B. Stock crashed to $60M. Shut down 2023.", industry: "Autonomous" },
+  { name: "Momentus", batch: "S18", valuation: 0, raised: "$160M", category: "hot-failed", story: "SPAC at $1B+. SEC fraud charges. Collapsed.", industry: "Space" },
+  { name: "Atrium", batch: "S07", valuation: 0, raised: "$75.5M", category: "hot-failed", story: "Justin Kan (sold Twitch for $970M). a16z backed. Shut down 2020.", industry: "Legal" },
+  { name: "Notable Labs", batch: "W15", valuation: 0, raised: "$55M", category: "hot-failed", story: "Public biotech company. Filed for bankruptcy Oct 2024.", industry: "Biotech" },
+  { name: "Homejoy", batch: "W10", valuation: 0, raised: "$40M", category: "hot-failed", story: "Massive Demo Day buzz. On-demand cleaning. Shut down 2015.", industry: "Services" },
+  { name: "SpoonRocket", batch: "S13", valuation: 0, raised: "$13.5M", category: "hot-failed", story: "TechCrunch top 8. $2M run rate. 112% weekly growth. Dead by 2016.", industry: "Delivery" },
+  { name: "Mattermark", batch: "S12", valuation: 0, raised: "$17M", category: "hot-failed", story: "a16z + Foundry. Fire-sold for <$1M. Stock worthless.", industry: "Data" },
+  { name: "Buttercoin", batch: "S13", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. Bitcoin exchange. Dead by April 2015.", industry: "Crypto" },
+  { name: "Standard Treasury", batch: "S13", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. Banking API. Acqui-hired by SVB.", industry: "Fintech" },
+  { name: "Dating Ring", batch: "W14", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch's #2 pick. 60% MoM growth. Shut down 2018.", industry: "Consumer" },
+  { name: "Kimono Labs", batch: "W14", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. 20K devs. Acqui-hired by Palantir.", industry: "Dev Tools" },
+  { name: "ZeroDown", batch: "W19", valuation: 0, raised: "$10M+", category: "hot-failed", story: "Raised $10M+ pre-Demo Day at $75M valuation. Shut down.", industry: "Real Estate" },
+  { name: "Flockjay", batch: "W19", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 10. 40% job placement rate. Shut down ~2022.", industry: "Education" },
+];
+
+const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
+const hotWon = COMPANIES.filter((c) => c.category === "hot-won");
+const hotFailed = COMPANIES.filter((c) => c.category === "hot-failed");
+
+const sleepersTotal = sleepers.reduce((s, c) => s + c.valuation, 0);
+const hotFailedRaised = "$1.5B+";
+
+const tcBatches = [
+  { batch: "S13", year: 2013, picks: 8, failed: 3, failedNames: "SpoonRocket, Buttercoin, Standard Treasury", missed: "DoorDash ($71B IPO)" },
+  { batch: "W14", year: 2014, picks: 8, failed: 5, failedNames: "Dating Ring (#2), Kimono Labs, Boostable, BatteryOS…", missed: "Cruise ($30B exit)" },
+  { batch: "W19", year: 2019, picks: 10, failed: 3, failedNames: "Flockjay, Docucharm, Parker (bankrupt)", missed: "Deel ($17.3B)" },
+];
+
+const quotes = [
+  { who: "Paul Graham", role: "YC Co-founder", text: "The hard part was predicting how tough and ambitious they would become. I learned to maintain a completely open mind about which startups in each batch would turn out to be the stars." },
+  { who: "Sam Altman", role: "Former YC President", text: "About 25% of YC companies appear to be on a trajectory for billion-dollar valuations at the end of YC, but only a handful actually achieve it." },
+  { who: "Dalton Caldwell", role: "YC Managing Director", text: "Tar pit ideas get enthusiastic Demo Day reception but trap founders. They've been tried since the '90s. The real advice is simpler: just don't die." },
+  { who: "Aaron Harris", role: "Former YC Partner", text: "There are no specific events that will automatically get money from an investor. I've seen founders cross $1M ARR and still not be able to raise." },
+];
+
+const categoryBreakdown = [
+  { name: "Sleepers that won", count: sleepers.length, value: Math.round(sleepersTotal), color: "#FF6600" },
+  { name: "Hot & won", count: hotWon.length, value: Math.round(hotWon.reduce((s, c) => s + c.valuation, 0)), color: "#10b981" },
+  { name: "Moderate & won", count: COMPANIES.filter(c => c.category === "moderate").length, value: Math.round(COMPANIES.filter(c => c.category === "moderate").reduce((s, c) => s + c.valuation, 0)), color: "#3b82f6" },
+  { name: "Hot & failed", count: hotFailed.length, value: 0, color: "#ef4444" },
+];
+
+const pieData = [
+  { name: "Top 3 (Airbnb, Stripe, Coinbase)", value: 50, fill: "#FF6600" },
+  { name: "Other unicorns (5.4%)", value: 40, fill: "#3b82f6" },
+  { name: "Remaining 94%", value: 10, fill: "#e5e5e5" },
+];
+
+const CATEGORY_META: Record<string, { label: string; color: string; bg: string }> = {
+  sleeper: { label: "Sleeper", color: "#FF6600", bg: "#FFF3EB" },
+  "hot-won": { label: "Hot → Won", color: "#10b981", bg: "#ecfdf5" },
+  "hot-failed": { label: "Hot → Failed", color: "#ef4444", bg: "#fef2f2" },
+  moderate: { label: "Moderate", color: "#3b82f6", bg: "#eff6ff" },
+};
+
+function ValuationBar({ company, maxVal }: { company: Company; maxVal: number }) {
+  const pct = company.valuation > 0 ? Math.max((company.valuation / maxVal) * 100, 2) : 0;
+  const meta = CATEGORY_META[company.category];
+  return (
+    <div className="flex items-center gap-3 py-2 group">
+      <div className="w-28 sm:w-36 shrink-0 text-right">
+        <span className="text-sm font-semibold text-yc-dark">{company.name}</span>
+        <span className="text-xs text-neutral-500 ml-1">{company.batch}</span>
+      </div>
+      <div className="flex-1 relative h-8 rounded bg-neutral-100 overflow-hidden">
+        <div
+          className="absolute inset-y-0 left-0 rounded transition-all duration-700 ease-out flex items-center"
+          style={{ width: `${pct}%`, backgroundColor: meta.color }}
+        >
+          {pct > 15 && (
+            <span className="text-white text-xs font-bold ml-2 whitespace-nowrap">${company.valuation}B</span>
+          )}
+        </div>
+        {pct <= 15 && company.valuation > 0 && (
+          <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-600">${company.valuation}B</span>
+        )}
+        {company.valuation === 0 && (
+          <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs font-bold text-red-500">$0 — Failed</span>
+        )}
+      </div>
+      <div className="hidden sm:block w-20 shrink-0">
+        <span className="company-badge text-xs" style={{ backgroundColor: meta.bg, color: meta.color }}>
+          {meta.label}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [filter, setFilter] = useState<string>("all");
+  const [showAll, setShowAll] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const maxVal = Math.max(...COMPANIES.map((c) => c.valuation));
+
+  const filteredCompanies = filter === "all" ? COMPANIES : COMPANIES.filter((c) => c.category === filter);
+  const sorted = [...filteredCompanies].sort((a, b) => b.valuation - a.valuation);
+  const displayed = showAll ? sorted : sorted.slice(0, 20);
+
+  return (
+    <main>
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden bg-yc-dark min-h-[85vh] sm:min-h-screen flex flex-col justify-center">
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
+            50+ companies · 20 years of data · 310 research agents
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
+            Does Demo Day<br />
+            heat predict<br />
+            <span className="text-[#FF6600]">success?</span>
+          </h1>
+
+          <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
+            We tracked every top YC company to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            <span className="text-white/90 font-semibold">The answer surprised us.</span>
+          </p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
+            {[
+              { big: "0.09", label: "R² correlation", sub: "Demo Day heat → valuation" },
+              { big: "~25%", label: "Look like winners", sub: "at the end of YC batch" },
+              { big: "~6%", label: "Actually become", sub: "unicorns ($1B+)" },
+              { big: "50%", label: "Ultimately", sub: "fail entirely" },
+            ].map((s, i) => (
+              <div key={i} className="border border-white/10 rounded-xl p-4 sm:p-5 bg-white/5 backdrop-blur-sm">
+                <p className="text-2xl sm:text-3xl font-bold text-[#FF6600] tabular-nums">{s.big}</p>
+                <p className="text-sm font-medium text-white/90 mt-1">{s.label}</p>
+                <p className="text-xs text-white/50 mt-0.5">{s.sub}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-xs text-white/30 mt-8">Not affiliated with Y Combinator. Independent research by <a href="https://x.com/Trace_Cohen" className="text-[#FF6600]/70 hover:text-[#FF6600]">@Trace_Cohen</a></p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* ── THE THESIS ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+        <Reveal>
+          <div className="max-w-3xl">
+            <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">The Thesis</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark leading-tight">
+              The companies nobody wanted<br />
+              are worth <span className="text-[#FF6600]">${Math.round(sleepersTotal)}B+</span> today.
+            </h2>
+            <p className="text-neutral-600 mt-4 text-base sm:text-lg leading-relaxed max-w-2xl">
+              Airbnb was rejected 7+ times. DoorDash was bottom half of its batch. Coinbase couldn&apos;t fill a $1M round. Meanwhile, the companies investors fought over at Demo Day? Many raised hundreds of millions — and are now worth $0.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
+            <div className="rounded-2xl border-2 border-[#FF6600]/20 bg-[#FFF3EB] p-6">
+              <p className="text-sm font-bold text-[#FF6600] uppercase tracking-wider">The Sleepers</p>
+              <p className="text-4xl sm:text-5xl font-bold text-yc-dark mt-2">
+                $<CountUp to={Math.round(sleepersTotal)} duration={2000} />B+
+              </p>
+              <p className="text-neutral-600 text-sm mt-2">Combined valuation of {sleepers.length} companies that were overlooked or struggled at Demo Day</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {sleepers.slice(0, 8).map((c) => (
+                  <span key={c.name} className="company-badge bg-white text-yc-dark text-xs border border-[#FF6600]/20">
+                    {c.name} <span className="text-neutral-400">{c.batch}</span>
+                  </span>
+                ))}
+                {sleepers.length > 8 && <span className="company-badge bg-white text-neutral-500 text-xs border border-neutral-200">+{sleepers.length - 8} more</span>}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border-2 border-red-200 bg-red-50 p-6">
+              <p className="text-sm font-bold text-red-600 uppercase tracking-wider">The Darlings That Died</p>
+              <p className="text-4xl sm:text-5xl font-bold text-yc-dark mt-2">$0</p>
+              <p className="text-neutral-600 text-sm mt-2">{hotFailed.length} companies that were hyped at Demo Day but raised {hotFailedRaised} and failed</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {hotFailed.slice(0, 8).map((c) => (
+                  <span key={c.name} className="company-badge bg-white text-yc-dark text-xs border border-red-200">
+                    {c.name} <span className="text-neutral-400">{c.raised}</span>
+                  </span>
+                ))}
+                {hotFailed.length > 8 && <span className="company-badge bg-white text-neutral-500 text-xs border border-neutral-200">+{hotFailed.length - 8} more</span>}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ── VALUATION BAR RACE ── */}
+      <section className="bg-white border-y border-neutral-200">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+          <Reveal>
+            <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">The Data</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Every company, ranked</h2>
+            <p className="text-neutral-500 mt-2 text-sm sm:text-base">Orange = sleepers nobody wanted. Green = hot from day 1. Blue = moderate. Red = hot but failed.</p>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="flex flex-wrap gap-2 mt-6 mb-4">
+              {[
+                { key: "all", label: "All" },
+                { key: "sleeper", label: "Sleepers" },
+                { key: "hot-won", label: "Hot → Won" },
+                { key: "hot-failed", label: "Hot → Failed" },
+                { key: "moderate", label: "Moderate" },
+              ].map((f) => (
+                <button
+                  key={f.key}
+                  onClick={() => { setFilter(f.key); setShowAll(false); }}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition active:scale-[0.97] ${
+                    filter === f.key
+                      ? "bg-yc-dark text-white"
+                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+
+          <div className="mt-4 space-y-0.5">
+            {displayed.map((c) => (
+              <ValuationBar key={c.name} company={c} maxVal={maxVal} />
+            ))}
+          </div>
+          {sorted.length > 20 && !showAll && (
+            <button
+              onClick={() => setShowAll(true)}
+              className="mt-6 px-6 py-3 bg-yc-dark text-white rounded-full text-sm font-semibold hover:bg-neutral-800 transition active:scale-[0.97]"
+            >
+              Show all {sorted.length} companies
+            </button>
+          )}
+        </div>
+      </section>
+
+      {/* ── SLEEPER STORIES ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+        <Reveal>
+          <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Sleeper Stories</div>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Nobody wanted them.</h2>
+          <p className="text-neutral-500 mt-2 text-sm sm:text-base">These companies were rejected, ignored, or struggled to raise at Demo Day. They went on to be worth billions.</p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+          {sleepers.map((c, i) => (
+            <Reveal key={c.name} delay={Math.min(i * 30, 150)}>
+              <div className="rounded-2xl border border-neutral-200 bg-white p-5 h-full hover:border-[#FF6600]/40 hover:shadow-lg transition-all duration-200">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-lg font-bold text-yc-dark">{c.name}</h3>
+                    <p className="text-xs text-neutral-500 font-mono">{c.batch} · {c.industry}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold text-[#FF6600]">${c.valuation}B</p>
+                  </div>
+                </div>
+                <p className="text-sm text-neutral-600 mt-3 leading-relaxed">{c.story}</p>
+                <div className="mt-3 pt-3 border-t border-neutral-100">
+                  <p className="text-xs text-neutral-400">Raised {c.raised} total</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── HOT FAILURES ── */}
+      <section className="bg-yc-dark">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+          <Reveal>
+            <div className="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest mb-4">The Graveyard</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-white">Everyone fought over them.</h2>
+            <p className="text-white/50 mt-2 text-sm sm:text-base">These companies were the hottest at Demo Day. Top VC firms piled in. They raised hundreds of millions. They&apos;re all dead.</p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+            {hotFailed.map((c, i) => (
+              <Reveal key={c.name} delay={Math.min(i * 30, 150)}>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 h-full backdrop-blur-sm hover:border-red-500/40 transition-all duration-200">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold text-white">{c.name}</h3>
+                      <p className="text-xs text-white/40 font-mono">{c.batch} · {c.industry}</p>
+                    </div>
+                    <span className="text-xs font-bold text-red-400 bg-red-500/20 px-2 py-1 rounded-full">DEAD</span>
+                  </div>
+                  <p className="text-sm text-white/60 mt-3 leading-relaxed">{c.story}</p>
+                  <div className="mt-3 pt-3 border-t border-white/10">
+                    <p className="text-xs text-white/30">Raised {c.raised}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TECHCRUNCH PICKS ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+        <Reveal>
+          <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">TechCrunch Cross-Reference</div>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">The pundits were wrong.<br />Every. Single. Time.</h2>
+          <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">In every batch we tracked, TechCrunch&apos;s &ldquo;Top Picks&rdquo; missed the actual biggest winner.</p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+          {tcBatches.map((b, i) => (
+            <Reveal key={b.batch} delay={i * 50}>
+              <div className="rounded-2xl border border-neutral-200 bg-white p-6 h-full">
+                <div className="flex items-baseline justify-between">
+                  <h3 className="text-2xl font-bold text-yc-dark">{b.batch}</h3>
+                  <span className="text-xs text-neutral-400">{b.year}</span>
+                </div>
+
+                <div className="mt-4 flex items-center gap-3">
+                  <div className="flex-1 h-3 rounded-full bg-neutral-100 overflow-hidden">
+                    <div className="h-full bg-red-500 rounded-full" style={{ width: `${(b.failed / b.picks) * 100}%` }} />
+                  </div>
+                  <span className="text-sm font-bold text-red-600">{b.failed}/{b.picks}</span>
+                </div>
+                <p className="text-xs text-neutral-500 mt-1">top picks failed or acqui-hired</p>
+
+                <div className="mt-4 p-3 rounded-xl bg-[#FFF3EB] border border-[#FF6600]/20">
+                  <p className="text-xs font-bold text-[#FF6600]">BIGGEST WINNER NOT PICKED</p>
+                  <p className="text-sm font-semibold text-yc-dark mt-1">{b.missed}</p>
+                </div>
+
+                <p className="text-xs text-neutral-400 mt-3 leading-relaxed">{b.failedNames}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── POWER LAW ── */}
+      <section className="bg-white border-y border-neutral-200">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+          <Reveal>
+            <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Power Law</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">3 companies = 50%+ of all value</h2>
+            <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">
+              YC&apos;s returns follow an extreme power law. Airbnb, Stripe, and Coinbase account for more than half of all YC portfolio value. Two of those three were sleepers.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12 items-center">
+            <Reveal>
+              <div role="img" aria-label="Pie chart showing share of YC portfolio value">
+                <ResponsiveContainer width="100%" height={280}>
+                  <PieChart>
+                    <Pie
+                      data={pieData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={70}
+                      outerRadius={120}
+                      dataKey="value"
+                      startAngle={90}
+                      endAngle={-270}
+                      stroke="none"
+                    >
+                      {pieData.map((d, i) => (
+                        <Cell key={i} fill={d.fill} />
+                      ))}
+                    </Pie>
+                    <Tooltip contentStyle={{ background: "#1a1a1a", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} formatter={(v: number) => `${v}%`} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="flex flex-wrap gap-4 justify-center mt-2">
+                {pieData.map((d) => (
+                  <div key={d.name} className="flex items-center gap-2 text-xs text-neutral-600">
+                    <span className="w-3 h-3 rounded-full" style={{ backgroundColor: d.fill }} />
+                    {d.name}
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className="space-y-4">
+                {[
+                  { n: "0.6%", label: "of YC companies are decacorns", sub: ">$10B — account for >50% of total value" },
+                  { n: "6%", label: "become unicorns at all", sub: "Account for 90% of total YC value" },
+                  { n: "821+", label: "companies in the YC Graveyard", sub: "Documented failures across all batches" },
+                  { n: "2/3", label: "of the top 3 were sleepers", sub: "Airbnb and Coinbase were ignored at Demo Day" },
+                ].map((s, i) => (
+                  <div key={i} className="flex gap-4 items-start">
+                    <span className="text-2xl font-bold text-[#FF6600] tabular-nums shrink-0 w-16 text-right">{s.n}</span>
+                    <div>
+                      <p className="text-sm font-semibold text-yc-dark">{s.label}</p>
+                      <p className="text-xs text-neutral-500">{s.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CATEGORY BREAKDOWN ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+        <Reveal>
+          <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Breakdown</div>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">By the numbers</h2>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <div className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-6 mt-8">
+            <div role="img" aria-label="Bar chart showing combined valuation by Demo Day category">
+              <ResponsiveContainer width="100%" height={240}>
+                <BarChart data={categoryBreakdown} layout="vertical" margin={{ left: 140, right: 30, top: 10, bottom: 10 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} />
+                  <XAxis type="number" tickFormatter={(v: number) => `$${v}B`} tick={{ fill: "#737373", fontSize: 12 }} />
+                  <YAxis type="category" dataKey="name" tick={{ fill: "#1a1a1a", fontSize: 13, fontWeight: 600 }} width={130} />
+                  <Tooltip contentStyle={{ background: "#1a1a1a", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} formatter={(v: number) => `$${v}B combined`} />
+                  <Bar dataKey="value" radius={[0, 8, 8, 0]} barSize={28}>
+                    {categoryBreakdown.map((d, i) => (
+                      <Cell key={i} fill={d.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-neutral-100">
+              {categoryBreakdown.map((d) => (
+                <div key={d.name} className="text-center">
+                  <p className="text-3xl font-bold tabular-nums" style={{ color: d.color }}>{d.count}</p>
+                  <p className="text-xs text-neutral-500 mt-1">{d.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ── INSIDER QUOTES ── */}
+      <section className="bg-yc-dark">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+          <Reveal>
+            <div className="inline-block px-3 py-1 rounded-full bg-[#FF6600]/20 text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">From the Insiders</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-white">Even YC can&apos;t predict winners</h2>
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+            {quotes.map((q, i) => (
+              <Reveal key={i} delay={i * 50}>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 h-full backdrop-blur-sm">
+                  <p className="text-[#FF6600] text-4xl font-serif leading-none mb-3">&ldquo;</p>
+                  <p className="text-sm text-white/80 leading-relaxed">{q.text}</p>
+                  <div className="mt-4 pt-3 border-t border-white/10">
+                    <p className="text-sm font-bold text-white">{q.who}</p>
+                    <p className="text-xs text-white/40">{q.role}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── BOTTOM LINE ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+        <Reveal>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">The signal isn&apos;t in the sizzle.</h2>
+            <p className="text-xl sm:text-2xl text-[#FF6600] font-semibold mt-4">It&apos;s in the survival.</p>
+            <p className="text-neutral-600 text-base sm:text-lg mt-8 leading-relaxed max-w-xl mx-auto">
+              Demo Day heat is a weak predictor of YC startup success. The R² is 0.09. The correlation is 0.23. In every batch we tracked, the pundits missed the biggest winner. The most iconic YC successes were the companies nobody wanted.
+            </p>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ── SOURCES ── */}
+      <section className="border-t border-neutral-200 bg-white">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-12">
+          <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-4">Sources &amp; Methodology</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
+            {[
+              "Rebel Fund: What Predicts YC Success (Jared Heyman)",
+              "Rebel Fund: Investing in Hot YC Startups",
+              "Rebel Fund: Power Law of YC Startups",
+              "Sam Altman: The Post-YC Slump",
+              "Aaron Harris: Fundraising Isn't Predictable",
+              "Sequoia: Crucible Moments — DoorDash",
+              "TechCrunch: YC S13, W14, W19 Demo Day Coverage",
+              "Contrary Research: Webflow, Checkr, Whatnot",
+              "First Round Review: GOAT's Path to PMF",
+              "YC Graveyard Database (821+ companies)",
+              "Eqvista: Top 100 YC Companies",
+              "310 AI research agents, 64 unique sources verified",
+            ].map((s) => (
+              <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
+            ))}
+          </div>
+          <p className="text-xs text-neutral-400 mt-6">Not affiliated with Y Combinator. Valuations from most recent public reports as of June 2026. &ldquo;Failed&rdquo; = shut down, acqui-hired for &lt;$10M, or filed bankruptcy.</p>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="border-t border-neutral-200 py-8 text-center bg-yc-cream">
+        <p className="text-sm text-neutral-500">
+          Research by <a href="https://x.com/Trace_Cohen" target="_blank" rel="noopener" className="text-[#FF6600] hover:underline font-semibold">@Trace_Cohen</a>
+          {" · "}
+          <a href="mailto:t@nyvp.com" className="text-neutral-600 hover:text-yc-dark transition">t@nyvp.com</a>
+        </p>
       </footer>
-    </div>
+    </main>
   );
 }

@@ -437,7 +437,7 @@ export default function Home() {
                         <Cell key={i} fill={d.fill} />
                       ))}
                     </Pie>
-                    <Tooltip contentStyle={{ background: "#1a1a1a", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} formatter={(v: number) => `${v}%`} />
+                    <Tooltip contentStyle={{ background: "#1a1a1a", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} formatter={(v) => `${v}%`} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
@@ -488,7 +488,7 @@ export default function Home() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} />
                   <XAxis type="number" tickFormatter={(v: number) => `$${v}B`} tick={{ fill: "#737373", fontSize: 12 }} />
                   <YAxis type="category" dataKey="name" tick={{ fill: "#1a1a1a", fontSize: 13, fontWeight: 600 }} width={130} />
-                  <Tooltip contentStyle={{ background: "#1a1a1a", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} formatter={(v: number) => `$${v}B combined`} />
+                  <Tooltip contentStyle={{ background: "#1a1a1a", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} formatter={(v) => `$${v}B combined`} />
                   <Bar dataKey="value" radius={[0, 8, 8, 0]} barSize={28}>
                     {categoryBreakdown.map((d, i) => (
                       <Cell key={i} fill={d.color} />

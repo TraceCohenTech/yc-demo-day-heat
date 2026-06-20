@@ -22,9 +22,9 @@ type Company = {
 
 const COMPANIES: Company[] = [
   // SLEEPERS — Ignored/struggled → Won Big
-  { name: "Airbnb", batch: "W09", valuation: 93.9, raised: "$6.4B", category: "sleeper", story: "7+ VC rejections. Sold cereal boxes to survive. Fred Wilson publicly passed.", industry: "Travel" },
+  { name: "Airbnb", batch: "W09", valuation: 84, raised: "$6.4B", category: "sleeper", story: "7+ VC rejections. Sold cereal boxes to survive. Fred Wilson publicly passed.", industry: "Travel" },
   { name: "Stripe", batch: "S09", valuation: 70, raised: "$9.4B", category: "hot-won", story: "First customer in 2 weeks via YC network. Sequoia early.", industry: "Fintech" },
-  { name: "Coinbase", batch: "S12", valuation: 63.3, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto" },
+  { name: "Coinbase", batch: "S12", valuation: 43, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto" },
   { name: "DoorDash", batch: "S13", valuation: 43.4, raised: "$2.5B", category: "sleeper", story: "Bottom half of batch at Demo Day. Nearly died in 2017–18.", industry: "Delivery" },
   { name: "Cruise", batch: "W14", valuation: 30, raised: "$16B", category: "sleeper", story: "Not in TechCrunch's top 8 picks. Completely overlooked.", industry: "Autonomous" },
   { name: "Scale AI", batch: "S16", valuation: 29, raised: "$1.6B", category: "hot-won", story: "19-year-old founder. Pivoted during batch. Raised Series A in 2017.", industry: "AI" },
@@ -32,7 +32,7 @@ const COMPANIES: Company[] = [
   { name: "Rippling", batch: "W17", valuation: 16.8, raised: "$2B", category: "moderate", story: "Zenefits baggage but closed seed in 2 weeks. 90% repeat backers.", industry: "HR" },
   { name: "OpenSea", batch: "W18", valuation: 13, raised: "$427M", category: "sleeper", story: "Barely keeping lights on during crypto winter 2018–19.", industry: "Crypto" },
   { name: "Faire", batch: "W17", valuation: 12.6, raised: "$1.7B", category: "hot-won", story: "Raised $3.4M seed from Khosla shortly after YC.", industry: "Wholesale" },
-  { name: "Brex", batch: "W17", valuation: 12.3, raised: "$1.5B", category: "hot-won", story: "Ribbit Capital led $7M Series A pre-Demo Day.", industry: "Fintech" },
+  { name: "Brex", batch: "W17", valuation: 5.15, raised: "$1.5B", category: "hot-won", story: "Ribbit Capital led $7M Series A pre-Demo Day. Acquired for $5.15B.", industry: "Fintech" },
   { name: "Reddit", batch: "S05", valuation: 10.6, raised: "$1.3B", category: "sleeper", story: "19 years from YC to IPO. Longest timeline of any YC company.", industry: "Social" },
   { name: "Instacart", batch: "S12", valuation: 9.3, raised: "$2.9B", category: "sleeper", story: "Applied late. Rejected multiple times. Delivered beer to Garry Tan's door.", industry: "Delivery" },
   { name: "Gusto", batch: "W12", valuation: 9.5, raised: "$746M", category: "moderate", story: "Steady builder. No Demo Day hype. Grew into $9.5B company.", industry: "HR" },
@@ -216,23 +216,23 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            50+ companies · 20 years of data · 310 research agents
+            100 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
             Does Demo Day<br />
-            heat predict<br />
+            hype predict<br />
             <span className="text-[#FF6600]">success?</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked every top YC company to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 100 of the most hyped YC companies to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
             {[
-              { big: "0.09", label: "R² correlation", sub: "Demo Day heat → valuation" },
+              { big: "0.09", label: "R² correlation", sub: "Demo Day hype → valuation" },
               { big: "~25%", label: "Look like winners", sub: "at the end of YC batch" },
               { big: "~6%", label: "Actually become", sub: "unicorns ($1B+)" },
               { big: "50%", label: "Ultimately", sub: "fail entirely" },
@@ -583,7 +583,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">The signal isn&apos;t in the sizzle.</h2>
             <p className="text-xl sm:text-2xl text-[#FF6600] font-semibold mt-4">It&apos;s in the survival.</p>
             <p className="text-neutral-600 text-base sm:text-lg mt-8 leading-relaxed max-w-xl mx-auto">
-              Demo Day heat is a weak predictor of YC startup success. The R² is 0.09. The correlation is 0.23. In every batch we tracked, the pundits missed the biggest winner. The most iconic YC successes were the companies nobody wanted.
+              Demo Day hype is a weak predictor of YC startup success. The R² is 0.09. The correlation is 0.23. In every batch we tracked, the pundits missed the biggest winner. The most iconic YC successes were the companies nobody wanted.
             </p>
           </div>
         </Reveal>

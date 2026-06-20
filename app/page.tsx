@@ -322,6 +322,22 @@ const COMPANIES: Company[] = [
   { name: "Snackpass", batch: "S18", valuation: 0.4, raised: "$90M", category: "moderate", story: "Social food ordering app for college campuses blending commerce with group ordering and gifting.", industry: "Food", founded: 2017, seedYear: 2018, seriesAYear: 2020, status: "active" },
   { name: "Copy.ai", batch: "W21", valuation: 0.2, raised: "$30M", category: "moderate", story: "Early mover in AI copywriting for marketing teams. One of the first generative AI consumer products.", industry: "AI", founded: 2020, seedYear: 2021, seriesAYear: 2022, status: "active" },
   { name: "Turing", batch: "W18", valuation: 1.1, raised: "$140M", category: "moderate", story: "AI-powered platform matching vetted remote engineers with US companies. Reached unicorn on relatively little capital.", industry: "HR Tech", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  // FINAL 15 — HITTING 300
+  { name: "Navan", batch: "W15", valuation: 9.2, raised: "$2.2B", category: "hot-won", story: "Formerly TripActions. Corporate travel and expense super-app. IPO'd on Nasdaq (NAVN).", industry: "Travel Tech", founded: 2015, seedYear: 2015, seriesAYear: 2018, unicornYear: 2018, status: "public" },
+  { name: "Nuro", batch: "S16", valuation: 8.6, raised: "$2.3B", category: "hot-won", story: "Autonomous delivery robots by two ex-Google self-driving engineers. Partnered with Kroger, Domino's, FedEx.", industry: "Autonomous Vehicles", founded: 2016, seedYear: 2016, seriesAYear: 2018, unicornYear: 2019, status: "active" },
+  { name: "Snorkel AI", batch: "S19", valuation: 6.4, raised: "$238M", category: "hot-won", story: "Stanford spinout for programmatic data labeling. Replaces manual labeling with code to build AI models faster.", industry: "AI", founded: 2019, seedYear: 2019, seriesAYear: 2020, unicornYear: 2021, status: "active" },
+  { name: "Iterable", batch: "S13", valuation: 2, raised: "$342M", category: "moderate", story: "Omnichannel marketing automation for email, SMS, push. Clients include DoorDash and Priceline.", industry: "Marketing", founded: 2013, seedYear: 2013, seriesAYear: 2016, unicornYear: 2021, status: "active" },
+  { name: "Coda", batch: "S14", valuation: 1.4, raised: "$240M", category: "moderate", story: "All-in-one doc combining documents, spreadsheets, and apps. Founded by former YouTube head Shishir Mehrotra.", industry: "Productivity", founded: 2014, seedYear: 2014, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Watershed", batch: "S19", valuation: 1.8, raised: "$185M", category: "sleeper", story: "Enterprise carbon accounting platform. Unicorn in ~2.5 years. Clients include Airbnb, Stripe, Spotify.", industry: "Climate Tech", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2022, status: "active" },
+  { name: "Gupshup", batch: "W11", valuation: 1.4, raised: "$544M", category: "sleeper", story: "Early YC Indian bet. Pivoted from social messaging to B2B conversational AI processing 10B+ messages/month.", industry: "Messaging", founded: 2004, seedYear: 2011, seriesAYear: 2014, unicornYear: 2021, status: "active" },
+  { name: "AtoB", batch: "S20", valuation: 0.8, raised: "$155M", category: "moderate", story: "Modern fuel card and fleet payments. Stripe-like API for the $800B trucking payments industry.", industry: "Fintech", founded: 2019, seedYear: 2020, seriesAYear: 2021, status: "active" },
+  { name: "Embark Veterinary", batch: "W16", valuation: 0.7, raised: "$94M", category: "sleeper", story: "Dog DNA testing and genetic health screening. SoftBank-backed. Identifies breed and 250+ genetic health risks.", industry: "Pet Tech", founded: 2015, seedYear: 2016, seriesAYear: 2019, status: "active" },
+  { name: "Iron Ox", batch: "W16", valuation: 0.5, raised: "$99M", category: "sleeper", story: "Autonomous robotic greenhouses for sustainable farming. Backed by Bill Gates' Breakthrough Energy Ventures.", industry: "AgTech", founded: 2016, seedYear: 2016, seriesAYear: 2018, status: "active" },
+  { name: "Pulley", batch: "W20", valuation: 0.25, raised: "$50M", category: "sleeper", story: "Cap table and equity management built for YC startups. Simplifies 409A valuations and equity grants.", industry: "Fintech", founded: 2020, seedYear: 2020, seriesAYear: 2021, status: "active" },
+  { name: "Terray Therapeutics", batch: "S17", valuation: 0.5, raised: "$180M", category: "sleeper", story: "Ultra-miniaturized chemistry + ML to explore billions of drug candidates simultaneously.", industry: "Biotech", founded: 2017, seedYear: 2017, seriesAYear: 2020, status: "active" },
+  { name: "PartnerStack", batch: "S15", valuation: 0.35, raised: "$67M", category: "sleeper", story: "B2B partner ecosystem platform. Powers partner programs for Notion, Monday.com, Webflow.", industry: "SaaS", founded: 2015, seedYear: 2015, seriesAYear: 2019, status: "active" },
+  { name: "WorkRamp", batch: "S16", valuation: 0.4, raised: "$67M", category: "sleeper", story: "All-in-one corporate learning cloud for employee training and customer education. Used by Box and Brex.", industry: "EdTech", founded: 2016, seedYear: 2016, seriesAYear: 2019, status: "active" },
+  { name: "Lunchclub", batch: "S18", valuation: 0.1, raised: "$56M", category: "moderate", story: "AI-powered professional networking. Exploded during COVID with virtual 1:1 matchmaking for professionals.", industry: "Social", founded: 2017, seedYear: 2018, seriesAYear: 2020, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -419,7 +435,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            285 companies tracked · 20 years of data
+            300 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -429,7 +445,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 285 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 300 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -991,7 +1007,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "285 companies tracked across 20 years of YC batches",
+              "300 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

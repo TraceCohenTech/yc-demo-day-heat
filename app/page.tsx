@@ -218,6 +218,28 @@ const COMPANIES: Company[] = [
   { name: "Lugg", batch: "S15", valuation: 0, raised: "$5.6M", category: "hot-failed", story: "'Uber for moving.' Hit $17.6M revenue but filed Chapter 11 in May 2024 after accumulating $3M+ debt.", industry: "Logistics", founded: 2015, seedYear: 2015, status: "dead" },
   { name: "Nurx", batch: "W16", valuation: 0.3, raised: "$96M", category: "moderate", story: "Telehealth for birth control and PrEP. Chelsea Clinton on board. Scaled to $300M, merged into Thirty Madison.", industry: "Healthcare", founded: 2014, seedYear: 2016, seriesAYear: 2017, status: "acquired" },
   { name: "Muzz", batch: "S17", valuation: 0.1, raised: "$7M", category: "sleeper", story: "World's largest Muslim dating app. 10M+ members, 500K+ weddings facilitated. Quietly dominant in its niche.", industry: "Social", founded: 2015, seedYear: 2017, status: "active" },
+  // GAP FILL — UNICORNS
+  { name: "SmartAsset", batch: "S12", valuation: 1, raised: "$161M", category: "sleeper", story: "Marketplace connecting consumers to financial advisors. 59M monthly users. Quietly became a unicorn.", industry: "Fintech", founded: 2012, seedYear: 2012, seriesAYear: 2014, unicornYear: 2021, status: "active" },
+  { name: "ShipBob", batch: "S14", valuation: 1.1, raised: "$333M", category: "sleeper", story: "E-commerce fulfillment for DTC brands. 40+ fulfillment centers globally.", industry: "Logistics", founded: 2014, seedYear: 2014, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Modern Health", batch: "W18", valuation: 1.17, raised: "$170M", category: "moderate", story: "Workplace mental health platform. Fastest entirely women-founded company to reach unicorn status in the US.", industry: "Healthcare", founded: 2017, seedYear: 2018, seriesAYear: 2019, unicornYear: 2021, status: "active" },
+  { name: "Modern Treasury", batch: "S18", valuation: 2, raised: "$185M", category: "sleeper", story: "Payment operations platform for moving money at scale. Powers automated payment flows for enterprises.", industry: "Fintech", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "Mashgin", batch: "W15", valuation: 1.5, raised: "$82.5M", category: "sleeper", story: "AI self-checkout kiosks using computer vision. $1.5B valuation on just $82M raised — capital-efficient unicorn.", industry: "AI", founded: 2014, seedYear: 2015, seriesAYear: 2018, unicornYear: 2022, status: "active" },
+  { name: "Speak", batch: "W17", valuation: 1, raised: "$118M", category: "moderate", story: "AI language learning app backed by OpenAI. #1 education app in South Korea before expanding globally.", industry: "EdTech", founded: 2016, seedYear: 2017, seriesAYear: 2020, unicornYear: 2024, status: "active" },
+  { name: "People.ai", batch: "W16", valuation: 1.1, raised: "$200M", category: "moderate", story: "AI platform capturing business activity data to drive revenue growth. Accepted into YC within 30 days of founding.", industry: "AI", founded: 2016, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Snapdocs", batch: "S13", valuation: 1.5, raised: "$269M", category: "moderate", story: "Digital mortgage closing platform. Automates notary and title workflow for real estate transactions.", industry: "Real Estate", founded: 2013, seedYear: 2013, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Veriff", batch: "S18", valuation: 1.5, raised: "$200M", category: "moderate", story: "AI identity verification from Estonia. One of YC's biggest European success stories.", industry: "Security", founded: 2015, seedYear: 2018, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "CaptivateIQ", batch: "W18", valuation: 1.25, raised: "$164M", category: "sleeper", story: "Sales commission management platform. Solved the spreadsheet nightmare of calculating sales comp.", industry: "SaaS", founded: 2017, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "Apollo GraphQL", batch: "S11", valuation: 1.5, raised: "$244M", category: "sleeper", story: "Built the most popular GraphQL platform. Underpins API architectures at major tech companies worldwide.", industry: "Dev Tools", founded: 2011, seedYear: 2016, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "Wave", batch: "W12", valuation: 1.7, raised: "$200M", category: "moderate", story: "Mobile money for Africa. Disrupted costly legacy money transfer in Senegal and Cote d'Ivoire.", industry: "Fintech", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2021, status: "active" },
+  { name: "Nowports", batch: "S19", valuation: 1.1, raised: "$291M", category: "moderate", story: "First digital freight forwarder for Latin America. LatAm's logistics unicorn.", industry: "Logistics", founded: 2018, seedYear: 2019, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "Salt Security", batch: "S16", valuation: 1.4, raised: "$271M", category: "moderate", story: "API security platform using AI/ML to detect and prevent API attacks.", industry: "Security", founded: 2016, seedYear: 2016, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "CoinTracker", batch: "S18", valuation: 1.3, raised: "$122M", category: "moderate", story: "Crypto tax and portfolio tracking. Used by millions to calculate crypto capital gains.", industry: "Crypto", founded: 2017, seedYear: 2018, seriesAYear: 2022, unicornYear: 2022, status: "active" },
+  { name: "Teleport", batch: "W15", valuation: 1.1, raised: "$169M", category: "sleeper", story: "Zero-trust infrastructure access platform. Secure access to servers, Kubernetes, and databases.", industry: "Security", founded: 2015, seedYear: 2015, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "Ajaib", batch: "S19", valuation: 1, raised: "$243M", category: "moderate", story: "Indonesia's leading online brokerage. Democratized stock investing for millions of Indonesians.", industry: "Fintech", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2021, status: "active" },
+  { name: "Opentrons", batch: "W16", valuation: 1.8, raised: "$386M", category: "moderate", story: "Open-source lab robotics. COVID testing machines made them essential pandemic infrastructure.", industry: "Biotech", founded: 2014, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "BetterUp", batch: "S16", valuation: 4.7, raised: "$567M", category: "hot-won", story: "Digital coaching and mental fitness platform. Prince Harry became Chief Impact Officer. $4.7B valuation.", industry: "Healthcare", founded: 2013, seedYear: 2016, seriesAYear: 2016, unicornYear: 2021, status: "active" },
+  { name: "Sift", batch: "S11", valuation: 1.3, raised: "$157M", category: "sleeper", story: "Digital trust and safety platform detecting fraud in real-time. Powers fraud prevention for 34K+ sites.", industry: "Security", founded: 2011, seedYear: 2011, seriesAYear: 2014, unicornYear: 2021, status: "active" },
+  { name: "Owner.com", batch: "W18", valuation: 1, raised: "$182M", category: "moderate", story: "Online ordering platform for independent restaurants. Hit $1B with $120M Series C in May 2025.", industry: "Restaurant Tech", founded: 2020, seedYear: 2020, seriesAYear: 2022, unicornYear: 2025, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -315,7 +337,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            189 companies tracked · 20 years of data
+            210 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -325,7 +347,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 189 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 210 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -887,7 +909,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "189 companies tracked across 20 years of YC batches",
+              "210 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

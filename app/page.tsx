@@ -476,13 +476,15 @@ function ValuationBar({ company, maxVal }: { company: Company; maxVal: number })
 
 export default function Home() {
   const [filter, setFilter] = useState<string>("all");
-  const [showAll, setShowAll] = useState(false);
+  const [search, setSearch] = useState("");
 
   const maxVal = Math.max(...COMPANIES.map((c) => c.valuation));
 
   const filteredCompanies = filter === "all" ? COMPANIES : COMPANIES.filter((c) => c.category === filter);
-  const sorted = [...filteredCompanies].sort((a, b) => b.valuation - a.valuation);
-  const displayed = showAll ? sorted : sorted.slice(0, 20);
+  const searched = search
+    ? filteredCompanies.filter(c => c.name.toLowerCase().includes(search.toLowerCase()) || c.industry.toLowerCase().includes(search.toLowerCase()) || c.batch.toLowerCase().includes(search.toLowerCase()))
+    : filteredCompanies;
+  const sorted = [...searched].sort((a, b) => b.valuation - a.valuation);
 
   return (
     <main>
@@ -578,51 +580,107 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* ── VALUATION BAR RACE ── */}
+      {/* ── TOP 25 BAR RACE ── */}
       <section className="bg-white border-y border-neutral-200">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
           <Reveal>
             <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">The Data</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Every company, ranked</h2>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Top 25 most valuable</h2>
             <p className="text-neutral-500 mt-2 text-sm sm:text-base">Orange = sleepers nobody wanted. Green = hot from day 1. Blue = moderate. Red = hot but failed.</p>
           </Reveal>
 
-          <Reveal delay={100}>
-            <div className="flex flex-wrap gap-2 mt-6 mb-4">
-              {[
-                { key: "all", label: "All" },
-                { key: "sleeper", label: "Sleepers" },
-                { key: "hot-won", label: "Hot → Won" },
-                { key: "hot-failed", label: "Hot → Failed" },
-                { key: "moderate", label: "Moderate" },
-              ].map((f) => (
-                <button
-                  key={f.key}
-                  onClick={() => { setFilter(f.key); setShowAll(false); }}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition active:scale-[0.97] ${
-                    filter === f.key
-                      ? "bg-yc-dark text-white"
-                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-                  }`}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
-          </Reveal>
-
-          <div className="mt-4 space-y-0.5">
-            {displayed.map((c) => (
+          <div className="mt-6 space-y-0.5">
+            {[...COMPANIES].sort((a, b) => b.valuation - a.valuation).slice(0, 25).map((c) => (
               <ValuationBar key={c.name} company={c} maxVal={maxVal} />
             ))}
           </div>
-          {sorted.length > 20 && !showAll && (
-            <button
-              onClick={() => setShowAll(true)}
-              className="mt-6 px-6 py-3 bg-yc-dark text-white rounded-full text-sm font-semibold hover:bg-neutral-800 transition active:scale-[0.97]"
-            >
-              Show all {sorted.length} companies
-            </button>
+        </div>
+      </section>
+
+      {/* ── FULL DIRECTORY ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+        <Reveal>
+          <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 300 companies</h2>
+          <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
+        </Reveal>
+
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+          <input
+            type="text"
+            placeholder="Search companies..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="flex-1 px-4 py-2.5 rounded-xl border border-neutral-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6600]/30 focus:border-[#FF6600]"
+          />
+          <div className="flex flex-wrap gap-2">
+            {[
+              { key: "all", label: "All" },
+              { key: "sleeper", label: "Sleepers" },
+              { key: "hot-won", label: "Hot → Won" },
+              { key: "hot-failed", label: "Hot → Failed" },
+              { key: "moderate", label: "Moderate" },
+            ].map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setFilter(f.key)}
+                className={`px-3 py-2 rounded-lg text-xs font-semibold transition active:scale-[0.97] ${
+                  filter === f.key
+                    ? "bg-yc-dark text-white"
+                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 overflow-x-auto rounded-xl border border-neutral-200 bg-white">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-neutral-100 bg-neutral-50">
+                <th className="text-left px-4 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Company</th>
+                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Batch</th>
+                <th className="text-right px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Valuation</th>
+                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider hidden sm:table-cell">Industry</th>
+                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider hidden md:table-cell">Category</th>
+                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider hidden lg:table-cell">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.slice(0, 50).map((c, i) => {
+                const meta = CATEGORY_META[c.category];
+                return (
+                  <tr key={c.name} className={`border-b border-neutral-50 hover:bg-neutral-50 transition ${i % 2 === 0 ? "" : "bg-neutral-25"}`}>
+                    <td className="px-4 py-2.5">
+                      <span className="font-semibold text-yc-dark">{c.name}</span>
+                    </td>
+                    <td className="px-3 py-2.5 text-neutral-500 font-mono text-xs">{c.batch}</td>
+                    <td className="px-3 py-2.5 text-right font-semibold tabular-nums">
+                      {c.valuation > 0 ? <span className="text-yc-dark">${c.valuation}B</span> : <span className="text-red-500">$0</span>}
+                    </td>
+                    <td className="px-3 py-2.5 text-neutral-500 text-xs hidden sm:table-cell">{c.industry}</td>
+                    <td className="px-3 py-2.5 hidden md:table-cell">
+                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold" style={{ backgroundColor: meta.bg, color: meta.color }}>{meta.label}</span>
+                    </td>
+                    <td className="px-3 py-2.5 text-xs hidden lg:table-cell">
+                      <span className={`${c.status === "dead" ? "text-red-500" : c.status === "public" ? "text-blue-600" : c.status === "acquired" ? "text-amber-600" : "text-green-600"}`}>
+                        {c.status === "dead" ? "Dead" : c.status === "public" ? "Public" : c.status === "acquired" ? "Acquired" : "Active"}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          {sorted.length > 50 && (
+            <div className="px-4 py-3 text-center text-xs text-neutral-400 border-t border-neutral-100">
+              Showing top 50 of {sorted.length} results{search && ` matching "${search}"`}
+            </div>
+          )}
+          {sorted.length === 0 && (
+            <div className="px-4 py-8 text-center text-sm text-neutral-400">No companies match your search.</div>
           )}
         </div>
       </section>

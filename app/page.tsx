@@ -301,6 +301,27 @@ const COMPANIES: Company[] = [
   { name: "9GAG", batch: "W12", valuation: 0.1, raised: "$2.8M", category: "sleeper", story: "Viral meme and entertainment platform. 200M+ monthly users. Built a massive audience on almost no funding.", industry: "Media", founded: 2008, seedYear: 2012, status: "active" },
   { name: "Songkick", batch: "S07", valuation: 0.05, raised: "$17M", category: "moderate", story: "Concert discovery and ticketing platform. Warner Music Group acquired in 2017.", industry: "Music", founded: 2007, seedYear: 2007, seriesAYear: 2010, status: "acquired" },
   { name: "Platzi", batch: "W15", valuation: 0.15, raised: "$62M", category: "moderate", story: "Largest online tech education platform in Latin America. Teaching millions to code in Spanish.", industry: "EdTech", founded: 2012, seedYear: 2015, seriesAYear: 2018, status: "active" },
+  // PUSH TO 300
+  { name: "Samsara", batch: "W15", valuation: 20, raised: "$930M", category: "hot-won", story: "IoT sensor platform for fleet management. Went public on NYSE (ticker: IOT). $20B market cap.", industry: "IoT", founded: 2015, seedYear: 2015, seriesAYear: 2016, unicornYear: 2018, status: "public" },
+  { name: "Weights & Biases", batch: "S18", valuation: 1.3, raised: "$250M", category: "hot-won", story: "MLOps platform used by OpenAI and every major AI lab to track and visualize model training.", industry: "AI", founded: 2017, seedYear: 2018, seriesAYear: 2020, unicornYear: 2023, status: "active" },
+  { name: "HoneyBook", batch: "S14", valuation: 2.4, raised: "$498M", category: "hot-won", story: "Client management for freelancers and small businesses — contracts, invoicing, payments in one platform.", industry: "SaaS", founded: 2013, seedYear: 2015, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Freenome", batch: "S16", valuation: 2.4, raised: "$860M", category: "hot-won", story: "AI-powered blood test for early cancer detection using cell-free DNA. In late-stage clinical trials.", industry: "Biotech", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Apeel Sciences", batch: "S12", valuation: 2, raised: "$635M", category: "moderate", story: "Edible plant-based coating that extends produce shelf life, reducing food waste at scale.", industry: "Food Tech", founded: 2012, seedYear: 2013, seriesAYear: 2015, unicornYear: 2021, status: "active" },
+  { name: "Divvy Homes", batch: "W17", valuation: 0.5, raised: "$735M", category: "hot-failed", story: "Rent-to-own home platform raised massive rounds at $2B peak. Faced headwinds in 2022 housing correction. Restructured.", industry: "Real Estate", founded: 2017, seedYear: 2017, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Writer", batch: "W20", valuation: 1.9, raised: "$326M", category: "hot-won", story: "Enterprise AI writing and content generation with full-stack LLM approach. Major enterprise adoption.", industry: "AI", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2024, status: "active" },
+  { name: "Maven Clinic", batch: "S14", valuation: 1.4, raised: "$300M", category: "hot-won", story: "Largest virtual clinic for women's and family health — fertility, maternity, pediatrics.", industry: "Healthcare", founded: 2014, seedYear: 2015, seriesAYear: 2017, unicornYear: 2022, status: "active" },
+  { name: "Incredible Health", batch: "W19", valuation: 1.6, raised: "$110M", category: "sleeper", story: "Reverse-recruiting for nurses — hospitals apply to candidates, not the other way around.", industry: "Healthcare", founded: 2017, seedYear: 2019, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "NotCo", batch: "S16", valuation: 1.5, raised: "$430M", category: "moderate", story: "Chilean AI food-tech creating plant-based alternatives to dairy, meat, and eggs using machine learning.", industry: "Food Tech", founded: 2015, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Shippo", batch: "S14", valuation: 1, raised: "$300M", category: "moderate", story: "Shipping API helping e-commerce businesses access best carrier rates and print labels.", industry: "Logistics", founded: 2013, seedYear: 2014, seriesAYear: 2016, unicornYear: 2021, status: "active" },
+  { name: "RevenueCat", batch: "S18", valuation: 1.2, raised: "$140M", category: "sleeper", story: "In-app subscription SDK used by 30,000+ apps. The invisible infrastructure behind mobile purchases.", industry: "Dev Tools", founded: 2017, seedYear: 2018, seriesAYear: 2021, unicornYear: 2023, status: "active" },
+  { name: "OpenPhone", batch: "S18", valuation: 1.4, raised: "$100M", category: "sleeper", story: "Modern business phone system in an app, replacing legacy telecom for startups and SMBs.", industry: "SaaS", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "Tractable", batch: "S15", valuation: 1, raised: "$115M", category: "sleeper", story: "AI visual assessment for auto insurance claims and disaster recovery. Used by major insurers globally.", industry: "AI", founded: 2014, seedYear: 2015, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Mattermost", batch: "W16", valuation: 0.3, raised: "$76M", category: "sleeper", story: "Open-source Slack alternative for enterprises and government. Self-hosted secure messaging.", industry: "SaaS", founded: 2016, seedYear: 2016, seriesAYear: 2019, status: "active" },
+  { name: "InfluxData", batch: "W13", valuation: 0.5, raised: "$165M", category: "moderate", story: "Creator of InfluxDB, the leading open-source time-series database for metrics and IoT data.", industry: "Data", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "active" },
+  { name: "Lob", batch: "W14", valuation: 0.3, raised: "$100M", category: "sleeper", story: "Direct mail automation API enabling programmatic sending of physical letters and postcards.", industry: "API", founded: 2013, seedYear: 2014, seriesAYear: 2017, status: "active" },
+  { name: "Snackpass", batch: "S18", valuation: 0.4, raised: "$90M", category: "moderate", story: "Social food ordering app for college campuses blending commerce with group ordering and gifting.", industry: "Food", founded: 2017, seedYear: 2018, seriesAYear: 2020, status: "active" },
+  { name: "Copy.ai", batch: "W21", valuation: 0.2, raised: "$30M", category: "moderate", story: "Early mover in AI copywriting for marketing teams. One of the first generative AI consumer products.", industry: "AI", founded: 2020, seedYear: 2021, seriesAYear: 2022, status: "active" },
+  { name: "Turing", batch: "W18", valuation: 1.1, raised: "$140M", category: "moderate", story: "AI-powered platform matching vetted remote engineers with US companies. Reached unicorn on relatively little capital.", industry: "HR Tech", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -398,7 +419,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            265 companies tracked · 20 years of data
+            285 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -408,7 +429,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 265 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 285 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -970,7 +991,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "265 companies tracked across 20 years of YC batches",
+              "285 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

@@ -5,10 +5,10 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 export const metadata: Metadata = {
   title: "Does Demo Day Hype Predict YC Success? | Data Study",
   description:
-    "We tracked 287 of the most hyped YC companies to find out if early fundraising momentum predicts long-term outcomes. R²=0.09 — Demo Day hype is a weak predictor of startup success.",
+    "We tracked 280 of the most hyped YC companies to find out if early fundraising momentum predicts long-term outcomes. R²=0.09 — Demo Day hype is a weak predictor of startup success.",
   openGraph: {
     title: "Does Demo Day Hype Predict YC Success?",
-    description: "We tracked 287 of the most hyped YC companies across 20 years. The data says no.",
+    description: "We tracked 280 of the most hyped YC companies across 20 years. The data says no.",
     type: "website",
   },
 };

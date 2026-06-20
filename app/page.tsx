@@ -171,6 +171,7 @@ const COMPANIES: Company[] = [
   { name: "Bland AI", batch: "S23", valuation: 0.6, raised: "$106M", category: "hot-won", story: "Rejected by 180 investors during YC. Now handles 3.5M+ AI phone calls per week for 250+ enterprise customers.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2024, status: "active" },
   { name: "Retell AI", batch: "W24", valuation: 0.5, raised: "$4.6M", category: "sleeper", story: "Voice AI platform. Hit $60M ARR on just $4.6M raised — 650% YoY growth. Insane capital efficiency.", industry: "AI", founded: 2023, seedYear: 2024, status: "active" },
   { name: "Jasper AI", batch: "W22", valuation: 0.5, raised: "$125M", category: "hot-failed", story: "Early generative AI darling for marketing content. Hit $1.5B valuation in 2022. Got crushed by ChatGPT commoditizing its core use case.", industry: "AI", founded: 2021, seedYear: 2021, seriesAYear: 2022, unicornYear: 2022, status: "active" },
+  { name: "Corgi Insurance", batch: "S24", valuation: 2.6, raised: "$108M", category: "hot-won", story: "Full-stack insurance carrier for startups. $630M in Jan 2026, unicorn by May, $2.6B by late May. Fastest YC insurtech ever.", industry: "Insurance", founded: 2024, seedYear: 2024, seriesAYear: 2026, unicornYear: 2026, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -268,7 +269,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            150 companies tracked · 20 years of data
+            151 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -840,7 +841,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "150 companies tracked across 20 years of YC batches",
+              "151 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

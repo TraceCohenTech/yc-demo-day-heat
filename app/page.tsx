@@ -31,7 +31,7 @@ const COMPANIES: Company[] = [
   { name: "Stripe", batch: "S09", valuation: 159, raised: "$9.4B", category: "hot-won", story: "First customer in 2 weeks via YC network. Sequoia early.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2012, unicornYear: 2014, status: "active" },
   { name: "Coinbase", batch: "S12", valuation: 43, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto", founded: 2012, seedYear: 2012, seriesAYear: 2013, unicornYear: 2017, status: "public" },
   { name: "DoorDash", batch: "S13", valuation: 72, raised: "$2.5B", category: "sleeper", story: "Bottom half of batch at Demo Day. Nearly died in 2017–18.", industry: "Delivery", founded: 2013, seedYear: 2013, seriesAYear: 2014, unicornYear: 2018, status: "public" },
-  { name: "Cruise", batch: "W14", valuation: 0, raised: "$16B", category: "hot-failed", story: "Not in TechCrunch's top 8 picks. Peaked at $30B. Pedestrian dragging incident 2023. GM shut down robotaxi unit Dec 2024 after $10B+ losses.", industry: "Autonomous", founded: 2013, seedYear: 2014, seriesAYear: 2015, status: "dead" },
+  { name: "Cruise", batch: "W14", valuation: 1, raised: "$16B", category: "sleeper", story: "Not in TechCrunch's top 8 picks. GM acquired for ~$1B in 2016 — a huge YC win. Peaked at $30B before pedestrian incident in 2023 led GM to shut down the robotaxi unit.", industry: "Autonomous", founded: 2013, seedYear: 2014, seriesAYear: 2015, status: "acquired" },
   { name: "Scale AI", batch: "S16", valuation: 29, raised: "$1.6B", category: "hot-won", story: "19-year-old founder. Pivoted during batch. Raised Series A in 2017.", industry: "AI", founded: 2016, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
   { name: "Deel", batch: "W19", valuation: 17.3, raised: "$679M", category: "hot-won", story: "TechCrunch top 10 pick. Raised quickly post-Demo Day.", industry: "HR", founded: 2019, seedYear: 2019, seriesAYear: 2020, unicornYear: 2021, status: "active" },
   { name: "Rippling", batch: "W17", valuation: 20.8, raised: "$2B", category: "moderate", story: "Zenefits baggage but closed seed in 2 weeks. 90% repeat backers.", industry: "HR", founded: 2016, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
@@ -424,14 +424,6 @@ const unicornScatter = COMPANIES
   }))
   .sort((a, b) => a.founded - b.founded);
 
-/* ── ANALYTICS: Failures ── */
-const failures = COMPANIES
-  .filter(c => c.status === "dead" || c.category === "hot-failed")
-  .sort((a, b) => {
-    const aRaised = parseFloat(a.raised.replace(/[^0-9.]/g, '')) * (a.raised.includes('B') ? 1000 : 1);
-    const bRaised = parseFloat(b.raised.replace(/[^0-9.]/g, '')) * (b.raised.includes('B') ? 1000 : 1);
-    return bRaised - aRaised;
-  });
 
 const CATEGORY_META: Record<string, { label: string; color: string; bg: string }> = {
   sleeper: { label: "Sleeper", color: "#FF6600", bg: "#FFF3EB" },
@@ -477,6 +469,7 @@ function ValuationBar({ company, maxVal }: { company: Company; maxVal: number })
 export default function Home() {
   const [filter, setFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
+  const [chartTab, setChartTab] = useState<"vintage" | "industry" | "unicorns">("vintage");
 
   const maxVal = Math.max(...COMPANIES.map((c) => c.valuation));
 
@@ -685,64 +678,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SLEEPER STORIES ── */}
+      {/* ── SLEEPERS vs FAILURES — side by side ── */}
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-        <Reveal>
-          <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Sleeper Stories</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Nobody wanted them.</h2>
-          <p className="text-neutral-500 mt-2 text-sm sm:text-base">These companies were rejected, ignored, or struggled to raise at Demo Day. They went on to be worth billions.</p>
-        </Reveal>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-          {sleepers.map((c, i) => (
-            <Reveal key={c.name} delay={Math.min(i * 30, 150)}>
-              <div className="rounded-2xl border border-neutral-200 bg-white p-5 h-full hover:border-[#FF6600]/40 hover:shadow-lg transition-all duration-200">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-yc-dark">{c.name}</h3>
-                    <p className="text-xs text-neutral-500 font-mono">{c.batch} · {c.industry}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xl font-bold text-[#FF6600]">${c.valuation}B</p>
-                  </div>
-                </div>
-                <p className="text-sm text-neutral-600 mt-3 leading-relaxed">{c.story}</p>
-                <div className="mt-3 pt-3 border-t border-neutral-100">
-                  <p className="text-xs text-neutral-400">Raised {c.raised} total</p>
-                </div>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
+            <Reveal>
+              <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-3">Sleepers</div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-yc-dark">Nobody wanted them.</h2>
+              <p className="text-neutral-500 mt-1 text-sm">Rejected at Demo Day. Now worth billions.</p>
             </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── HOT FAILURES ── */}
-      <section className="bg-yc-dark">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-          <Reveal>
-            <div className="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest mb-4">The Graveyard</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white">Everyone fought over them.</h2>
-            <p className="text-white/50 mt-2 text-sm sm:text-base">These companies were the hottest at Demo Day. Top VC firms piled in. They raised hundreds of millions. They&apos;re all dead.</p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-            {hotFailed.map((c, i) => (
-              <Reveal key={c.name} delay={Math.min(i * 30, 150)}>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 h-full backdrop-blur-sm hover:border-red-500/40 transition-all duration-200">
-                  <div className="flex items-start justify-between">
+            <div className="mt-4 space-y-3">
+              {[...sleepers].sort((a, b) => b.valuation - a.valuation).slice(0, 6).map((c) => (
+                <div key={c.name} className="rounded-xl border border-neutral-200 bg-white p-4 hover:border-[#FF6600]/40 hover:shadow-md transition-all duration-200">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-bold text-white">{c.name}</h3>
-                      <p className="text-xs text-white/40 font-mono">{c.batch} · {c.industry}</p>
+                      <span className="font-bold text-yc-dark">{c.name}</span>
+                      <span className="text-xs text-neutral-400 ml-2 font-mono">{c.batch}</span>
                     </div>
-                    <span className="text-xs font-bold text-red-400 bg-red-500/20 px-2 py-1 rounded-full">DEAD</span>
+                    <span className="text-lg font-bold text-[#FF6600]">${c.valuation}B</span>
                   </div>
-                  <p className="text-sm text-white/60 mt-3 leading-relaxed">{c.story}</p>
-                  <div className="mt-3 pt-3 border-t border-white/10">
-                    <p className="text-xs text-white/30">Raised {c.raised}</p>
-                  </div>
+                  <p className="text-xs text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">{c.story}</p>
                 </div>
-              </Reveal>
-            ))}
+              ))}
+              <p className="text-xs text-neutral-400 text-center mt-2">+ {sleepers.length - 6} more sleepers in the full directory above</p>
+            </div>
+          </div>
+
+          <div>
+            <Reveal>
+              <div className="inline-block px-3 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-bold uppercase tracking-widest mb-3">The Graveyard</div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-yc-dark">Everyone fought over them.</h2>
+              <p className="text-neutral-500 mt-1 text-sm">Hottest at Demo Day. VCs piled in. All dead.</p>
+            </Reveal>
+            <div className="mt-4 space-y-3">
+              {[...hotFailed].sort((a, b) => {
+                const aR = parseFloat(a.raised.replace(/[^0-9.]/g, '')) * (a.raised.includes('B') ? 1000 : 1);
+                const bR = parseFloat(b.raised.replace(/[^0-9.]/g, '')) * (b.raised.includes('B') ? 1000 : 1);
+                return bR - aR;
+              }).slice(0, 6).map((c) => (
+                <div key={c.name} className="rounded-xl border border-red-200 bg-red-50/50 p-4 hover:border-red-400 hover:shadow-md transition-all duration-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-yc-dark">{c.name}</span>
+                      <span className="text-xs text-neutral-400 ml-2 font-mono">{c.batch}</span>
+                    </div>
+                    <span className="text-xs font-bold text-red-500 bg-red-100 px-2 py-0.5 rounded-full">Raised {c.raised}</span>
+                  </div>
+                  <p className="text-xs text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">{c.story}</p>
+                </div>
+              ))}
+              <p className="text-xs text-neutral-400 text-center mt-2">+ {hotFailed.length - 6} more failures in the full directory</p>
+            </div>
           </div>
         </div>
       </section>
@@ -851,36 +837,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CATEGORY BREAKDOWN ── */}
-      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+      {/* ── CATEGORY BREAKDOWN (merged into Power Law above) ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 pb-16 sm:pb-24">
         <Reveal>
-          <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Breakdown</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">By the numbers</h2>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <div className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-6 mt-8">
-            <div role="img" aria-label="Bar chart showing combined valuation by Demo Day category">
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={categoryBreakdown} layout="vertical" margin={{ left: 140, right: 30, top: 10, bottom: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} />
-                  <XAxis type="number" tickFormatter={(v: number) => `$${v}B`} tick={{ fill: "#737373", fontSize: 12 }} />
-                  <YAxis type="category" dataKey="name" tick={{ fill: "#1a1a1a", fontSize: 13, fontWeight: 600 }} width={130} />
-                  <Tooltip contentStyle={{ background: "#1a1a1a", border: "none", borderRadius: 8, color: "#fff", fontSize: 13 }} formatter={(v) => `$${v}B combined`} />
-                  <Bar dataKey="value" radius={[0, 8, 8, 0]} barSize={28}>
-                    {categoryBreakdown.map((d, i) => (
-                      <Cell key={i} fill={d.color} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-neutral-100">
+          <div className="bg-white rounded-2xl border border-neutral-200 p-4 sm:p-6">
+            <h3 className="text-lg font-bold text-yc-dark mb-4">Category Breakdown</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {categoryBreakdown.map((d) => (
-                <div key={d.name} className="text-center">
+                <div key={d.name} className="text-center rounded-xl bg-neutral-50 p-4">
                   <p className="text-3xl font-bold tabular-nums" style={{ color: d.color }}>{d.count}</p>
                   <p className="text-xs text-neutral-500 mt-1">{d.name}</p>
+                  <p className="text-xs font-semibold text-neutral-700 mt-0.5">${d.value}B total</p>
                 </div>
               ))}
             </div>
@@ -905,8 +872,7 @@ export default function Home() {
               .map(c => ({ ...c, yearsToUnicorn: c.unicornYear! - c.founded }))
               .sort((a, b) => a.yearsToUnicorn - b.yearsToUnicorn);
 
-            const fastest = unicorns.slice(0, 15);
-            const slowest = [...unicorns].sort((a, b) => b.yearsToUnicorn - a.yearsToUnicorn).slice(0, 10);
+            const fastest = unicorns.slice(0, 8);
 
             const seedToA = COMPANIES
               .filter(c => c.seedYear && c.seriesAYear)
@@ -987,40 +953,7 @@ export default function Home() {
                   </div>
                 </Reveal>
 
-                <Reveal delay={200}>
-                  <div className="mt-12">
-                    <h3 className="text-lg font-bold text-yc-dark mb-1">Slowest to Unicorn</h3>
-                    <p className="text-xs text-neutral-500 mb-4">Patience paid off — these took the longest but still got there</p>
-                    <div className="space-y-1">
-                      {slowest.map((c) => {
-                        const meta = CATEGORY_META[c.category];
-                        const maxSlow = Math.max(...slowest.map(s => s.yearsToUnicorn));
-                        const pct = Math.max((c.yearsToUnicorn / maxSlow) * 100, 8);
-                        return (
-                          <div key={c.name} className="flex items-center gap-3 py-1.5">
-                            <div className="w-28 sm:w-36 shrink-0 text-right">
-                              <span className="text-sm font-semibold text-yc-dark">{c.name}</span>
-                              <span className="text-xs text-neutral-400 ml-1">{c.batch}</span>
-                            </div>
-                            <div className="flex-1 relative h-7 rounded bg-neutral-100 overflow-hidden">
-                              <div
-                                className="absolute inset-y-0 left-0 rounded transition-all duration-700 ease-out flex items-center"
-                                style={{ width: `${pct}%`, backgroundColor: meta.color }}
-                              >
-                                <span className="text-white text-xs font-bold ml-2 whitespace-nowrap">{c.yearsToUnicorn}y</span>
-                              </div>
-                            </div>
-                            <div className="hidden sm:block w-16 shrink-0 text-right">
-                              <span className="text-xs text-neutral-500">${c.valuation}B</span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </Reveal>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                   <Reveal delay={250}>
                     <div className="rounded-2xl border border-neutral-200 p-6">
                       <h3 className="text-lg font-bold text-yc-dark mb-4">Time to Unicorn Distribution</h3>
@@ -1070,154 +1003,138 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── VALUE BY YEAR ── */}
-      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-        <Reveal>
-          <div className="inline-block px-3 py-1 rounded-full bg-[#FF6600]/20 text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">By Vintage</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Which years produced the most value?</h2>
-          <p className="text-neutral-600 mt-3 text-lg">Total company value created by YC batch year. Some vintages are worth 100x more than others.</p>
-        </Reveal>
-        <Reveal delay={100}>
-          <div className="mt-8 h-[400px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={valueByYear} margin={{ top: 10, right: 10, left: 10, bottom: 30 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis dataKey="year" tick={{ fontSize: 12, fill: "#737373" }} angle={-45} textAnchor="end" />
-                <YAxis tick={{ fontSize: 12, fill: "#737373" }} tickFormatter={(v: number) => `$${v}B`} />
-                <Tooltip
-                  formatter={((value: number, name: string) => {
-                    if (name === "total") return [`$${value}B`, "Total Value"];
-                    return [value, name];
-                  }) as never}
-                  labelFormatter={((year: number) => {
-                    const d = valueByYear.find(v => v.year === year);
-                    return `${year} — ${d?.count} companies, top: ${d?.top}`;
-                  }) as never}
-                  contentStyle={{ borderRadius: "12px", border: "1px solid #e5e5e5" }}
-                />
-                <Bar dataKey="total" radius={[6, 6, 0, 0]}>
-                  {valueByYear.map((entry, i) => (
-                    <Cell key={i} fill={entry.total > 100 ? "#FF6600" : entry.total > 20 ? "#3b82f6" : entry.total > 5 ? "#10b981" : "#d4d4d4"} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="flex flex-wrap gap-4 mt-4 justify-center text-xs text-neutral-500">
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#FF6600]" /> $100B+</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#3b82f6]" /> $20–100B</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#10b981]" /> $5–20B</span>
-            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#d4d4d4]" /> Under $5B</span>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ── INDUSTRY BREAKDOWN ── */}
+      {/* ── ANALYTICS DASHBOARD (tabbed) ── */}
       <section className="bg-white border-y border-neutral-200">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
           <Reveal>
-            <div className="inline-block px-3 py-1 rounded-full bg-[#3b82f6]/10 text-[#3b82f6] text-xs font-bold uppercase tracking-widest mb-4">By Industry</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Where the value lives</h2>
-            <p className="text-neutral-600 mt-3 text-lg">Top 15 industries by total portfolio value. Fintech and AI dominate, but sleepers lurk everywhere.</p>
+            <div className="inline-block px-3 py-1 rounded-full bg-[#FF6600]/20 text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Deep Dive</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">The analytics</h2>
           </Reveal>
-          <Reveal delay={100}>
-            <div className="mt-8 h-[500px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={industryData} layout="vertical" margin={{ left: 120, right: 30, top: 10, bottom: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} />
-                  <XAxis type="number" tick={{ fontSize: 12, fill: "#737373" }} tickFormatter={(v: number) => `$${v}B`} />
-                  <YAxis type="category" dataKey="industry" tick={{ fontSize: 12, fill: "#525252" }} width={110} />
-                  <Tooltip
-                    formatter={((value: number) => [`$${value}B`, "Total Value"]) as never}
-                    labelFormatter={((ind: string) => {
-                      const d = industryData.find(x => x.industry === ind);
-                      return `${ind} — ${d?.count} companies, ${d?.unicorns} unicorns`;
-                    }) as never}
-                    contentStyle={{ borderRadius: "12px", border: "1px solid #e5e5e5" }}
-                  />
-                  <Bar dataKey="total" radius={[0, 6, 6, 0]}>
-                    {industryData.map((_, i) => (
-                      <Cell key={i} fill={INDUSTRY_COLORS[i % INDUSTRY_COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </Reveal>
-          <Reveal delay={200}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-8">
-              {industryData.slice(0, 5).map((d, i) => (
-                <div key={d.industry} className="rounded-xl border border-neutral-200 p-4 text-center">
-                  <div className="text-2xl font-bold" style={{ color: INDUSTRY_COLORS[i] }}>{d.count}</div>
-                  <div className="text-xs text-neutral-500 mt-1">{d.industry}</div>
-                  <div className="text-xs font-semibold text-neutral-700 mt-0.5">{d.unicorns} unicorns</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* ── UNICORN TIMELINE ── */}
-      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-        <Reveal>
-          <div className="inline-block px-3 py-1 rounded-full bg-[#10b981]/10 text-[#10b981] text-xs font-bold uppercase tracking-widest mb-4">Unicorn Map</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">How long to reach $1B?</h2>
-          <p className="text-neutral-600 mt-3 text-lg">Each dot is a YC unicorn. X = founding year, Y = years to hit $1B. Bigger dots = higher valuation.</p>
-        </Reveal>
-        <Reveal delay={100}>
-          <div className="mt-8 h-[400px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <ScatterChart margin={{ top: 10, right: 30, left: 10, bottom: 30 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis dataKey="founded" name="Founded" tick={{ fontSize: 12, fill: "#737373" }} type="number" domain={[2004, 2026]} />
-                <YAxis dataKey="yearsToUnicorn" name="Years to $1B" tick={{ fontSize: 12, fill: "#737373" }} label={{ value: "Years to $1B", angle: -90, position: "insideLeft", style: { fontSize: 12, fill: "#a3a3a3" } }} />
-                <ZAxis dataKey="valuation" range={[40, 400]} name="Valuation" />
-                <Tooltip
-                  formatter={((value: number, name: string) => {
-                    if (name === "Valuation") return [`$${value}B`, name];
-                    return [value, name];
-                  }) as never}
-                  labelFormatter={((_: unknown, payload: Array<{payload?: {name?: string}}>) => payload?.[0]?.payload?.name || "") as never}
-                  contentStyle={{ borderRadius: "12px", border: "1px solid #e5e5e5" }}
-                />
-                <Scatter data={unicornScatter.filter(c => c.category === "sleeper")} name="Sleepers" fill="#FF6600" fillOpacity={0.7} />
-                <Scatter data={unicornScatter.filter(c => c.category === "hot-won")} name="Hot → Won" fill="#10b981" fillOpacity={0.7} />
-                <Scatter data={unicornScatter.filter(c => c.category === "moderate")} name="Moderate" fill="#3b82f6" fillOpacity={0.7} />
-                <Legend wrapperStyle={{ fontSize: 12 }} />
-              </ScatterChart>
-            </ResponsiveContainer>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ── THE GRAVEYARD ── */}
-      <section className="bg-neutral-950 border-y border-neutral-800">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-          <Reveal>
-            <div className="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest mb-4">The Graveyard</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white">Hype doesn&apos;t save you</h2>
-            <p className="text-neutral-400 mt-3 text-lg">{failures.length} companies that raised big, buzzed loud, and still failed or collapsed.</p>
-          </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-8">
-            {failures.map((c, i) => (
-              <Reveal key={c.name} delay={i * 30}>
-                <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 h-full">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-base font-bold text-white">{c.name}</h3>
-                    <span className="text-xs text-red-400 font-mono">{c.batch}</span>
-                  </div>
-                  <p className="text-xs text-neutral-400 leading-relaxed">{c.story}</p>
-                  <div className="flex items-center gap-3 mt-3 pt-2 border-t border-white/5">
-                    <span className="text-xs text-red-400 font-semibold">Raised {c.raised}</span>
-                    <span className="text-xs text-neutral-600">{c.status === "dead" ? "Dead" : "Collapsed"}</span>
-                  </div>
-                </div>
-              </Reveal>
+          <div className="flex gap-2 mt-6 mb-6">
+            {([
+              { key: "vintage" as const, label: "By Year" },
+              { key: "industry" as const, label: "By Industry" },
+              { key: "unicorns" as const, label: "Unicorn Map" },
+            ]).map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setChartTab(t.key)}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition active:scale-[0.97] ${
+                  chartTab === t.key
+                    ? "bg-yc-dark text-white"
+                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                }`}
+              >
+                {t.label}
+              </button>
             ))}
           </div>
+
+          {chartTab === "vintage" && (
+            <div>
+              <p className="text-neutral-500 text-sm mb-4">Total value created by YC batch year. Some vintages are worth 100x more than others.</p>
+              <div className="h-[380px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={valueByYear} margin={{ top: 10, right: 10, left: 10, bottom: 30 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                    <XAxis dataKey="year" tick={{ fontSize: 12, fill: "#737373" }} angle={-45} textAnchor="end" />
+                    <YAxis tick={{ fontSize: 12, fill: "#737373" }} tickFormatter={(v: number) => `$${v}B`} />
+                    <Tooltip
+                      formatter={((value: number, name: string) => {
+                        if (name === "total") return [`$${value}B`, "Total Value"];
+                        return [value, name];
+                      }) as never}
+                      labelFormatter={((year: number) => {
+                        const d = valueByYear.find(v => v.year === year);
+                        return `${year} — ${d?.count} companies, top: ${d?.top}`;
+                      }) as never}
+                      contentStyle={{ borderRadius: "12px", border: "1px solid #e5e5e5" }}
+                    />
+                    <Bar dataKey="total" radius={[6, 6, 0, 0]}>
+                      {valueByYear.map((entry, i) => (
+                        <Cell key={i} fill={entry.total > 100 ? "#FF6600" : entry.total > 20 ? "#3b82f6" : entry.total > 5 ? "#10b981" : "#d4d4d4"} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="flex flex-wrap gap-4 mt-3 justify-center text-xs text-neutral-500">
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#FF6600]" /> $100B+</span>
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#3b82f6]" /> $20–100B</span>
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#10b981]" /> $5–20B</span>
+                <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-[#d4d4d4]" /> Under $5B</span>
+              </div>
+            </div>
+          )}
+
+          {chartTab === "industry" && (
+            <div>
+              <p className="text-neutral-500 text-sm mb-4">Top 15 industries by total portfolio value.</p>
+              <div className="h-[450px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={industryData} layout="vertical" margin={{ left: 120, right: 30, top: 10, bottom: 10 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} />
+                    <XAxis type="number" tick={{ fontSize: 12, fill: "#737373" }} tickFormatter={(v: number) => `$${v}B`} />
+                    <YAxis type="category" dataKey="industry" tick={{ fontSize: 12, fill: "#525252" }} width={110} />
+                    <Tooltip
+                      formatter={((value: number) => [`$${value}B`, "Total Value"]) as never}
+                      labelFormatter={((ind: string) => {
+                        const d = industryData.find(x => x.industry === ind);
+                        return `${ind} — ${d?.count} companies, ${d?.unicorns} unicorns`;
+                      }) as never}
+                      contentStyle={{ borderRadius: "12px", border: "1px solid #e5e5e5" }}
+                    />
+                    <Bar dataKey="total" radius={[0, 6, 6, 0]}>
+                      {industryData.map((_, i) => (
+                        <Cell key={i} fill={INDUSTRY_COLORS[i % INDUSTRY_COLORS.length]} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mt-4">
+                {industryData.slice(0, 5).map((d, i) => (
+                  <div key={d.industry} className="rounded-lg border border-neutral-200 p-3 text-center">
+                    <div className="text-xl font-bold" style={{ color: INDUSTRY_COLORS[i] }}>{d.count}</div>
+                    <div className="text-xs text-neutral-500">{d.industry}</div>
+                    <div className="text-xs font-semibold text-neutral-700">{d.unicorns} unicorns</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {chartTab === "unicorns" && (
+            <div>
+              <p className="text-neutral-500 text-sm mb-4">Each dot is a YC unicorn. X = founding year, Y = years to hit $1B. Bigger dots = higher valuation.</p>
+              <div className="h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <ScatterChart margin={{ top: 10, right: 30, left: 10, bottom: 30 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                    <XAxis dataKey="founded" name="Founded" tick={{ fontSize: 12, fill: "#737373" }} type="number" domain={[2004, 2026]} />
+                    <YAxis dataKey="yearsToUnicorn" name="Years to $1B" tick={{ fontSize: 12, fill: "#737373" }} label={{ value: "Years to $1B", angle: -90, position: "insideLeft", style: { fontSize: 12, fill: "#a3a3a3" } }} />
+                    <ZAxis dataKey="valuation" range={[40, 400]} name="Valuation" />
+                    <Tooltip
+                      formatter={((value: number, name: string) => {
+                        if (name === "Valuation") return [`$${value}B`, name];
+                        return [value, name];
+                      }) as never}
+                      labelFormatter={((_: unknown, payload: Array<{payload?: {name?: string}}>) => payload?.[0]?.payload?.name || "") as never}
+                      contentStyle={{ borderRadius: "12px", border: "1px solid #e5e5e5" }}
+                    />
+                    <Scatter data={unicornScatter.filter(c => c.category === "sleeper")} name="Sleepers" fill="#FF6600" fillOpacity={0.7} />
+                    <Scatter data={unicornScatter.filter(c => c.category === "hot-won")} name="Hot → Won" fill="#10b981" fillOpacity={0.7} />
+                    <Scatter data={unicornScatter.filter(c => c.category === "moderate")} name="Moderate" fill="#3b82f6" fillOpacity={0.7} />
+                    <Legend wrapperStyle={{ fontSize: 12 }} />
+                  </ScatterChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
         </div>
       </section>
+
 
       {/* ── INSIDER QUOTES ── */}
       <section className="bg-yc-dark">

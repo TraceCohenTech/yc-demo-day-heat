@@ -262,6 +262,23 @@ const COMPANIES: Company[] = [
   { name: "Sendwave", batch: "S12", valuation: 0.5, raised: "$10M", category: "sleeper", story: "Instant no-fee money transfers to Africa. WorldRemit acquired for $500M on just $10M raised.", industry: "Fintech", founded: 2014, seedYear: 2014, status: "acquired" },
   { name: "Caper AI", batch: "W16", valuation: 0.35, raised: "$36M", category: "moderate", story: "AI smart shopping carts for cashier-less checkout. Instacart acquired for $350M in 2021.", industry: "Retail Tech", founded: 2016, seedYear: 2016, seriesAYear: 2019, status: "acquired" },
   { name: "Fivestars", batch: "W11", valuation: 0.317, raised: "$115M", category: "moderate", story: "Customer loyalty and payments for small businesses. 60M+ members. Acquired by SumUp.", industry: "Fintech", founded: 2011, seedYear: 2011, seriesAYear: 2013, status: "acquired" },
+  // NOTABLE ACQUISITIONS
+  { name: "Parakey", batch: "S06", valuation: 0, raised: "$0.02M", category: "sleeper", story: "Founded by Firefox co-creators Blake Ross and Joe Hewitt. Facebook's very first acquisition. Hewitt built Facebook's iPhone app.", industry: "Web", founded: 2006, seedYear: 2006, status: "acquired" },
+  { name: "Zenter", batch: "W07", valuation: 0, raised: "$0.02M", category: "sleeper", story: "Web-based presentation tool acquired by Google months after demo day. Became the foundation for Google Slides.", industry: "Productivity", founded: 2007, seedYear: 2007, status: "acquired" },
+  { name: "AppJet", batch: "S07", valuation: 0, raised: "$0.7M", category: "sleeper", story: "Built EtherPad — one of the first real-time collaborative editors. Google acquired it and the tech became Google Docs.", industry: "Productivity", founded: 2007, seedYear: 2007, status: "acquired" },
+  { name: "Omnisio", batch: "W08", valuation: 0, raised: "$0.1M", category: "sleeper", story: "Video annotation and editing tool. Google acquired and integrated into YouTube's editing capabilities.", industry: "Media", founded: 2007, seedYear: 2008, status: "acquired" },
+  { name: "Cloudkick", batch: "W09", valuation: 0, raised: "$2.8M", category: "moderate", story: "Cloud server monitoring. Rackspace acquired 11 months after launch. Founder Alex Polvi later founded CoreOS (also acquired).", industry: "DevOps", founded: 2009, seedYear: 2009, status: "acquired" },
+  { name: "Bump", batch: "S09", valuation: 0.03, raised: "$19.9M", category: "moderate", story: "Contact-sharing app — bump phones to exchange info. 125M+ downloads. Google acquired for ~$30M. Team built Google Photos.", industry: "Mobile", founded: 2008, seedYear: 2009, status: "acquired" },
+  { name: "Rapportive", batch: "S10", valuation: 0.015, raised: "$1M", category: "sleeper", story: "Gmail plugin showing rich social profiles of contacts. LinkedIn acquired. Founder Rahul Vohra later created Superhuman.", industry: "SaaS", founded: 2010, seedYear: 2010, status: "acquired" },
+  { name: "Cue", batch: "W10", valuation: 0.05, raised: "$5.8M", category: "moderate", story: "Started as Greplin (personal search), pivoted to Cue assistant. Apple acquired for ~$50M to bolster Siri.", industry: "AI", founded: 2009, seedYear: 2010, status: "acquired" },
+  { name: "Flutter", batch: "W12", valuation: 0.04, raised: "$2M", category: "sleeper", story: "Gesture recognition — control your computer with hand waves via webcam. Google acquired for ~$40M for the tech.", industry: "AI", founded: 2012, seedYear: 2012, status: "acquired" },
+  // LATEST BATCHES (2024-2025)
+  { name: "Vapi", batch: "W24", valuation: 0.3, raised: "$75.2M", category: "hot-won", story: "Voice AI developer platform for natural phone call agents. Series A at $130M, then Series B 14 months later.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, status: "active" },
+  { name: "Ema", batch: "W24", valuation: 0.25, raised: "$61M", category: "hot-won", story: "'Universal AI employee.' Tripled customer base since launch. KPMG strategic investment. $15.2M ARR.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, status: "active" },
+  { name: "Browser Use", batch: "W25", valuation: 0.1, raised: "$17M", category: "hot-won", story: "Open-source browser automation for AI agents. Went viral — 50K GitHub stars in 3 months, 28K daily downloads.", industry: "AI", founded: 2024, seedYear: 2025, status: "active" },
+  { name: "Pingo AI", batch: "S25", valuation: 0.06, raised: "$0.5M", category: "hot-won", story: "AI language learning hit $500K MRR in 14 months with 300K+ users. Growing 70% monthly. The Duolingo killer.", industry: "EdTech", founded: 2025, seedYear: 2025, status: "active" },
+  { name: "Perseus Defense", batch: "S25", valuation: 0.05, raised: "$6M", category: "hot-won", story: "Building America's Iron Dome for drones — 15-inch mini-missiles under $5K each. Multiple US military branches testing.", industry: "Defense", founded: 2025, seedYear: 2025, status: "active" },
+  { name: "Solva", batch: "S25", valuation: 0.1, raised: "$21.5M", category: "hot-won", story: "AI insurance claims automation. Hit $245K ARR 10 weeks after launch. Raised massive Series A right out of YC.", industry: "Insurance", founded: 2025, seedYear: 2025, seriesAYear: 2025, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -359,7 +376,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            230 companies tracked · 20 years of data
+            245 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -369,7 +386,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 230 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 245 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -931,7 +948,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "230 companies tracked across 20 years of YC batches",
+              "245 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

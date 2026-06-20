@@ -201,9 +201,9 @@ const categoryBreakdown = [
 ];
 
 const pieData = [
-  { name: "Top 3 (Airbnb, Stripe, Coinbase)", value: 50, fill: "#FF6600" },
-  { name: "Other unicorns (5.4%)", value: 40, fill: "#3b82f6" },
-  { name: "Remaining 94%", value: 10, fill: "#e5e5e5" },
+  { name: "Top 5 (Stripe, Airbnb, DoorDash, Cursor, Ramp)", value: 55, fill: "#FF6600" },
+  { name: "Other unicorns", value: 35, fill: "#3b82f6" },
+  { name: "Remaining ~90%", value: 10, fill: "#e5e5e5" },
 ];
 
 const CATEGORY_META: Record<string, { label: string; color: string; bg: string }> = {
@@ -278,7 +278,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 100 of the most hyped YC companies to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 150 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -504,9 +504,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
           <Reveal>
             <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Power Law</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">3 companies = 50%+ of all value</h2>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">5 companies = 55%+ of all value</h2>
             <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">
-              YC&apos;s returns follow an extreme power law. Airbnb, Stripe, and Coinbase account for more than half of all YC portfolio value. Two of those three were sleepers.
+              YC&apos;s returns follow an extreme power law. Stripe, Airbnb, DoorDash, Cursor, and Ramp account for over half of all YC portfolio value. Three of those five were sleepers.
             </p>
           </Reveal>
 
@@ -547,10 +547,10 @@ export default function Home() {
             <Reveal delay={100}>
               <div className="space-y-4">
                 {[
-                  { n: "0.6%", label: "of YC companies are decacorns", sub: ">$10B — account for >50% of total value" },
+                  { n: "0.6%", label: "of YC companies are decacorns", sub: ">$10B — account for >55% of total value" },
                   { n: "6%", label: "become unicorns at all", sub: "Account for 90% of total YC value" },
                   { n: "821+", label: "companies in the YC Graveyard", sub: "Documented failures across all batches" },
-                  { n: "2/3", label: "of the top 3 were sleepers", sub: "Airbnb and Coinbase were ignored at Demo Day" },
+                  { n: "3/5", label: "of the top 5 were sleepers", sub: "Airbnb, DoorDash, and Cursor were overlooked" },
                 ].map((s, i) => (
                   <div key={i} className="flex gap-4 items-start">
                     <span className="text-2xl font-bold text-[#FF6600] tabular-nums shrink-0 w-16 text-right">{s.n}</span>
@@ -840,7 +840,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "310 AI research agents, 64 unique sources verified",
+              "150 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

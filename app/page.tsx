@@ -279,6 +279,17 @@ const COMPANIES: Company[] = [
   { name: "Pingo AI", batch: "S25", valuation: 0.06, raised: "$0.5M", category: "hot-won", story: "AI language learning hit $500K MRR in 14 months with 300K+ users. Growing 70% monthly. The Duolingo killer.", industry: "EdTech", founded: 2025, seedYear: 2025, status: "active" },
   { name: "Perseus Defense", batch: "S25", valuation: 0.05, raised: "$6M", category: "hot-won", story: "Building America's Iron Dome for drones — 15-inch mini-missiles under $5K each. Multiple US military branches testing.", industry: "Defense", founded: 2025, seedYear: 2025, status: "active" },
   { name: "Solva", batch: "S25", valuation: 0.1, raised: "$21.5M", category: "hot-won", story: "AI insurance claims automation. Hit $245K ARR 10 weeks after launch. Raised massive Series A right out of YC.", industry: "Insurance", founded: 2025, seedYear: 2025, seriesAYear: 2025, status: "active" },
+  // FINAL PUSH
+  { name: "Casetext", batch: "S13", valuation: 0.65, raised: "$68M", category: "hot-won", story: "Built CoCounsel, GPT-4 AI legal assistant. Thomson Reuters acquired for $650M in 2023 — 5x valuation jump in 18 months.", industry: "Legal Tech", founded: 2013, seedYear: 2013, seriesAYear: 2015, status: "acquired" },
+  { name: "The Athletic", batch: "S16", valuation: 0.55, raised: "$140M", category: "hot-won", story: "Subscription sports journalism that challenged legacy media. NYT acquired for $550M in 2022.", industry: "Media", founded: 2016, seedYear: 2016, seriesAYear: 2017, status: "acquired" },
+  { name: "Heap", batch: "W13", valuation: 0.96, raised: "$216M", category: "moderate", story: "Auto-capture product analytics — no manual event tagging needed. Contentsquare acquired for $960M in 2023.", industry: "Analytics", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "acquired" },
+  { name: "uBiome", batch: "S14", valuation: 0, raised: "$109M", category: "hot-failed", story: "Raised $109M to decode the microbiome. FBI raided offices over insurance billing fraud. Founders charged.", industry: "Biotech", founded: 2012, seedYear: 2014, seriesAYear: 2016, status: "dead" },
+  { name: "Airware", batch: "W13", valuation: 0, raised: "$118M", category: "hot-failed", story: "Enterprise drone software. Raised $118M but DJI ate their lunch on hardware. Burned cash on obsolete tech. Shut down 2018.", industry: "Drones", founded: 2011, seedYear: 2013, seriesAYear: 2015, status: "dead" },
+  { name: "Modern Fertility", batch: "S17", valuation: 0.225, raised: "$22M", category: "hot-won", story: "At-home fertility hormone testing. Democratized reproductive health data. Ro acquired for $225M in 2021.", industry: "Healthcare", founded: 2017, seedYear: 2017, seriesAYear: 2019, status: "acquired" },
+  { name: "Heirloom", batch: "S22", valuation: 0.1, raised: "$53M", category: "moderate", story: "Limestone-based direct air capture of CO2. One of the most promising climate tech approaches to carbon removal.", industry: "Climate", founded: 2020, seedYear: 2022, seriesAYear: 2023, status: "active" },
+  { name: "FutureAdvisor", batch: "S10", valuation: 0.15, raised: "$21.5M", category: "sleeper", story: "Robo-advisor for automated wealth management. BlackRock — world's largest asset manager — acquired for $150M.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2013, status: "acquired" },
+  { name: "Persona", batch: "S14", valuation: 0.25, raised: "$50M", category: "moderate", story: "Identity verification API (originally Cognito). Powers KYC for fintechs and marketplaces.", industry: "Security", founded: 2014, seedYear: 2014, seriesAYear: 2019, status: "active" },
+  { name: "Sqreen", batch: "W18", valuation: 0.22, raised: "$35M", category: "moderate", story: "Runtime application security platform. Datadog acquired to expand their security portfolio.", industry: "Security", founded: 2015, seedYear: 2018, seriesAYear: 2019, status: "acquired" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -376,7 +387,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            245 companies tracked · 20 years of data
+            255 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -386,7 +397,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 245 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 255 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -948,7 +959,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "245 companies tracked across 20 years of YC batches",
+              "255 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

@@ -119,6 +119,32 @@ const COMPANIES: Company[] = [
   { name: "Kustomer", batch: "S14", valuation: 0.25, raised: "$174M", category: "moderate", story: "CRM platform. Acquired by Meta for $1B, then spun out at ~$250M.", industry: "SaaS" },
   { name: "Clearbit", batch: "W14", valuation: 0.5, raised: "$74M", category: "moderate", story: "Data enrichment API. Acquired by HubSpot in 2023.", industry: "Data" },
   { name: "Vetcove", batch: "S16", valuation: 1.6, raised: "$120M", category: "sleeper", story: "Amazon for veterinarians. Quietly grew to $1.6B. Zero hype at Demo Day.", industry: "Healthcare" },
+  // EXPANSION — 25 more companies
+  { name: "Helion Energy", batch: "W14", valuation: 15.5, raised: "$1.5B", category: "sleeper", story: "Fusion energy startup. Sam Altman became chairman. Contract to power Microsoft. $15.5B.", industry: "Energy" },
+  { name: "Vercel", batch: "W21", valuation: 9.3, raised: "$563M", category: "hot-won", story: "Founded as ZEIT. Creators of Next.js. Rode AI cloud wave to $9.3B with $340M ARR.", industry: "Dev Tools" },
+  { name: "Verkada", batch: "W17", valuation: 5.8, raised: "$757M", category: "sleeper", story: "Enterprise security cameras sounded boring at Demo Day. Cloud-managed physical security grew to $5.8B.", industry: "Security" },
+  { name: "Mercury", batch: "S19", valuation: 5.2, raised: "$546M", category: "sleeper", story: "Banking for startups when neobanks were crowded. 40%+ of YC batches now bank with Mercury.", industry: "Fintech" },
+  { name: "Oklo", batch: "S14", valuation: 6.16, raised: "$1.9B", category: "sleeper", story: "Nuclear microreactor company. Sam Altman chairman. Went public via SPAC 2024. ~$6B market cap.", industry: "Nuclear" },
+  { name: "Rigetti Computing", batch: "S14", valuation: 6.16, raised: "$298M", category: "moderate", story: "Quantum computing hardware. Went public via SPAC. Volatile but hit $6B amid quantum hype.", industry: "Quantum" },
+  { name: "Solugen", batch: "W17", valuation: 2, raised: "$656M", category: "sleeper", story: "Plant-sugar-to-chemicals got modest Demo Day attention. First YC climate tech unicorn.", industry: "Climate" },
+  { name: "Substack", batch: "W18", valuation: 1.1, raised: "$190M", category: "moderate", story: "Newsletter platform seemed niche at Demo Day. Rode creator economy wave to unicorn.", industry: "Media" },
+  { name: "Matterport", batch: "W12", valuation: 1.6, raised: "$163M", category: "moderate", story: "3D spatial capture for real estate. SPAC'd at $2.9B. Acquired by CoStar for $1.6B.", industry: "Real Estate" },
+  { name: "Apollo.io", batch: "W16", valuation: 1.6, raised: "$250M", category: "sleeper", story: "Sales intelligence grew slowly for years then exploded to $150M ARR. Capital-efficient unicorn.", industry: "Sales" },
+  { name: "Gecko Robotics", batch: "S16", valuation: 1.25, raised: "$354M", category: "sleeper", story: "Wall-climbing inspection robots for power plants. Founded at 19. Took 12 years to unicorn.", industry: "Robotics" },
+  { name: "Astranis", batch: "W16", valuation: 2, raised: "$753M", category: "sleeper", story: "Small geostationary satellites. Demo Day investors skeptical of hardware. Now $2B+ with defense contracts.", industry: "Space" },
+  { name: "Front", batch: "S14", valuation: 1.7, raised: "$202M", category: "sleeper", story: "Shared inbox for teams seemed incremental. Steadily grew to $100M ARR and $1.7B.", industry: "SaaS" },
+  { name: "Clipboard Health", batch: "W17", valuation: 1.3, raised: "$94M", category: "sleeper", story: "Healthcare staffing marketplace. Hit unicorn on just $94M raised — most capital-efficient YC unicorn.", industry: "Healthcare" },
+  { name: "Xendit", batch: "S15", valuation: 1, raised: "$530M", category: "sleeper", story: "First Southeast Asian YC company. Pivoted from Bitcoin to payment infrastructure. Processes $15B/year in Indonesia.", industry: "Fintech" },
+  { name: "Paystack", batch: "W16", valuation: 0.2, raised: "$11.7M", category: "hot-won", story: "First Nigerian YC company. Processed half of Nigeria's online transactions. Acquired by Stripe for $200M+.", industry: "Fintech" },
+  { name: "Newfront", batch: "W18", valuation: 2.2, raised: "$310M", category: "moderate", story: "Modern commercial insurance brokerage. Digitized old-school industry to $2.2B.", industry: "Insurance" },
+  { name: "GoCardless", batch: "S11", valuation: 2.1, raised: "$540M", category: "moderate", story: "UK bank-to-bank payments. One of YC's earliest international successes. Acquired in 2025.", industry: "Fintech" },
+  { name: "Honeylove", batch: "S18", valuation: 2.3, raised: "$13.2M", category: "sleeper", story: "DTC shapewear by an EDM artist. Only raised $13M. One of YC's most capital-efficient consumer brands.", industry: "DTC" },
+  { name: "BillionToOne", batch: "S17", valuation: 1, raised: "$230M", category: "sleeper", story: "Prenatal genetic testing 10x more accurate than competitors. Grew from diagnostics niche to unicorn.", industry: "Biotech" },
+  { name: "Stoke Space", batch: "W21", valuation: 2, raised: "$175M", category: "sleeper", story: "Fully reusable rocket by Blue Origin veterans. Quietly building while SpaceX dominates headlines.", industry: "Space" },
+  { name: "Go1", batch: "S15", valuation: 2, raised: "$414M", category: "sleeper", story: "Australian corporate learning aggregator. Overlooked at Demo Day. World's largest curated e-learning library.", industry: "EdTech" },
+  { name: "Scribd", batch: "S06", valuation: 0.45, raised: "$107M", category: "moderate", story: "One of YC's earliest companies. Pivoted from doc sharing to 'Netflix for books.' Survived 20 years.", industry: "Media" },
+  { name: "Boosted", batch: "S12", valuation: 0, raised: "$72M", category: "hot-failed", story: "Electric skateboard pioneer with devoted fans. Killed by Trump-era tariffs on Chinese components. Shut down 2020.", industry: "Hardware" },
+  { name: "Weave", batch: "W14", valuation: 0.7, raised: "$168M", category: "moderate", story: "Communication platform for small healthcare businesses. Went public on NYSE 2021.", industry: "SaaS" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -216,7 +242,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            100 companies tracked · 20 years of data
+            127 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">

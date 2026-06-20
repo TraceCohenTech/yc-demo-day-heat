@@ -202,6 +202,18 @@ const COMPANIES: Company[] = [
   // INTERNATIONAL
   { name: "ClearTax", batch: "S14", valuation: 0.7, raised: "$141M", category: "moderate", story: "First India-focused startup to join YC. Automates tax filing for Indian workers and businesses. Rebranded to 'Clear.'", industry: "Fintech", founded: 2011, seedYear: 2014, seriesAYear: 2017, status: "active" },
   { name: "Mono", batch: "W21", valuation: 0.03, raised: "$20M", category: "moderate", story: "'Plaid for Africa.' Powered millions of bank account linkages. First YC-to-YC exit in Africa — acquired by Flutterwave.", industry: "Fintech", founded: 2020, seedYear: 2020, seriesAYear: 2021, status: "acquired" },
+  // NOTABLE FAILURES
+  { name: "Kiko", batch: "S05", valuation: 0, raised: "$0.07M", category: "hot-failed", story: "YC's very first company. Built a web calendar, then Google Calendar launched. Sold on eBay for $258K. Founders pivoted to Justin.tv → Twitch ($970M).", industry: "Productivity", founded: 2005, seedYear: 2005, status: "dead" },
+  { name: "Exec", batch: "W12", valuation: 0, raised: "$3.3M", category: "hot-failed", story: "Justin Kan's on-demand errand service. Couldn't scale past SF, hiked rates, pivoted to cleaning. Acqui-hired by Handy.", industry: "On-Demand", founded: 2012, seedYear: 2012, status: "dead" },
+  { name: "Tutorspree", batch: "W11", valuation: 0, raised: "$1.8M", category: "hot-failed", story: "'Airbnb for tutoring' backed by Sequoia. Users bypassed the platform to work directly. Co-founder Aaron Harris became a YC partner.", industry: "EdTech", founded: 2011, seedYear: 2011, status: "dead" },
+  // FINTECH / B2B SAAS
+  { name: "Hightouch", batch: "S19", valuation: 1.2, raised: "$180M", category: "hot-won", story: "Reverse ETL pioneer that became the leading composable CDP. Now powering AI decisioning for enterprise marketing.", industry: "Data", founded: 2018, seedYear: 2019, seriesAYear: 2021, unicornYear: 2025, status: "active" },
+  { name: "Statsig", batch: "W21", valuation: 1.1, raised: "$153M", category: "hot-won", story: "Ex-Facebook VP built feature flagging and experimentation platform. OpenAI acquired for $1.1B in Sept 2025.", industry: "Dev Tools", founded: 2021, seedYear: 2021, seriesAYear: 2022, unicornYear: 2025, status: "acquired" },
+  { name: "Middesk", batch: "W19", valuation: 0.5, raised: "$77M", category: "moderate", story: "Founded by ex-Checkr leaders. Automates business identity verification and KYB checks for banks and fintechs.", industry: "Fintech", founded: 2019, seedYear: 2019, seriesAYear: 2021, status: "active" },
+  { name: "Vouch", batch: "S19", valuation: 0.5, raised: "$160M", category: "moderate", story: "Business insurance built for startups. Became the default insurer for YC, Brex, and Carta portfolios.", industry: "Insurance", founded: 2018, seedYear: 2019, seriesAYear: 2021, status: "active" },
+  { name: "Census", batch: "S19", valuation: 0.1, raised: "$80M", category: "hot-failed", story: "Reverse ETL company that lost the category war to Hightouch. Down-exit acquisition by Fivetran in 2025.", industry: "Data", founded: 2018, seedYear: 2019, seriesAYear: 2021, status: "acquired" },
+  { name: "Orb", batch: "W22", valuation: 0.3, raised: "$44M", category: "sleeper", story: "Ex-Asana engineers built usage-based billing infrastructure powering Vercel, Replit, and Perplexity.", industry: "Fintech", founded: 2021, seedYear: 2022, seriesAYear: 2023, status: "active" },
+  { name: "Merge", batch: "S21", valuation: 0.5, raised: "$75M", category: "moderate", story: "Unified API for HR, payroll, ATS, CRM integrations. Build 200+ integrations at once.", industry: "Dev Tools", founded: 2020, seedYear: 2021, seriesAYear: 2022, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -299,7 +311,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            176 companies tracked · 20 years of data
+            186 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -309,7 +321,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 176 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 186 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -871,7 +883,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "176 companies tracked across 20 years of YC batches",
+              "186 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

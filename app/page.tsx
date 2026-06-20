@@ -45,7 +45,7 @@ const COMPANIES: Company[] = [
   { name: "GitLab", batch: "W15", valuation: 4.7, raised: "$414M", category: "sleeper", story: "All-remote model made fundraising difficult. Series B was a grind. IPO'd, now ~$4.7B.", industry: "Dev Tools", founded: 2011, seedYear: 2015, seriesAYear: 2016, unicornYear: 2019, status: "public" },
   { name: "Flexport", batch: "W14", valuation: 1, raised: "$2.7B", category: "moderate", story: "Logistics. Peaked at $8B. CEO ousted, cratered to ~$1B on secondaries.", industry: "Logistics", founded: 2013, seedYear: 2014, seriesAYear: 2015, unicornYear: 2019, status: "active" },
   { name: "Flock Safety", batch: "S17", valuation: 8.4, raised: "$381M", category: "hot-won", story: "Garry Tan funded seed at Demo Day on the spot. 'Home run.'", industry: "Security", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
-  { name: "Dropbox", batch: "W07", valuation: 6.4, raised: "$1.7B", category: "hot-won", story: "Viral demo video. 5K→75K waitlist signups overnight.", industry: "Cloud", founded: 2007, seedYear: 2007, seriesAYear: 2008, unicornYear: 2011, status: "public" },
+  { name: "Dropbox", batch: "S07", valuation: 6.4, raised: "$1.7B", category: "hot-won", story: "Viral demo video. 5K→75K waitlist signups overnight.", industry: "Cloud", founded: 2007, seedYear: 2007, seriesAYear: 2008, unicornYear: 2011, status: "public" },
   { name: "Razorpay", batch: "W15", valuation: 9.2, raised: "$816M", category: "moderate", story: "Payments for India. Valued at $9.2B, preparing IPO.", industry: "Fintech", founded: 2014, seedYear: 2015, seriesAYear: 2016, unicornYear: 2021, status: "active" },
   { name: "Benchling", batch: "S12", valuation: 6.1, raised: "$412M", category: "moderate", story: "Biotech tools. Quiet grower to $6.1B valuation.", industry: "Biotech", founded: 2012, seedYear: 2013, seriesAYear: 2016, unicornYear: 2021, status: "active" },
   { name: "Checkr", batch: "S14", valuation: 1.2, raised: "$679M", category: "hot-won", story: "Overwhelming investor interest. Landed Uber immediately. Peaked at $5.7B, marked down to ~$1.2B.", industry: "HR", founded: 2014, seedYear: 2014, seriesAYear: 2016, unicornYear: 2019, status: "active" },
@@ -61,7 +61,7 @@ const COMPANIES: Company[] = [
   { name: "Segment", batch: "S11", valuation: 3.2, raised: "$284M", category: "sleeper", story: "Demo Day product was a classroom tool that flopped. Pivoted entirely.", industry: "Analytics", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2019, status: "acquired" },
   { name: "Groww", batch: "W18", valuation: 9, raised: "$393M", category: "moderate", story: "Indian investing platform. IPO'd Nov 2025. Market cap ~$9B.", industry: "Fintech", founded: 2016, seedYear: 2018, seriesAYear: 2019, unicornYear: 2021, status: "public" },
   { name: "Podium", batch: "W16", valuation: 3, raised: "$419M", category: "moderate", story: "Customer engagement platform.", industry: "SaaS", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
-  { name: "Twitch", batch: "S07", valuation: 0.97, raised: "$35M", category: "moderate", story: "Started as Justin.tv. Pivoted to gaming streams. $970M Amazon exit.", industry: "Streaming", founded: 2007, seedYear: 2007, seriesAYear: 2008, status: "acquired" },
+  { name: "Twitch", batch: "W07", valuation: 0.97, raised: "$35M", category: "moderate", story: "Started as Justin.tv. Pivoted to gaming streams. $970M Amazon exit.", industry: "Streaming", founded: 2007, seedYear: 2007, seriesAYear: 2008, status: "acquired" },
   { name: "Algolia", batch: "W14", valuation: 2.25, raised: "$334M", category: "moderate", story: "Search API. $2.25B valuation.", industry: "Dev Tools", founded: 2012, seedYear: 2014, seriesAYear: 2015, unicornYear: 2021, status: "active" },
   { name: "PagerDuty", batch: "S10", valuation: 0.66, raised: "$524M", category: "moderate", story: "Already had paying customers at YC. IPO'd. Stock declined to ~$660M market cap.", industry: "DevOps", founded: 2009, seedYear: 2010, seriesAYear: 2013, status: "public" },
   { name: "Mixpanel", batch: "S09", valuation: 1, raised: "$277M", category: "moderate", story: "Analytics. Same batch as Stripe.", industry: "Analytics", founded: 2009, seedYear: 2009, seriesAYear: 2012, status: "active" },
@@ -72,7 +72,6 @@ const COMPANIES: Company[] = [
   { name: "Parker", batch: "W19", valuation: 0, raised: "$200M+", category: "hot-failed", story: "Peter Thiel's Valar Ventures led. $65M revenue. Chapter 7 bankruptcy.", industry: "Fintech", founded: 2019, seedYear: 2019, seriesAYear: 2020, status: "dead" },
   { name: "Embark Trucks", batch: "W16", valuation: 0, raised: "$317M", category: "hot-failed", story: "SPAC at $5.2B. Stock crashed to $60M. Shut down 2023.", industry: "Autonomous", founded: 2016, seedYear: 2016, seriesAYear: 2018, status: "dead" },
   { name: "Momentus", batch: "S18", valuation: 0, raised: "$160M", category: "hot-failed", story: "SPAC at $1B+. SEC fraud charges. Collapsed.", industry: "Space", founded: 2017, seedYear: 2018, seriesAYear: 2019, status: "dead" },
-  { name: "Atrium", batch: "S07", valuation: 0, raised: "$75.5M", category: "hot-failed", story: "Justin Kan (sold Twitch for $970M). a16z backed. Shut down 2020.", industry: "Legal", founded: 2017, seedYear: 2017, seriesAYear: 2018, status: "dead" },
   { name: "Notable Labs", batch: "W15", valuation: 0, raised: "$55M", category: "hot-failed", story: "Public biotech company. Filed for bankruptcy Oct 2024.", industry: "Biotech", founded: 2014, seedYear: 2015, seriesAYear: 2017, status: "dead" },
   { name: "Homejoy", batch: "W10", valuation: 0, raised: "$40M", category: "hot-failed", story: "Massive Demo Day buzz. On-demand cleaning. Shut down 2015.", industry: "Services", founded: 2012, seedYear: 2012, seriesAYear: 2013, status: "dead" },
   { name: "SpoonRocket", batch: "S13", valuation: 0, raised: "$13.5M", category: "hot-failed", story: "TechCrunch top 8. $2M run rate. 112% weekly growth. Dead by 2016.", industry: "Delivery", founded: 2013, seedYear: 2013, seriesAYear: 2014, status: "dead" },
@@ -118,7 +117,6 @@ const COMPANIES: Company[] = [
   { name: "Lever", batch: "S12", valuation: 0.5, raised: "$122M", category: "moderate", story: "Recruiting ATS. Acquired by Employ Inc. Steady SaaS play.", industry: "HR", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "acquired" },
   { name: "ReadMe", batch: "W15", valuation: 0.2, raised: "$37M", category: "moderate", story: "Interactive API documentation. Developer tools niche.", industry: "Dev Tools", founded: 2014, seedYear: 2015, seriesAYear: 2019, status: "active" },
   { name: "Stytch", batch: "W21", valuation: 1, raised: "$210M", category: "hot-won", story: "Auth infrastructure. Raised at $1B within 18 months of YC.", industry: "Security", founded: 2020, seedYear: 2021, seriesAYear: 2021, unicornYear: 2022, status: "active" },
-  { name: "Monzo", batch: "S16", valuation: 6.5, raised: "$1.1B", category: "hot-won", story: "UK neobank. Coral debit card became a status symbol. 9M+ customers. Preparing London IPO.", industry: "Fintech", founded: 2015, seedYear: 2015, seriesAYear: 2016, unicornYear: 2018, status: "active" },
   { name: "Teespring", batch: "W13", valuation: 0, raised: "$56M", category: "hot-failed", story: "Custom merch platform. a16z led $55M Series B. Revenue collapsed. Rebranded to Spring.", industry: "E-commerce", founded: 2012, seedYear: 2013, seriesAYear: 2014, status: "dead" },
   { name: "Kustomer", batch: "S14", valuation: 0.25, raised: "$174M", category: "moderate", story: "CRM platform. Acquired by Meta for $1B, then spun out at ~$250M.", industry: "SaaS", founded: 2015, seedYear: 2015, seriesAYear: 2017, unicornYear: 2020, status: "active" },
   { name: "Clearbit", batch: "W14", valuation: 0.5, raised: "$74M", category: "moderate", story: "Data enrichment API. Acquired by HubSpot in 2023.", industry: "Data", founded: 2014, seedYear: 2014, seriesAYear: 2016, status: "acquired" },
@@ -474,7 +472,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
           >
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            280 companies tracked · 20 years of data
+            278 companies tracked · 20 years of data
           </motion.div>
 
           <motion.h1
@@ -494,7 +492,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We tracked 280 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 278 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </motion.p>
 
@@ -608,7 +606,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 280 companies</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 278 companies</h2>
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
@@ -1205,7 +1203,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "280 companies tracked across 20 years of YC batches",
+              "278 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

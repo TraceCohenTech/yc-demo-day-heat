@@ -18,133 +18,134 @@ type Company = {
   category: "sleeper" | "hot-won" | "hot-failed" | "moderate";
   story: string;
   industry: string;
+  founded: number;
+  seedYear?: number;
+  seriesAYear?: number;
+  unicornYear?: number;
+  status: "active" | "public" | "acquired" | "dead";
 };
 
 const COMPANIES: Company[] = [
-  // SLEEPERS — Ignored/struggled → Won Big
-  { name: "Airbnb", batch: "W09", valuation: 84, raised: "$6.4B", category: "sleeper", story: "7+ VC rejections. Sold cereal boxes to survive. Fred Wilson publicly passed.", industry: "Travel" },
-  { name: "Stripe", batch: "S09", valuation: 159, raised: "$9.4B", category: "hot-won", story: "First customer in 2 weeks via YC network. Sequoia early.", industry: "Fintech" },
-  { name: "Coinbase", batch: "S12", valuation: 43, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto" },
-  { name: "DoorDash", batch: "S13", valuation: 72, raised: "$2.5B", category: "sleeper", story: "Bottom half of batch at Demo Day. Nearly died in 2017–18.", industry: "Delivery" },
-  { name: "Cruise", batch: "W14", valuation: 0, raised: "$16B", category: "hot-failed", story: "Not in TechCrunch's top 8 picks. Peaked at $30B. Pedestrian dragging incident 2023. GM shut down robotaxi unit Dec 2024 after $10B+ losses.", industry: "Autonomous" },
-  { name: "Scale AI", batch: "S16", valuation: 29, raised: "$1.6B", category: "hot-won", story: "19-year-old founder. Pivoted during batch. Raised Series A in 2017.", industry: "AI" },
-  { name: "Deel", batch: "W19", valuation: 17.3, raised: "$679M", category: "hot-won", story: "TechCrunch top 10 pick. Raised quickly post-Demo Day.", industry: "HR" },
-  { name: "Rippling", batch: "W17", valuation: 20.8, raised: "$2B", category: "moderate", story: "Zenefits baggage but closed seed in 2 weeks. 90% repeat backers.", industry: "HR" },
-  { name: "OpenSea", batch: "W18", valuation: 0, raised: "$427M", category: "hot-failed", story: "Peaked at $13B during NFT mania. Sold to Coinbase for undisclosed amount at massive loss.", industry: "Crypto" },
-  { name: "Faire", batch: "W17", valuation: 5.2, raised: "$1.7B", category: "hot-won", story: "Raised $3.4M seed from Khosla shortly after YC. Peaked at $12.6B, down-round to $5.2B.", industry: "Wholesale" },
-  { name: "Brex", batch: "W17", valuation: 5.15, raised: "$1.5B", category: "hot-won", story: "Ribbit Capital led $7M Series A pre-Demo Day. Acquired for $5.15B.", industry: "Fintech" },
-  { name: "Reddit", batch: "S05", valuation: 33, raised: "$1.3B", category: "sleeper", story: "19 years from YC to IPO. Longest timeline of any YC company.", industry: "Social" },
-  { name: "Instacart", batch: "S12", valuation: 10, raised: "$2.9B", category: "sleeper", story: "Applied late. Rejected multiple times. Delivered beer to Garry Tan's door.", industry: "Delivery" },
-  { name: "Gusto", batch: "W12", valuation: 9.5, raised: "$746M", category: "moderate", story: "Steady builder. No Demo Day hype. Grew into $9.5B company.", industry: "HR" },
-  { name: "GitLab", batch: "W15", valuation: 4.7, raised: "$414M", category: "sleeper", story: "All-remote model made fundraising difficult. Series B was a grind. IPO'd, now ~$4.7B.", industry: "Dev Tools" },
-  { name: "Flexport", batch: "W14", valuation: 1, raised: "$2.7B", category: "moderate", story: "Logistics. Peaked at $8B. CEO ousted, cratered to ~$1B on secondaries.", industry: "Logistics" },
-  { name: "Flock Safety", batch: "S17", valuation: 8.4, raised: "$381M", category: "hot-won", story: "Garry Tan funded seed at Demo Day on the spot. 'Home run.'", industry: "Security" },
-  { name: "Dropbox", batch: "S07", valuation: 6.4, raised: "$1.7B", category: "hot-won", story: "Viral demo video. 5K→75K waitlist signups overnight.", industry: "Cloud" },
-  { name: "Razorpay", batch: "W15", valuation: 9.2, raised: "$816M", category: "moderate", story: "Payments for India. Valued at $9.2B, preparing IPO.", industry: "Fintech" },
-  { name: "Benchling", batch: "S12", valuation: 6.1, raised: "$412M", category: "moderate", story: "Biotech tools. Quiet grower to $6.1B valuation.", industry: "Biotech" },
-  { name: "Checkr", batch: "S14", valuation: 1.2, raised: "$679M", category: "hot-won", story: "Overwhelming investor interest. Landed Uber immediately. Peaked at $5.7B, marked down to ~$1.2B.", industry: "HR" },
-  { name: "Fivetran", batch: "W13", valuation: 5.6, raised: "$853M", category: "moderate", story: "Data integration. Scaled steadily from YC check.", industry: "Data" },
-  { name: "Rappi", batch: "W16", valuation: 5.2, raised: "$2.3B", category: "moderate", story: "Latin American delivery super-app.", industry: "Delivery" },
-  { name: "Zapier", batch: "S12", valuation: 5, raised: "$1.4M", category: "sleeper", story: "Bootstrapped from Missouri. Only ever raised $1.3M total.", industry: "Automation" },
-  { name: "Webflow", batch: "S13", valuation: 4, raised: "$335M", category: "sleeper", story: "Credit card debt. Failed Kickstarter. 6 years to raise first VC.", industry: "Dev Tools" },
-  { name: "Meesho", batch: "S16", valuation: 9, raised: "$1.4B", category: "moderate", story: "Social commerce India. IPO'd Dec 2025. Market cap ~$9B.", industry: "E-commerce" },
-  { name: "EquipmentShare", batch: "W15", valuation: 5.7, raised: "$3.5B", category: "moderate", story: "Construction equipment rental. IPO'd Jan 2026 on NASDAQ.", industry: "Construction" },
-  { name: "Whatnot", batch: "W20", valuation: 11.5, raised: "$710M", category: "sleeper", story: "100+ investor meetings. Raised from friends. Pivoted post-Demo Day. Series F at $11.5B.", industry: "E-commerce" },
-  { name: "GOAT Group", batch: "W11", valuation: 3.7, raised: "$493M", category: "sleeper", story: "Original YC company (GrubWithUs) failed. Years of middling ideas before pivot.", industry: "E-commerce" },
-  { name: "GrubMarket", batch: "W15", valuation: 4.5, raised: "$549M", category: "moderate", story: "Food marketplace. Series H Feb 2026.", industry: "Food" },
-  { name: "Segment", batch: "S11", valuation: 3.2, raised: "$284M", category: "sleeper", story: "Demo Day product was a classroom tool that flopped. Pivoted entirely.", industry: "Analytics" },
-  { name: "Groww", batch: "W18", valuation: 9, raised: "$393M", category: "moderate", story: "Indian investing platform. IPO'd Nov 2025. Market cap ~$9B.", industry: "Fintech" },
-  { name: "Podium", batch: "W16", valuation: 3, raised: "$419M", category: "moderate", story: "Customer engagement platform.", industry: "SaaS" },
-  { name: "Twitch", batch: "S07", valuation: 0.97, raised: "$35M", category: "moderate", story: "Started as Justin.tv. Pivoted to gaming streams. $970M Amazon exit.", industry: "Streaming" },
-  { name: "Algolia", batch: "W14", valuation: 2.25, raised: "$334M", category: "moderate", story: "Search API. $2.25B valuation.", industry: "Dev Tools" },
-  { name: "PagerDuty", batch: "S10", valuation: 0.66, raised: "$524M", category: "moderate", story: "Already had paying customers at YC. IPO'd. Stock declined to ~$660M market cap.", industry: "DevOps" },
-  { name: "Mixpanel", batch: "S09", valuation: 1, raised: "$277M", category: "moderate", story: "Analytics. Same batch as Stripe.", industry: "Analytics" },
-  { name: "Amplitude", batch: "W12", valuation: 0.87, raised: "$336M", category: "moderate", story: "Product analytics. IPO'd. Market cap ~$870M.", industry: "Analytics" },
-  { name: "PlanGrid", batch: "W12", valuation: 0.875, raised: "$69M", category: "moderate", story: "Construction tech. Acquired by Autodesk for $875M.", industry: "Construction" },
-  { name: "Heroku", batch: "W08", valuation: 0.212, raised: "$13M", category: "moderate", story: "Cloud platform. Acquired by Salesforce for $212M.", industry: "Cloud" },
-  // HOT → FAILED
-  { name: "Zenefits", batch: "W13", valuation: 0, raised: "$584M", category: "hot-failed", story: "a16z Series A. $4.5B peak valuation. CEO ousted for fraud.", industry: "HR" },
-  { name: "Parker", batch: "W19", valuation: 0, raised: "$200M+", category: "hot-failed", story: "Peter Thiel's Valar Ventures led. $65M revenue. Chapter 7 bankruptcy.", industry: "Fintech" },
-  { name: "Embark Trucks", batch: "W16", valuation: 0, raised: "$317M", category: "hot-failed", story: "SPAC at $5.2B. Stock crashed to $60M. Shut down 2023.", industry: "Autonomous" },
-  { name: "Momentus", batch: "S18", valuation: 0, raised: "$160M", category: "hot-failed", story: "SPAC at $1B+. SEC fraud charges. Collapsed.", industry: "Space" },
-  { name: "Atrium", batch: "S07", valuation: 0, raised: "$75.5M", category: "hot-failed", story: "Justin Kan (sold Twitch for $970M). a16z backed. Shut down 2020.", industry: "Legal" },
-  { name: "Notable Labs", batch: "W15", valuation: 0, raised: "$55M", category: "hot-failed", story: "Public biotech company. Filed for bankruptcy Oct 2024.", industry: "Biotech" },
-  { name: "Homejoy", batch: "W10", valuation: 0, raised: "$40M", category: "hot-failed", story: "Massive Demo Day buzz. On-demand cleaning. Shut down 2015.", industry: "Services" },
-  { name: "SpoonRocket", batch: "S13", valuation: 0, raised: "$13.5M", category: "hot-failed", story: "TechCrunch top 8. $2M run rate. 112% weekly growth. Dead by 2016.", industry: "Delivery" },
-  { name: "Mattermark", batch: "S12", valuation: 0, raised: "$17M", category: "hot-failed", story: "a16z + Foundry. Fire-sold for <$1M. Stock worthless.", industry: "Data" },
-  { name: "Buttercoin", batch: "S13", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. Bitcoin exchange. Dead by April 2015.", industry: "Crypto" },
-  { name: "Standard Treasury", batch: "S13", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. Banking API. Acqui-hired by SVB.", industry: "Fintech" },
-  { name: "Dating Ring", batch: "W14", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch's #2 pick. 60% MoM growth. Shut down 2018.", industry: "Consumer" },
-  { name: "Kimono Labs", batch: "W14", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. 20K devs. Acqui-hired by Palantir.", industry: "Dev Tools" },
-  { name: "ZeroDown", batch: "W19", valuation: 0, raised: "$10M+", category: "hot-failed", story: "Raised $10M+ pre-Demo Day at $75M valuation. Shut down.", industry: "Real Estate" },
-  { name: "Flockjay", batch: "W19", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 10. 40% job placement rate. Shut down ~2022.", industry: "Education" },
-  // ADDITIONAL COMPANIES
-  { name: "Retool", batch: "W17", valuation: 3.2, raised: "$445M", category: "moderate", story: "Internal tools builder. Quiet Demo Day but became default for ops teams.", industry: "Dev Tools" },
-  { name: "Ramp", batch: "W19", valuation: 44, raised: "$2.35B", category: "hot-won", story: "Raised fast post-Demo Day. Series F at $44B (June 2026). Fastest-growing YC fintech.", industry: "Fintech" },
-  { name: "Vanta", batch: "W18", valuation: 2.45, raised: "$353M", category: "moderate", story: "SOC 2 compliance automation. Steady growth to $2.45B.", industry: "Security" },
-  { name: "Applied Intuition", batch: "S17", valuation: 15, raised: "$1.05B", category: "sleeper", story: "AV simulation tools. Under the radar at Demo Day. Series F at $15B.", industry: "Autonomous" },
-  { name: "Lattice", batch: "W16", valuation: 3, raised: "$329M", category: "moderate", story: "People management platform. Steady SaaS grower.", industry: "HR" },
-  { name: "Ironclad", batch: "S15", valuation: 3.2, raised: "$333M", category: "moderate", story: "Contract lifecycle management. Accel-backed.", industry: "Legal" },
-  { name: "Zip", batch: "S20", valuation: 2.2, raised: "$370M", category: "hot-won", story: "Procurement platform. Raised $1.7M at Demo Day, then exploded.", industry: "SaaS" },
-  { name: "Zepto", batch: "S21", valuation: 5, raised: "$1.4B", category: "hot-won", story: "10-minute grocery delivery in India. Youngest YC founders at 19.", industry: "Delivery" },
-  { name: "Supabase", batch: "S20", valuation: 2, raised: "$166M", category: "hot-won", story: "Open-source Firebase alternative. Developer darling from day one.", industry: "Dev Tools" },
-  { name: "Replit", batch: "W18", valuation: 1.16, raised: "$222M", category: "moderate", story: "Browser-based IDE. Pivoted to AI coding. a16z backed.", industry: "Dev Tools" },
-  { name: "Lambda", batch: "S17", valuation: 2.9, raised: "$628M", category: "sleeper", story: "Started as a face recognition API. Pivoted to GPU cloud for AI training.", industry: "AI" },
-  { name: "Ginkgo Bioworks", batch: "S14", valuation: 0.4, raised: "$2.8B", category: "hot-failed", story: "SPAC at $17.5B valuation. Stock crashed 97%. Synthetic biology hype cycle.", industry: "Biotech" },
-  { name: "Convoy", batch: "W15", valuation: 0, raised: "$900M", category: "hot-failed", story: "Jeff Bezos invested. Valued at $3.8B. Shut down Oct 2023.", industry: "Logistics" },
-  { name: "Pebble", batch: "S11", valuation: 0, raised: "$16M+", category: "sleeper", story: "Kickstarter record $10M. Sold to Fitbit for parts. Pioneer that lost to Apple Watch.", industry: "Hardware" },
-  { name: "Docker", batch: "S10", valuation: 2.1, raised: "$392M", category: "sleeper", story: "Applied as dotCloud (PaaS). Container side project became the product.", industry: "Dev Tools" },
-  { name: "Weebly", batch: "W07", valuation: 0.35, raised: "$35M", category: "moderate", story: "Website builder. Acquired by Square for $365M in 2018.", industry: "Dev Tools" },
-  { name: "Optimizely", batch: "W10", valuation: 0.6, raised: "$251M", category: "moderate", story: "A/B testing. Acquired by Episerver for ~$600M.", industry: "Analytics" },
-  { name: "Machine Zone", batch: "S08", valuation: 0.8, raised: "$8M", category: "sleeper", story: "Game of War made $1B+/year. Kate Upton Super Bowl ads. Peak $5B. Acquired by Tripledot for $800M.", industry: "Gaming" },
-  { name: "Gumroad", batch: "S11", valuation: 0.1, raised: "$8M", category: "sleeper", story: "Sahil Lavingia's creator platform. Failed to raise Series B. Rebuilt as solo founder.", industry: "E-commerce" },
-  { name: "Sendbird", batch: "W16", valuation: 1.05, raised: "$221M", category: "moderate", story: "Chat API for apps. Grew to unicorn status from South Korea.", industry: "Dev Tools" },
-  { name: "Kalshi", batch: "W19", valuation: 1, raised: "$166M", category: "hot-won", story: "CFTC-regulated prediction market. Bet on elections going mainstream.", industry: "Fintech" },
-  { name: "PostHog", batch: "W20", valuation: 0.45, raised: "$27M", category: "moderate", story: "Open-source product analytics. Transparent pricing. Developer-first.", industry: "Analytics" },
-  { name: "Relativity Space", batch: "S16", valuation: 4.2, raised: "$1.3B", category: "hot-won", story: "3D-printed rockets. Raised at $4.2B valuation. First launch 2023.", industry: "Space" },
-  { name: "Boom Supersonic", batch: "W16", valuation: 1.5, raised: "$700M", category: "moderate", story: "Building supersonic jets. United ordered 15. Series B at $1.5B, far below hype.", industry: "Aviation" },
-  { name: "Airtable", batch: "W12", valuation: 4, raised: "$1.4B", category: "sleeper", story: "Spreadsheet-database hybrid. Barely got into YC. Peaked at $11.7B, secondary ~$4B.", industry: "SaaS" },
-  { name: "Loom", batch: "S16", valuation: 1.53, raised: "$203M", category: "moderate", story: "Async video messaging. Acquired by Atlassian for $975M.", industry: "SaaS" },
-  { name: "Wufoo", batch: "W06", valuation: 0.035, raised: "$118K", category: "sleeper", story: "Only raised $118K ever. Acquired by SurveyMonkey for $35M. Pure YC ethos.", industry: "SaaS" },
-  { name: "Socialcam", batch: "W12", valuation: 0.06, raised: "$8M", category: "hot-won", story: "Video sharing app. Hit #1 in App Store. Acquired by Autodesk for $60M in 6 months.", industry: "Social" },
-  { name: "Panorama Education", batch: "S13", valuation: 0.4, raised: "$105M", category: "moderate", story: "Mark Zuckerberg's first angel investment. K-12 data analytics.", industry: "Education" },
-  { name: "Cal.com", batch: "W19", valuation: 0.3, raised: "$32M", category: "moderate", story: "Open-source Calendly alternative. Rebranded from Calendso.", industry: "SaaS" },
-  { name: "Mintlify", batch: "W22", valuation: 0.15, raised: "$20M", category: "moderate", story: "Developer docs platform. AI-powered documentation.", industry: "Dev Tools" },
-  { name: "Roboflow", batch: "S20", valuation: 0.3, raised: "$24M", category: "moderate", story: "Computer vision infrastructure. Used by 250K+ developers.", industry: "AI" },
-  { name: "Lever", batch: "S12", valuation: 0.5, raised: "$122M", category: "moderate", story: "Recruiting ATS. Acquired by Employ Inc. Steady SaaS play.", industry: "HR" },
-  { name: "ReadMe", batch: "W15", valuation: 0.2, raised: "$37M", category: "moderate", story: "Interactive API documentation. Developer tools niche.", industry: "Dev Tools" },
-  { name: "Stytch", batch: "W21", valuation: 1, raised: "$210M", category: "hot-won", story: "Auth infrastructure. Raised at $1B within 18 months of YC.", industry: "Security" },
-  { name: "Monzo", batch: "S16", valuation: 6.5, raised: "$1.1B", category: "hot-won", story: "UK neobank. Coral debit card became a status symbol. 9M+ customers. Preparing London IPO.", industry: "Fintech" },
-  { name: "Teespring", batch: "W13", valuation: 0, raised: "$56M", category: "hot-failed", story: "Custom merch platform. a16z led $55M Series B. Revenue collapsed. Rebranded to Spring.", industry: "E-commerce" },
-  { name: "Kustomer", batch: "S14", valuation: 0.25, raised: "$174M", category: "moderate", story: "CRM platform. Acquired by Meta for $1B, then spun out at ~$250M.", industry: "SaaS" },
-  { name: "Clearbit", batch: "W14", valuation: 0.5, raised: "$74M", category: "moderate", story: "Data enrichment API. Acquired by HubSpot in 2023.", industry: "Data" },
-  { name: "Vetcove", batch: "S16", valuation: 1.6, raised: "$120M", category: "sleeper", story: "Amazon for veterinarians. Quietly grew to $1.6B. Zero hype at Demo Day.", industry: "Healthcare" },
-  // EXPANSION — 25 more companies
-  { name: "Helion Energy", batch: "W14", valuation: 15.5, raised: "$1.5B", category: "sleeper", story: "Fusion energy startup. Sam Altman became chairman. Contract to power Microsoft. $15.5B.", industry: "Energy" },
-  { name: "Vercel", batch: "W21", valuation: 9.3, raised: "$563M", category: "hot-won", story: "Founded as ZEIT. Creators of Next.js. Rode AI cloud wave to $9.3B with $340M ARR.", industry: "Dev Tools" },
-  { name: "Verkada", batch: "W17", valuation: 5.8, raised: "$757M", category: "sleeper", story: "Enterprise security cameras sounded boring at Demo Day. Cloud-managed physical security grew to $5.8B.", industry: "Security" },
-  { name: "Mercury", batch: "S19", valuation: 5.2, raised: "$546M", category: "sleeper", story: "Banking for startups when neobanks were crowded. 40%+ of YC batches now bank with Mercury.", industry: "Fintech" },
-  { name: "Oklo", batch: "S14", valuation: 6.16, raised: "$1.9B", category: "sleeper", story: "Nuclear microreactor company. Sam Altman chairman. Went public via SPAC 2024. ~$6B market cap.", industry: "Nuclear" },
-  { name: "Rigetti Computing", batch: "S14", valuation: 6.16, raised: "$298M", category: "moderate", story: "Quantum computing hardware. Went public via SPAC. Volatile but hit $6B amid quantum hype.", industry: "Quantum" },
-  { name: "Solugen", batch: "W17", valuation: 2, raised: "$656M", category: "sleeper", story: "Plant-sugar-to-chemicals got modest Demo Day attention. First YC climate tech unicorn.", industry: "Climate" },
-  { name: "Substack", batch: "W18", valuation: 1.1, raised: "$190M", category: "moderate", story: "Newsletter platform seemed niche at Demo Day. Rode creator economy wave to unicorn.", industry: "Media" },
-  { name: "Matterport", batch: "W12", valuation: 1.6, raised: "$163M", category: "moderate", story: "3D spatial capture for real estate. SPAC'd at $2.9B. Acquired by CoStar for $1.6B.", industry: "Real Estate" },
-  { name: "Apollo.io", batch: "W16", valuation: 1.6, raised: "$250M", category: "sleeper", story: "Sales intelligence grew slowly for years then exploded to $150M ARR. Capital-efficient unicorn.", industry: "Sales" },
-  { name: "Gecko Robotics", batch: "S16", valuation: 1.25, raised: "$354M", category: "sleeper", story: "Wall-climbing inspection robots for power plants. Founded at 19. Took 12 years to unicorn.", industry: "Robotics" },
-  { name: "Astranis", batch: "W16", valuation: 2, raised: "$753M", category: "sleeper", story: "Small geostationary satellites. Demo Day investors skeptical of hardware. Now $2B+ with defense contracts.", industry: "Space" },
-  { name: "Front", batch: "S14", valuation: 1.7, raised: "$202M", category: "sleeper", story: "Shared inbox for teams seemed incremental. Steadily grew to $100M ARR and $1.7B.", industry: "SaaS" },
-  { name: "Clipboard Health", batch: "W17", valuation: 1.3, raised: "$94M", category: "sleeper", story: "Healthcare staffing marketplace. Hit unicorn on just $94M raised — most capital-efficient YC unicorn.", industry: "Healthcare" },
-  { name: "Xendit", batch: "S15", valuation: 1, raised: "$530M", category: "sleeper", story: "First Southeast Asian YC company. Pivoted from Bitcoin to payment infrastructure. Processes $15B/year in Indonesia.", industry: "Fintech" },
-  { name: "Paystack", batch: "W16", valuation: 0.2, raised: "$11.7M", category: "hot-won", story: "First Nigerian YC company. Processed half of Nigeria's online transactions. Acquired by Stripe for $200M+.", industry: "Fintech" },
-  { name: "Newfront", batch: "W18", valuation: 2.2, raised: "$310M", category: "moderate", story: "Modern commercial insurance brokerage. Digitized old-school industry to $2.2B.", industry: "Insurance" },
-  { name: "GoCardless", batch: "S11", valuation: 2.1, raised: "$540M", category: "moderate", story: "UK bank-to-bank payments. One of YC's earliest international successes. Acquired in 2025.", industry: "Fintech" },
-  { name: "Honeylove", batch: "S18", valuation: 2.3, raised: "$13.2M", category: "sleeper", story: "DTC shapewear by an EDM artist. Only raised $13M. One of YC's most capital-efficient consumer brands.", industry: "DTC" },
-  { name: "BillionToOne", batch: "S17", valuation: 1, raised: "$230M", category: "sleeper", story: "Prenatal genetic testing 10x more accurate than competitors. Grew from diagnostics niche to unicorn.", industry: "Biotech" },
-  { name: "Stoke Space", batch: "W21", valuation: 2, raised: "$175M", category: "sleeper", story: "Fully reusable rocket by Blue Origin veterans. Quietly building while SpaceX dominates headlines.", industry: "Space" },
-  { name: "Go1", batch: "S15", valuation: 2, raised: "$414M", category: "sleeper", story: "Australian corporate learning aggregator. Overlooked at Demo Day. World's largest curated e-learning library.", industry: "EdTech" },
-  { name: "Scribd", batch: "S06", valuation: 0.45, raised: "$107M", category: "moderate", story: "One of YC's earliest companies. Pivoted from doc sharing to 'Netflix for books.' Survived 20 years.", industry: "Media" },
-  { name: "Boosted", batch: "S12", valuation: 0, raised: "$72M", category: "hot-failed", story: "Electric skateboard pioneer with devoted fans. Killed by Trump-era tariffs on Chinese components. Shut down 2020.", industry: "Hardware" },
-  { name: "Weave", batch: "W14", valuation: 0.7, raised: "$168M", category: "moderate", story: "Communication platform for small healthcare businesses. Went public on NYSE 2021.", industry: "SaaS" },
+  { name: "Airbnb", batch: "W09", valuation: 84, raised: "$6.4B", category: "sleeper", story: "7+ VC rejections. Sold cereal boxes to survive. Fred Wilson publicly passed.", industry: "Travel", founded: 2008, seedYear: 2009, seriesAYear: 2011, unicornYear: 2014, status: "public" },
+  { name: "Stripe", batch: "S09", valuation: 159, raised: "$9.4B", category: "hot-won", story: "First customer in 2 weeks via YC network. Sequoia early.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2012, unicornYear: 2014, status: "active" },
+  { name: "Coinbase", batch: "S12", valuation: 43, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto", founded: 2012, seedYear: 2012, seriesAYear: 2013, unicornYear: 2017, status: "public" },
+  { name: "DoorDash", batch: "S13", valuation: 72, raised: "$2.5B", category: "sleeper", story: "Bottom half of batch at Demo Day. Nearly died in 2017–18.", industry: "Delivery", founded: 2013, seedYear: 2013, seriesAYear: 2014, unicornYear: 2018, status: "public" },
+  { name: "Cruise", batch: "W14", valuation: 0, raised: "$16B", category: "hot-failed", story: "Not in TechCrunch's top 8 picks. Peaked at $30B. Pedestrian dragging incident 2023. GM shut down robotaxi unit Dec 2024 after $10B+ losses.", industry: "Autonomous", founded: 2013, seedYear: 2014, seriesAYear: 2015, status: "dead" },
+  { name: "Scale AI", batch: "S16", valuation: 29, raised: "$1.6B", category: "hot-won", story: "19-year-old founder. Pivoted during batch. Raised Series A in 2017.", industry: "AI", founded: 2016, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Deel", batch: "W19", valuation: 17.3, raised: "$679M", category: "hot-won", story: "TechCrunch top 10 pick. Raised quickly post-Demo Day.", industry: "HR", founded: 2019, seedYear: 2019, seriesAYear: 2020, unicornYear: 2021, status: "active" },
+  { name: "Rippling", batch: "W17", valuation: 20.8, raised: "$2B", category: "moderate", story: "Zenefits baggage but closed seed in 2 weeks. 90% repeat backers.", industry: "HR", founded: 2016, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
+  { name: "OpenSea", batch: "W18", valuation: 0, raised: "$427M", category: "hot-failed", story: "Peaked at $13B during NFT mania. Sold to Coinbase for undisclosed amount at massive loss.", industry: "Crypto", founded: 2017, seedYear: 2018, seriesAYear: 2021, unicornYear: 2021, status: "acquired" },
+  { name: "Faire", batch: "W17", valuation: 5.2, raised: "$1.7B", category: "hot-won", story: "Raised $3.4M seed from Khosla shortly after YC. Peaked at $12.6B, down-round to $5.2B.", industry: "Wholesale", founded: 2017, seedYear: 2017, seriesAYear: 2018, unicornYear: 2019, status: "active" },
+  { name: "Brex", batch: "W17", valuation: 5.15, raised: "$1.5B", category: "hot-won", story: "Ribbit Capital led $7M Series A pre-Demo Day. Acquired for $5.15B.", industry: "Fintech", founded: 2017, seedYear: 2017, seriesAYear: 2018, unicornYear: 2018, status: "acquired" },
+  { name: "Reddit", batch: "S05", valuation: 33, raised: "$1.3B", category: "sleeper", story: "19 years from YC to IPO. Longest timeline of any YC company.", industry: "Social", founded: 2005, seedYear: 2005, seriesAYear: 2007, unicornYear: 2017, status: "public" },
+  { name: "Instacart", batch: "S12", valuation: 10, raised: "$2.9B", category: "sleeper", story: "Applied late. Rejected multiple times. Delivered beer to Garry Tan's door.", industry: "Delivery", founded: 2012, seedYear: 2012, seriesAYear: 2013, unicornYear: 2015, status: "public" },
+  { name: "Gusto", batch: "W12", valuation: 9.5, raised: "$746M", category: "moderate", story: "Steady builder. No Demo Day hype. Grew into $9.5B company.", industry: "HR", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2019, status: "active" },
+  { name: "GitLab", batch: "W15", valuation: 4.7, raised: "$414M", category: "sleeper", story: "All-remote model made fundraising difficult. Series B was a grind. IPO'd, now ~$4.7B.", industry: "Dev Tools", founded: 2011, seedYear: 2015, seriesAYear: 2016, unicornYear: 2019, status: "public" },
+  { name: "Flexport", batch: "W14", valuation: 1, raised: "$2.7B", category: "moderate", story: "Logistics. Peaked at $8B. CEO ousted, cratered to ~$1B on secondaries.", industry: "Logistics", founded: 2013, seedYear: 2014, seriesAYear: 2015, unicornYear: 2019, status: "active" },
+  { name: "Flock Safety", batch: "S17", valuation: 8.4, raised: "$381M", category: "hot-won", story: "Garry Tan funded seed at Demo Day on the spot. 'Home run.'", industry: "Security", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
+  { name: "Dropbox", batch: "S07", valuation: 6.4, raised: "$1.7B", category: "hot-won", story: "Viral demo video. 5K→75K waitlist signups overnight.", industry: "Cloud", founded: 2007, seedYear: 2007, seriesAYear: 2008, unicornYear: 2011, status: "public" },
+  { name: "Razorpay", batch: "W15", valuation: 9.2, raised: "$816M", category: "moderate", story: "Payments for India. Valued at $9.2B, preparing IPO.", industry: "Fintech", founded: 2014, seedYear: 2015, seriesAYear: 2016, unicornYear: 2021, status: "active" },
+  { name: "Benchling", batch: "S12", valuation: 6.1, raised: "$412M", category: "moderate", story: "Biotech tools. Quiet grower to $6.1B valuation.", industry: "Biotech", founded: 2012, seedYear: 2013, seriesAYear: 2016, unicornYear: 2021, status: "active" },
+  { name: "Checkr", batch: "S14", valuation: 1.2, raised: "$679M", category: "hot-won", story: "Overwhelming investor interest. Landed Uber immediately. Peaked at $5.7B, marked down to ~$1.2B.", industry: "HR", founded: 2014, seedYear: 2014, seriesAYear: 2016, unicornYear: 2019, status: "active" },
+  { name: "Fivetran", batch: "W13", valuation: 5.6, raised: "$853M", category: "moderate", story: "Data integration. Scaled steadily from YC check.", industry: "Data", founded: 2012, seedYear: 2013, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Rappi", batch: "W16", valuation: 5.2, raised: "$2.3B", category: "moderate", story: "Latin American delivery super-app.", industry: "Delivery", founded: 2015, seedYear: 2016, seriesAYear: 2017, unicornYear: 2019, status: "active" },
+  { name: "Zapier", batch: "S12", valuation: 5, raised: "$1.4M", category: "sleeper", story: "Bootstrapped from Missouri. Only ever raised $1.3M total.", industry: "Automation", founded: 2011, seedYear: 2012, status: "active" },
+  { name: "Webflow", batch: "S13", valuation: 4, raised: "$335M", category: "sleeper", story: "Credit card debt. Failed Kickstarter. 6 years to raise first VC.", industry: "Dev Tools", founded: 2013, seedYear: 2019, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "Meesho", batch: "S16", valuation: 9, raised: "$1.4B", category: "moderate", story: "Social commerce India. IPO'd Dec 2025. Market cap ~$9B.", industry: "E-commerce", founded: 2015, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "public" },
+  { name: "EquipmentShare", batch: "W15", valuation: 5.7, raised: "$3.5B", category: "moderate", story: "Construction equipment rental. IPO'd Jan 2026 on NASDAQ.", industry: "Construction", founded: 2014, seedYear: 2015, seriesAYear: 2017, unicornYear: 2022, status: "public" },
+  { name: "Whatnot", batch: "W20", valuation: 11.5, raised: "$710M", category: "sleeper", story: "100+ investor meetings. Raised from friends. Pivoted post-Demo Day. Series F at $11.5B.", industry: "E-commerce", founded: 2019, seedYear: 2020, seriesAYear: 2021, unicornYear: 2022, status: "active" },
+  { name: "GOAT Group", batch: "W11", valuation: 3.7, raised: "$493M", category: "sleeper", story: "Original YC company (GrubWithUs) failed. Years of middling ideas before pivot.", industry: "E-commerce", founded: 2015, seedYear: 2016, seriesAYear: 2017, unicornYear: 2020, status: "active" },
+  { name: "GrubMarket", batch: "W15", valuation: 4.5, raised: "$549M", category: "moderate", story: "Food marketplace. Series H Feb 2026.", industry: "Food", founded: 2014, seedYear: 2015, seriesAYear: 2016, unicornYear: 2021, status: "active" },
+  { name: "Segment", batch: "S11", valuation: 3.2, raised: "$284M", category: "sleeper", story: "Demo Day product was a classroom tool that flopped. Pivoted entirely.", industry: "Analytics", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2019, status: "acquired" },
+  { name: "Groww", batch: "W18", valuation: 9, raised: "$393M", category: "moderate", story: "Indian investing platform. IPO'd Nov 2025. Market cap ~$9B.", industry: "Fintech", founded: 2016, seedYear: 2018, seriesAYear: 2019, unicornYear: 2021, status: "public" },
+  { name: "Podium", batch: "W16", valuation: 3, raised: "$419M", category: "moderate", story: "Customer engagement platform.", industry: "SaaS", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Twitch", batch: "S07", valuation: 0.97, raised: "$35M", category: "moderate", story: "Started as Justin.tv. Pivoted to gaming streams. $970M Amazon exit.", industry: "Streaming", founded: 2007, seedYear: 2007, seriesAYear: 2008, status: "acquired" },
+  { name: "Algolia", batch: "W14", valuation: 2.25, raised: "$334M", category: "moderate", story: "Search API. $2.25B valuation.", industry: "Dev Tools", founded: 2012, seedYear: 2014, seriesAYear: 2015, unicornYear: 2021, status: "active" },
+  { name: "PagerDuty", batch: "S10", valuation: 0.66, raised: "$524M", category: "moderate", story: "Already had paying customers at YC. IPO'd. Stock declined to ~$660M market cap.", industry: "DevOps", founded: 2009, seedYear: 2010, seriesAYear: 2013, status: "public" },
+  { name: "Mixpanel", batch: "S09", valuation: 1, raised: "$277M", category: "moderate", story: "Analytics. Same batch as Stripe.", industry: "Analytics", founded: 2009, seedYear: 2009, seriesAYear: 2012, status: "active" },
+  { name: "Amplitude", batch: "W12", valuation: 0.87, raised: "$336M", category: "moderate", story: "Product analytics. IPO'd. Market cap ~$870M.", industry: "Analytics", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "public" },
+  { name: "PlanGrid", batch: "W12", valuation: 0.875, raised: "$69M", category: "moderate", story: "Construction tech. Acquired by Autodesk for $875M.", industry: "Construction", founded: 2011, seedYear: 2012, seriesAYear: 2014, status: "acquired" },
+  { name: "Heroku", batch: "W08", valuation: 0.212, raised: "$13M", category: "moderate", story: "Cloud platform. Acquired by Salesforce for $212M.", industry: "Cloud", founded: 2007, seedYear: 2008, seriesAYear: 2009, status: "acquired" },
+  { name: "Zenefits", batch: "W13", valuation: 0, raised: "$584M", category: "hot-failed", story: "a16z Series A. $4.5B peak valuation. CEO ousted for fraud.", industry: "HR", founded: 2013, seedYear: 2013, seriesAYear: 2014, unicornYear: 2015, status: "dead" },
+  { name: "Parker", batch: "W19", valuation: 0, raised: "$200M+", category: "hot-failed", story: "Peter Thiel's Valar Ventures led. $65M revenue. Chapter 7 bankruptcy.", industry: "Fintech", founded: 2019, seedYear: 2019, seriesAYear: 2020, status: "dead" },
+  { name: "Embark Trucks", batch: "W16", valuation: 0, raised: "$317M", category: "hot-failed", story: "SPAC at $5.2B. Stock crashed to $60M. Shut down 2023.", industry: "Autonomous", founded: 2016, seedYear: 2016, seriesAYear: 2018, status: "dead" },
+  { name: "Momentus", batch: "S18", valuation: 0, raised: "$160M", category: "hot-failed", story: "SPAC at $1B+. SEC fraud charges. Collapsed.", industry: "Space", founded: 2017, seedYear: 2018, seriesAYear: 2019, status: "dead" },
+  { name: "Atrium", batch: "S07", valuation: 0, raised: "$75.5M", category: "hot-failed", story: "Justin Kan (sold Twitch for $970M). a16z backed. Shut down 2020.", industry: "Legal", founded: 2017, seedYear: 2017, seriesAYear: 2018, status: "dead" },
+  { name: "Notable Labs", batch: "W15", valuation: 0, raised: "$55M", category: "hot-failed", story: "Public biotech company. Filed for bankruptcy Oct 2024.", industry: "Biotech", founded: 2014, seedYear: 2015, seriesAYear: 2017, status: "dead" },
+  { name: "Homejoy", batch: "W10", valuation: 0, raised: "$40M", category: "hot-failed", story: "Massive Demo Day buzz. On-demand cleaning. Shut down 2015.", industry: "Services", founded: 2012, seedYear: 2012, seriesAYear: 2013, status: "dead" },
+  { name: "SpoonRocket", batch: "S13", valuation: 0, raised: "$13.5M", category: "hot-failed", story: "TechCrunch top 8. $2M run rate. 112% weekly growth. Dead by 2016.", industry: "Delivery", founded: 2013, seedYear: 2013, seriesAYear: 2014, status: "dead" },
+  { name: "Mattermark", batch: "S12", valuation: 0, raised: "$17M", category: "hot-failed", story: "a16z + Foundry. Fire-sold for <$1M. Stock worthless.", industry: "Data", founded: 2012, seedYear: 2012, seriesAYear: 2014, status: "dead" },
+  { name: "Buttercoin", batch: "S13", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. Bitcoin exchange. Dead by April 2015.", industry: "Crypto", founded: 2013, seedYear: 2013, status: "dead" },
+  { name: "Standard Treasury", batch: "S13", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. Banking API. Acqui-hired by SVB.", industry: "Fintech", founded: 2013, seedYear: 2013, status: "acquired" },
+  { name: "Dating Ring", batch: "W14", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch's #2 pick. 60% MoM growth. Shut down 2018.", industry: "Consumer", founded: 2014, seedYear: 2014, status: "dead" },
+  { name: "Kimono Labs", batch: "W14", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. 20K devs. Acqui-hired by Palantir.", industry: "Dev Tools", founded: 2014, seedYear: 2014, status: "acquired" },
+  { name: "ZeroDown", batch: "W19", valuation: 0, raised: "$10M+", category: "hot-failed", story: "Raised $10M+ pre-Demo Day at $75M valuation. Shut down.", industry: "Real Estate", founded: 2018, seedYear: 2019, status: "dead" },
+  { name: "Flockjay", batch: "W19", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 10. 40% job placement rate. Shut down ~2022.", industry: "Education", founded: 2018, seedYear: 2019, status: "dead" },
+  { name: "Retool", batch: "W17", valuation: 3.2, raised: "$445M", category: "moderate", story: "Internal tools builder. Quiet Demo Day but became default for ops teams.", industry: "Dev Tools", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
+  { name: "Ramp", batch: "W19", valuation: 44, raised: "$2.35B", category: "hot-won", story: "Raised fast post-Demo Day. Series F at $44B (June 2026). Fastest-growing YC fintech.", industry: "Fintech", founded: 2019, seedYear: 2019, seriesAYear: 2020, unicornYear: 2021, status: "active" },
+  { name: "Vanta", batch: "W18", valuation: 2.45, raised: "$353M", category: "moderate", story: "SOC 2 compliance automation. Steady growth to $2.45B.", industry: "Security", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "Applied Intuition", batch: "S17", valuation: 15, raised: "$1.05B", category: "sleeper", story: "AV simulation tools. Under the radar at Demo Day. Series F at $15B.", industry: "Autonomous", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
+  { name: "Lattice", batch: "W16", valuation: 3, raised: "$329M", category: "moderate", story: "People management platform. Steady SaaS grower.", industry: "HR", founded: 2015, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
+  { name: "Ironclad", batch: "S15", valuation: 3.2, raised: "$333M", category: "moderate", story: "Contract lifecycle management. Accel-backed.", industry: "Legal", founded: 2014, seedYear: 2015, seriesAYear: 2017, unicornYear: 2022, status: "active" },
+  { name: "Zip", batch: "S20", valuation: 2.2, raised: "$370M", category: "hot-won", story: "Procurement platform. Raised $1.7M at Demo Day, then exploded.", industry: "SaaS", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2022, status: "active" },
+  { name: "Zepto", batch: "S21", valuation: 5, raised: "$1.4B", category: "hot-won", story: "10-minute grocery delivery in India. Youngest YC founders at 19.", industry: "Delivery", founded: 2021, seedYear: 2021, seriesAYear: 2021, unicornYear: 2023, status: "active" },
+  { name: "Supabase", batch: "S20", valuation: 2, raised: "$166M", category: "hot-won", story: "Open-source Firebase alternative. Developer darling from day one.", industry: "Dev Tools", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2024, status: "active" },
+  { name: "Replit", batch: "W18", valuation: 1.16, raised: "$222M", category: "moderate", story: "Browser-based IDE. Pivoted to AI coding. a16z backed.", industry: "Dev Tools", founded: 2016, seedYear: 2018, seriesAYear: 2020, unicornYear: 2023, status: "active" },
+  { name: "Lambda", batch: "S17", valuation: 2.9, raised: "$628M", category: "sleeper", story: "Started as a face recognition API. Pivoted to GPU cloud for AI training.", industry: "AI", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2023, status: "active" },
+  { name: "Ginkgo Bioworks", batch: "S14", valuation: 0.4, raised: "$2.8B", category: "hot-failed", story: "SPAC at $17.5B valuation. Stock crashed 97%. Synthetic biology hype cycle.", industry: "Biotech", founded: 2009, seedYear: 2014, seriesAYear: 2015, unicornYear: 2020, status: "public" },
+  { name: "Convoy", batch: "W15", valuation: 0, raised: "$900M", category: "hot-failed", story: "Jeff Bezos invested. Valued at $3.8B. Shut down Oct 2023.", industry: "Logistics", founded: 2015, seedYear: 2015, seriesAYear: 2017, unicornYear: 2019, status: "dead" },
+  { name: "Pebble", batch: "S11", valuation: 0, raised: "$16M+", category: "sleeper", story: "Kickstarter record $10M. Sold to Fitbit for parts. Pioneer that lost to Apple Watch.", industry: "Hardware", founded: 2012, seedYear: 2012, status: "dead" },
+  { name: "Docker", batch: "S10", valuation: 2.1, raised: "$392M", category: "sleeper", story: "Applied as dotCloud (PaaS). Container side project became the product.", industry: "Dev Tools", founded: 2008, seedYear: 2010, seriesAYear: 2013, unicornYear: 2015, status: "active" },
+  { name: "Weebly", batch: "W07", valuation: 0.35, raised: "$35M", category: "moderate", story: "Website builder. Acquired by Square for $365M in 2018.", industry: "Dev Tools", founded: 2006, seedYear: 2007, seriesAYear: 2012, status: "acquired" },
+  { name: "Optimizely", batch: "W10", valuation: 0.6, raised: "$251M", category: "moderate", story: "A/B testing. Acquired by Episerver for ~$600M.", industry: "Analytics", founded: 2010, seedYear: 2010, seriesAYear: 2013, status: "acquired" },
+  { name: "Machine Zone", batch: "S08", valuation: 0.8, raised: "$8M", category: "sleeper", story: "Game of War made $1B+/year. Kate Upton Super Bowl ads. Peak $5B. Acquired by Tripledot for $800M.", industry: "Gaming", founded: 2008, seedYear: 2008, unicornYear: 2014, status: "acquired" },
+  { name: "Gumroad", batch: "S11", valuation: 0.1, raised: "$8M", category: "sleeper", story: "Sahil Lavingia's creator platform. Failed to raise Series B. Rebuilt as solo founder.", industry: "E-commerce", founded: 2011, seedYear: 2012, seriesAYear: 2012, status: "active" },
+  { name: "Sendbird", batch: "W16", valuation: 1.05, raised: "$221M", category: "moderate", story: "Chat API for apps. Grew to unicorn status from South Korea.", industry: "Dev Tools", founded: 2013, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Kalshi", batch: "W19", valuation: 1, raised: "$166M", category: "hot-won", story: "CFTC-regulated prediction market. Bet on elections going mainstream.", industry: "Fintech", founded: 2018, seedYear: 2019, seriesAYear: 2021, unicornYear: 2024, status: "active" },
+  { name: "PostHog", batch: "W20", valuation: 0.45, raised: "$27M", category: "moderate", story: "Open-source product analytics. Transparent pricing. Developer-first.", industry: "Analytics", founded: 2020, seedYear: 2020, seriesAYear: 2021, status: "active" },
+  { name: "Relativity Space", batch: "S16", valuation: 4.2, raised: "$1.3B", category: "hot-won", story: "3D-printed rockets. Raised at $4.2B valuation. First launch 2023.", industry: "Space", founded: 2015, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Boom Supersonic", batch: "W16", valuation: 1.5, raised: "$700M", category: "moderate", story: "Building supersonic jets. United ordered 15. Series B at $1.5B, far below hype.", industry: "Aviation", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2024, status: "active" },
+  { name: "Airtable", batch: "W12", valuation: 4, raised: "$1.4B", category: "sleeper", story: "Spreadsheet-database hybrid. Barely got into YC. Peaked at $11.7B, secondary ~$4B.", industry: "SaaS", founded: 2012, seedYear: 2013, seriesAYear: 2015, unicornYear: 2018, status: "active" },
+  { name: "Loom", batch: "S16", valuation: 1.53, raised: "$203M", category: "moderate", story: "Async video messaging. Acquired by Atlassian for $975M.", industry: "SaaS", founded: 2015, seedYear: 2016, seriesAYear: 2019, status: "acquired" },
+  { name: "Wufoo", batch: "W06", valuation: 0.035, raised: "$118K", category: "sleeper", story: "Only raised $118K ever. Acquired by SurveyMonkey for $35M. Pure YC ethos.", industry: "SaaS", founded: 2006, seedYear: 2006, status: "acquired" },
+  { name: "Socialcam", batch: "W12", valuation: 0.06, raised: "$8M", category: "hot-won", story: "Video sharing app. Hit #1 in App Store. Acquired by Autodesk for $60M in 6 months.", industry: "Social", founded: 2012, seedYear: 2012, status: "acquired" },
+  { name: "Panorama Education", batch: "S13", valuation: 0.4, raised: "$105M", category: "moderate", story: "Mark Zuckerberg's first angel investment. K-12 data analytics.", industry: "Education", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "active" },
+  { name: "Cal.com", batch: "W19", valuation: 0.3, raised: "$32M", category: "moderate", story: "Open-source Calendly alternative. Rebranded from Calendso.", industry: "SaaS", founded: 2020, seedYear: 2021, seriesAYear: 2022, status: "active" },
+  { name: "Mintlify", batch: "W22", valuation: 0.15, raised: "$20M", category: "moderate", story: "Developer docs platform. AI-powered documentation.", industry: "Dev Tools", founded: 2022, seedYear: 2022, seriesAYear: 2023, status: "active" },
+  { name: "Roboflow", batch: "S20", valuation: 0.3, raised: "$24M", category: "moderate", story: "Computer vision infrastructure. Used by 250K+ developers.", industry: "AI", founded: 2019, seedYear: 2020, seriesAYear: 2022, status: "active" },
+  { name: "Lever", batch: "S12", valuation: 0.5, raised: "$122M", category: "moderate", story: "Recruiting ATS. Acquired by Employ Inc. Steady SaaS play.", industry: "HR", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "acquired" },
+  { name: "ReadMe", batch: "W15", valuation: 0.2, raised: "$37M", category: "moderate", story: "Interactive API documentation. Developer tools niche.", industry: "Dev Tools", founded: 2014, seedYear: 2015, seriesAYear: 2019, status: "active" },
+  { name: "Stytch", batch: "W21", valuation: 1, raised: "$210M", category: "hot-won", story: "Auth infrastructure. Raised at $1B within 18 months of YC.", industry: "Security", founded: 2020, seedYear: 2021, seriesAYear: 2021, unicornYear: 2022, status: "active" },
+  { name: "Monzo", batch: "S16", valuation: 6.5, raised: "$1.1B", category: "hot-won", story: "UK neobank. Coral debit card became a status symbol. 9M+ customers. Preparing London IPO.", industry: "Fintech", founded: 2015, seedYear: 2015, seriesAYear: 2016, unicornYear: 2018, status: "active" },
+  { name: "Teespring", batch: "W13", valuation: 0, raised: "$56M", category: "hot-failed", story: "Custom merch platform. a16z led $55M Series B. Revenue collapsed. Rebranded to Spring.", industry: "E-commerce", founded: 2012, seedYear: 2013, seriesAYear: 2014, status: "dead" },
+  { name: "Kustomer", batch: "S14", valuation: 0.25, raised: "$174M", category: "moderate", story: "CRM platform. Acquired by Meta for $1B, then spun out at ~$250M.", industry: "SaaS", founded: 2015, seedYear: 2015, seriesAYear: 2017, unicornYear: 2020, status: "active" },
+  { name: "Clearbit", batch: "W14", valuation: 0.5, raised: "$74M", category: "moderate", story: "Data enrichment API. Acquired by HubSpot in 2023.", industry: "Data", founded: 2014, seedYear: 2014, seriesAYear: 2016, status: "acquired" },
+  { name: "Vetcove", batch: "S16", valuation: 1.6, raised: "$120M", category: "sleeper", story: "Amazon for veterinarians. Quietly grew to $1.6B. Zero hype at Demo Day.", industry: "Healthcare", founded: 2015, seedYear: 2016, seriesAYear: 2019, unicornYear: 2024, status: "active" },
+  { name: "Helion Energy", batch: "W14", valuation: 15.5, raised: "$1.5B", category: "sleeper", story: "Fusion energy startup. Sam Altman became chairman. Contract to power Microsoft. $15.5B.", industry: "Energy", founded: 2013, seedYear: 2014, seriesAYear: 2015, unicornYear: 2021, status: "active" },
+  { name: "Vercel", batch: "W21", valuation: 9.3, raised: "$563M", category: "hot-won", story: "Founded as ZEIT. Creators of Next.js. Rode AI cloud wave to $9.3B with $340M ARR.", industry: "Dev Tools", founded: 2015, seedYear: 2016, seriesAYear: 2020, unicornYear: 2021, status: "active" },
+  { name: "Verkada", batch: "W17", valuation: 5.8, raised: "$757M", category: "sleeper", story: "Enterprise security cameras sounded boring at Demo Day. Cloud-managed physical security grew to $5.8B.", industry: "Security", founded: 2016, seedYear: 2017, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Mercury", batch: "S19", valuation: 5.2, raised: "$546M", category: "sleeper", story: "Banking for startups when neobanks were crowded. 40%+ of YC batches now bank with Mercury.", industry: "Fintech", founded: 2017, seedYear: 2017, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "Oklo", batch: "S14", valuation: 6.16, raised: "$1.9B", category: "sleeper", story: "Nuclear microreactor company. Sam Altman chairman. Went public via SPAC 2024. ~$6B market cap.", industry: "Nuclear", founded: 2013, seedYear: 2014, seriesAYear: 2016, unicornYear: 2024, status: "public" },
+  { name: "Rigetti Computing", batch: "S14", valuation: 6.16, raised: "$298M", category: "moderate", story: "Quantum computing hardware. Went public via SPAC. Volatile but hit $6B amid quantum hype.", industry: "Quantum", founded: 2013, seedYear: 2014, seriesAYear: 2017, unicornYear: 2024, status: "public" },
+  { name: "Solugen", batch: "W17", valuation: 2, raised: "$656M", category: "sleeper", story: "Plant-sugar-to-chemicals got modest Demo Day attention. First YC climate tech unicorn.", industry: "Climate", founded: 2016, seedYear: 2017, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "Substack", batch: "W18", valuation: 1.1, raised: "$190M", category: "moderate", story: "Newsletter platform seemed niche at Demo Day. Rode creator economy wave to unicorn.", industry: "Media", founded: 2017, seedYear: 2018, seriesAYear: 2019, unicornYear: 2025, status: "active" },
+  { name: "Matterport", batch: "W12", valuation: 1.6, raised: "$163M", category: "moderate", story: "3D spatial capture for real estate. SPAC'd at $2.9B. Acquired by CoStar for $1.6B.", industry: "Real Estate", founded: 2011, seedYear: 2012, seriesAYear: 2013, unicornYear: 2021, status: "acquired" },
+  { name: "Apollo.io", batch: "W16", valuation: 1.6, raised: "$250M", category: "sleeper", story: "Sales intelligence grew slowly for years then exploded to $150M ARR. Capital-efficient unicorn.", industry: "Sales", founded: 2015, seedYear: 2016, seriesAYear: 2021, unicornYear: 2023, status: "active" },
+  { name: "Gecko Robotics", batch: "S16", valuation: 1.25, raised: "$354M", category: "sleeper", story: "Wall-climbing inspection robots for power plants. Founded at 19. Took 12 years to unicorn.", industry: "Robotics", founded: 2013, seedYear: 2016, seriesAYear: 2018, unicornYear: 2025, status: "active" },
+  { name: "Astranis", batch: "W16", valuation: 2, raised: "$753M", category: "sleeper", story: "Small geostationary satellites. Demo Day investors skeptical of hardware. Now $2B+ with defense contracts.", industry: "Space", founded: 2015, seedYear: 2016, seriesAYear: 2018, unicornYear: 2024, status: "active" },
+  { name: "Front", batch: "S14", valuation: 1.7, raised: "$202M", category: "sleeper", story: "Shared inbox for teams seemed incremental. Steadily grew to $100M ARR and $1.7B.", industry: "SaaS", founded: 2013, seedYear: 2014, seriesAYear: 2016, unicornYear: 2022, status: "active" },
+  { name: "Clipboard Health", batch: "W17", valuation: 1.3, raised: "$94M", category: "sleeper", story: "Healthcare staffing marketplace. Hit unicorn on just $94M raised — most capital-efficient YC unicorn.", industry: "Healthcare", founded: 2016, seedYear: 2017, seriesAYear: 2021, unicornYear: 2022, status: "active" },
+  { name: "Xendit", batch: "S15", valuation: 1, raised: "$530M", category: "sleeper", story: "First Southeast Asian YC company. Pivoted from Bitcoin to payment infrastructure. Processes $15B/year in Indonesia.", industry: "Fintech", founded: 2015, seedYear: 2015, seriesAYear: 2018, unicornYear: 2021, status: "active" },
+  { name: "Paystack", batch: "W16", valuation: 0.2, raised: "$11.7M", category: "hot-won", story: "First Nigerian YC company. Processed half of Nigeria's online transactions. Acquired by Stripe for $200M+.", industry: "Fintech", founded: 2015, seedYear: 2016, seriesAYear: 2018, status: "acquired" },
+  { name: "Newfront", batch: "W18", valuation: 2.2, raised: "$310M", category: "moderate", story: "Modern commercial insurance brokerage. Digitized old-school industry to $2.2B.", industry: "Insurance", founded: 2017, seedYear: 2018, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "GoCardless", batch: "S11", valuation: 2.1, raised: "$540M", category: "moderate", story: "UK bank-to-bank payments. One of YC's earliest international successes. Acquired in 2025.", industry: "Fintech", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2022, status: "acquired" },
+  { name: "Honeylove", batch: "S18", valuation: 2.3, raised: "$13.2M", category: "sleeper", story: "DTC shapewear by an EDM artist. Only raised $13M. One of YC's most capital-efficient consumer brands.", industry: "DTC", founded: 2018, seedYear: 2018, seriesAYear: 2022, unicornYear: 2022, status: "active" },
+  { name: "BillionToOne", batch: "S17", valuation: 1, raised: "$230M", category: "sleeper", story: "Prenatal genetic testing 10x more accurate than competitors. Grew from diagnostics niche to unicorn.", industry: "Biotech", founded: 2016, seedYear: 2017, seriesAYear: 2020, unicornYear: 2023, status: "active" },
+  { name: "Stoke Space", batch: "W21", valuation: 2, raised: "$175M", category: "sleeper", story: "Fully reusable rocket by Blue Origin veterans. Quietly building while SpaceX dominates headlines.", industry: "Space", founded: 2019, seedYear: 2021, seriesAYear: 2023, unicornYear: 2024, status: "active" },
+  { name: "Go1", batch: "S15", valuation: 2, raised: "$414M", category: "sleeper", story: "Australian corporate learning aggregator. Overlooked at Demo Day. World's largest curated e-learning library.", industry: "EdTech", founded: 2015, seedYear: 2015, seriesAYear: 2017, unicornYear: 2022, status: "active" },
+  { name: "Scribd", batch: "S06", valuation: 0.45, raised: "$107M", category: "moderate", story: "One of YC's earliest companies. Pivoted from doc sharing to 'Netflix for books.' Survived 20 years.", industry: "Media", founded: 2006, seedYear: 2006, seriesAYear: 2008, status: "active" },
+  { name: "Boosted", batch: "S12", valuation: 0, raised: "$72M", category: "hot-failed", story: "Electric skateboard pioneer with devoted fans. Killed by Trump-era tariffs on Chinese components. Shut down 2020.", industry: "Hardware", founded: 2012, seedYear: 2012, seriesAYear: 2015, status: "dead" },
+  { name: "Weave", batch: "W14", valuation: 0.7, raised: "$168M", category: "moderate", story: "Communication platform for small healthcare businesses. Went public on NYSE 2021.", industry: "SaaS", founded: 2008, seedYear: 2015, seriesAYear: 2017, status: "public" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -575,6 +576,188 @@ export default function Home() {
             </div>
           </div>
         </Reveal>
+      </section>
+
+      {/* ── FUNDING VELOCITY ── */}
+      <section className="bg-white border-y border-neutral-200">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+          <Reveal>
+            <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Funding Velocity</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">How fast did they scale?</h2>
+            <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">
+              Time from founding to unicorn status ($1B+ valuation). The fastest got there in 1–2 years. Some took over a decade. Many never made it.
+            </p>
+          </Reveal>
+
+          {(() => {
+            const unicorns = COMPANIES
+              .filter(c => c.unicornYear && c.founded)
+              .map(c => ({ ...c, yearsToUnicorn: c.unicornYear! - c.founded }))
+              .sort((a, b) => a.yearsToUnicorn - b.yearsToUnicorn);
+
+            const fastest = unicorns.slice(0, 15);
+            const slowest = [...unicorns].sort((a, b) => b.yearsToUnicorn - a.yearsToUnicorn).slice(0, 10);
+
+            const seedToA = COMPANIES
+              .filter(c => c.seedYear && c.seriesAYear)
+              .map(c => ({ ...c, gap: c.seriesAYear! - c.seedYear! }));
+
+            const avgSeedToA = seedToA.length > 0 ? (seedToA.reduce((s, c) => s + c.gap, 0) / seedToA.length).toFixed(1) : "N/A";
+            const avgToUnicorn = unicorns.length > 0 ? (unicorns.reduce((s, c) => s + c.yearsToUnicorn, 0) / unicorns.length).toFixed(1) : "N/A";
+
+            const speedBuckets = [
+              { label: "≤2 years", count: unicorns.filter(c => c.yearsToUnicorn <= 2).length, color: "#FF6600" },
+              { label: "3–4 years", count: unicorns.filter(c => c.yearsToUnicorn >= 3 && c.yearsToUnicorn <= 4).length, color: "#10b981" },
+              { label: "5–6 years", count: unicorns.filter(c => c.yearsToUnicorn >= 5 && c.yearsToUnicorn <= 6).length, color: "#3b82f6" },
+              { label: "7–9 years", count: unicorns.filter(c => c.yearsToUnicorn >= 7 && c.yearsToUnicorn <= 9).length, color: "#f59e0b" },
+              { label: "10+ years", count: unicorns.filter(c => c.yearsToUnicorn >= 10).length, color: "#ef4444" },
+            ];
+
+            const statusCounts = [
+              { label: "Active (Private)", count: COMPANIES.filter(c => c.status === "active").length, color: "#10b981" },
+              { label: "Public", count: COMPANIES.filter(c => c.status === "public").length, color: "#3b82f6" },
+              { label: "Acquired", count: COMPANIES.filter(c => c.status === "acquired").length, color: "#f59e0b" },
+              { label: "Dead", count: COMPANIES.filter(c => c.status === "dead").length, color: "#ef4444" },
+            ];
+
+            const maxFastest = Math.max(...fastest.map(c => c.yearsToUnicorn));
+
+            return (
+              <>
+                <Reveal delay={100}>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
+                    <div className="rounded-2xl border border-neutral-200 p-5 text-center">
+                      <p className="text-3xl sm:text-4xl font-bold text-[#FF6600] tabular-nums">{avgToUnicorn}y</p>
+                      <p className="text-xs text-neutral-500 mt-1">Avg. years to unicorn</p>
+                    </div>
+                    <div className="rounded-2xl border border-neutral-200 p-5 text-center">
+                      <p className="text-3xl sm:text-4xl font-bold text-[#10b981] tabular-nums">{avgSeedToA}y</p>
+                      <p className="text-xs text-neutral-500 mt-1">Avg. seed → Series A</p>
+                    </div>
+                    <div className="rounded-2xl border border-neutral-200 p-5 text-center">
+                      <p className="text-3xl sm:text-4xl font-bold text-[#3b82f6] tabular-nums">{unicorns.length}</p>
+                      <p className="text-xs text-neutral-500 mt-1">Reached unicorn status</p>
+                    </div>
+                    <div className="rounded-2xl border border-neutral-200 p-5 text-center">
+                      <p className="text-3xl sm:text-4xl font-bold text-[#ef4444] tabular-nums">{COMPANIES.filter(c => c.status === "dead").length}</p>
+                      <p className="text-xs text-neutral-500 mt-1">Completely dead</p>
+                    </div>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={150}>
+                  <div className="mt-12">
+                    <h3 className="text-lg font-bold text-yc-dark mb-1">Fastest to Unicorn</h3>
+                    <p className="text-xs text-neutral-500 mb-4">Years from founding to $1B+ valuation</p>
+                    <div className="space-y-1">
+                      {fastest.map((c) => {
+                        const meta = CATEGORY_META[c.category];
+                        const pct = Math.max((c.yearsToUnicorn / maxFastest) * 100, 8);
+                        return (
+                          <div key={c.name} className="flex items-center gap-3 py-1.5 group">
+                            <div className="w-28 sm:w-36 shrink-0 text-right">
+                              <span className="text-sm font-semibold text-yc-dark">{c.name}</span>
+                              <span className="text-xs text-neutral-400 ml-1">{c.batch}</span>
+                            </div>
+                            <div className="flex-1 relative h-7 rounded bg-neutral-100 overflow-hidden">
+                              <div
+                                className="absolute inset-y-0 left-0 rounded transition-all duration-700 ease-out flex items-center"
+                                style={{ width: `${pct}%`, backgroundColor: meta.color }}
+                              >
+                                <span className="text-white text-xs font-bold ml-2 whitespace-nowrap">{c.yearsToUnicorn}y</span>
+                              </div>
+                            </div>
+                            <div className="hidden sm:block w-16 shrink-0 text-right">
+                              <span className="text-xs text-neutral-500">${c.valuation}B</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </Reveal>
+
+                <Reveal delay={200}>
+                  <div className="mt-12">
+                    <h3 className="text-lg font-bold text-yc-dark mb-1">Slowest to Unicorn</h3>
+                    <p className="text-xs text-neutral-500 mb-4">Patience paid off — these took the longest but still got there</p>
+                    <div className="space-y-1">
+                      {slowest.map((c) => {
+                        const meta = CATEGORY_META[c.category];
+                        const maxSlow = Math.max(...slowest.map(s => s.yearsToUnicorn));
+                        const pct = Math.max((c.yearsToUnicorn / maxSlow) * 100, 8);
+                        return (
+                          <div key={c.name} className="flex items-center gap-3 py-1.5">
+                            <div className="w-28 sm:w-36 shrink-0 text-right">
+                              <span className="text-sm font-semibold text-yc-dark">{c.name}</span>
+                              <span className="text-xs text-neutral-400 ml-1">{c.batch}</span>
+                            </div>
+                            <div className="flex-1 relative h-7 rounded bg-neutral-100 overflow-hidden">
+                              <div
+                                className="absolute inset-y-0 left-0 rounded transition-all duration-700 ease-out flex items-center"
+                                style={{ width: `${pct}%`, backgroundColor: meta.color }}
+                              >
+                                <span className="text-white text-xs font-bold ml-2 whitespace-nowrap">{c.yearsToUnicorn}y</span>
+                              </div>
+                            </div>
+                            <div className="hidden sm:block w-16 shrink-0 text-right">
+                              <span className="text-xs text-neutral-500">${c.valuation}B</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </Reveal>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
+                  <Reveal delay={250}>
+                    <div className="rounded-2xl border border-neutral-200 p-6">
+                      <h3 className="text-lg font-bold text-yc-dark mb-4">Time to Unicorn Distribution</h3>
+                      <div className="space-y-3">
+                        {speedBuckets.map((b) => (
+                          <div key={b.label} className="flex items-center gap-3">
+                            <span className="text-sm text-neutral-600 w-20 shrink-0">{b.label}</span>
+                            <div className="flex-1 h-6 rounded bg-neutral-100 overflow-hidden">
+                              <div
+                                className="h-full rounded flex items-center transition-all duration-500"
+                                style={{ width: `${Math.max((b.count / unicorns.length) * 100, 4)}%`, backgroundColor: b.color }}
+                              >
+                                {b.count > 0 && <span className="text-white text-xs font-bold ml-2">{b.count}</span>}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </Reveal>
+
+                  <Reveal delay={300}>
+                    <div className="rounded-2xl border border-neutral-200 p-6">
+                      <h3 className="text-lg font-bold text-yc-dark mb-4">Current Status</h3>
+                      <div className="space-y-3">
+                        {statusCounts.map((s) => (
+                          <div key={s.label} className="flex items-center gap-3">
+                            <span className="text-sm text-neutral-600 w-28 shrink-0">{s.label}</span>
+                            <div className="flex-1 h-6 rounded bg-neutral-100 overflow-hidden">
+                              <div
+                                className="h-full rounded flex items-center transition-all duration-500"
+                                style={{ width: `${Math.max((s.count / COMPANIES.length) * 100, 4)}%`, backgroundColor: s.color }}
+                              >
+                                <span className="text-white text-xs font-bold ml-2">{s.count}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-xs text-neutral-400 mt-4">{COMPANIES.length} companies tracked</p>
+                    </div>
+                  </Reveal>
+                </div>
+              </>
+            );
+          })()}
+        </div>
       </section>
 
       {/* ── INSIDER QUOTES ── */}

@@ -249,6 +249,19 @@ const COMPANIES: Company[] = [
   { name: "Onebrief", batch: "S21", valuation: 1.1, raised: "$336M", category: "sleeper", story: "Cloud-native military operational planning. Defense tech unicorn turning planning into reusable building blocks.", industry: "Defense", founded: 2019, seedYear: 2020, seriesAYear: 2022, unicornYear: 2025, status: "active" },
   { name: "Vendr", batch: "S19", valuation: 1, raised: "$216M", category: "moderate", story: "AI SaaS purchasing platform that negotiates software deals. Saved customers $250M+ across $2.5B in SaaS purchases.", industry: "SaaS", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2022, status: "active" },
   { name: "Imbue", batch: "S17", valuation: 1, raised: "$220M", category: "sleeper", story: "Women-led AI unicorn building reasoning and coding systems. Nvidia-backed with access to 10,000 GPUs.", industry: "AI", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2023, status: "active" },
+  // FINAL SWEEP
+  { name: "Prometheus", batch: "S19", valuation: 1.5, raised: "$24.1M", category: "sleeper", story: "First e-fuels unicorn. Removes CO2 from air, uses solar/wind to make zero-net-carbon gasoline cheaper than fossil fuels.", industry: "Climate", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2022, status: "active" },
+  { name: "Eight Sleep", batch: "W16", valuation: 1.5, raised: "$160M", category: "sleeper", story: "Smart mattress cover with heating/cooling and sleep tracking. Unicorn in March 2026. Founders Fund-backed.", industry: "Consumer", founded: 2014, seedYear: 2016, seriesAYear: 2018, unicornYear: 2026, status: "active" },
+  { name: "Truebill", batch: "W16", valuation: 1.275, raised: "$72M", category: "hot-won", story: "Subscription management app founded by three brothers. Rocket Companies acquired for $1.275B. Rebranded to Rocket Money.", industry: "Fintech", founded: 2015, seedYear: 2016, seriesAYear: 2019, unicornYear: 2021, status: "acquired" },
+  { name: "Moxion Power", batch: "S21", valuation: 1.5, raised: "$100M", category: "sleeper", story: "All-electric mobile power replacing diesel generators at construction sites and film sets. Climate tech unicorn.", industry: "Climate", founded: 2020, seedYear: 2021, seriesAYear: 2022, unicornYear: 2023, status: "active" },
+  { name: "Odeko", batch: "S19", valuation: 1, raised: "$302M", category: "sleeper", story: "Supply chain platform for cafes and small food businesses. Aggregates ordering, inventory, and payments.", industry: "Food", founded: 2019, seedYear: 2019, seriesAYear: 2020, unicornYear: 2022, status: "active" },
+  { name: "HelloSign", batch: "W11", valuation: 0.23, raised: "$16M", category: "moderate", story: "E-signature platform competing with DocuSign. Dropbox acquired for $230M in 2019.", industry: "SaaS", founded: 2011, seedYear: 2011, seriesAYear: 2014, status: "acquired" },
+  { name: "Clever", batch: "W12", valuation: 0.5, raised: "$55M", category: "sleeper", story: "Single sign-on for K-12 classrooms. Used by 65%+ of US schools. Kahoot! acquired for $500M.", industry: "EdTech", founded: 2012, seedYear: 2012, seriesAYear: 2013, status: "acquired" },
+  { name: "CoreOS", batch: "S13", valuation: 0.25, raised: "$50M", category: "moderate", story: "Built Container Linux and contributed to Kubernetes ecosystem. Red Hat (IBM) acquired for $250M.", industry: "Dev Tools", founded: 2013, seedYear: 2013, seriesAYear: 2014, status: "acquired" },
+  { name: "Bear Flag Robotics", batch: "S17", valuation: 0.25, raised: "$8M", category: "sleeper", story: "Autonomous tractor tech. John Deere acquired for $250M on just $8M raised — one of YC's best ROI exits.", industry: "AgTech", founded: 2017, seedYear: 2017, seriesAYear: 2020, status: "acquired" },
+  { name: "Sendwave", batch: "S12", valuation: 0.5, raised: "$10M", category: "sleeper", story: "Instant no-fee money transfers to Africa. WorldRemit acquired for $500M on just $10M raised.", industry: "Fintech", founded: 2014, seedYear: 2014, status: "acquired" },
+  { name: "Caper AI", batch: "W16", valuation: 0.35, raised: "$36M", category: "moderate", story: "AI smart shopping carts for cashier-less checkout. Instacart acquired for $350M in 2021.", industry: "Retail Tech", founded: 2016, seedYear: 2016, seriesAYear: 2019, status: "acquired" },
+  { name: "Fivestars", batch: "W11", valuation: 0.317, raised: "$115M", category: "moderate", story: "Customer loyalty and payments for small businesses. 60M+ members. Acquired by SumUp.", industry: "Fintech", founded: 2011, seedYear: 2011, seriesAYear: 2013, status: "acquired" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -346,7 +359,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            218 companies tracked · 20 years of data
+            230 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -356,7 +369,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 218 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 230 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -918,7 +931,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "218 companies tracked across 20 years of YC batches",
+              "230 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

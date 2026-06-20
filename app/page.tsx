@@ -290,6 +290,17 @@ const COMPANIES: Company[] = [
   { name: "FutureAdvisor", batch: "S10", valuation: 0.15, raised: "$21.5M", category: "sleeper", story: "Robo-advisor for automated wealth management. BlackRock — world's largest asset manager — acquired for $150M.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2013, status: "acquired" },
   { name: "Persona", batch: "S14", valuation: 0.25, raised: "$50M", category: "moderate", story: "Identity verification API (originally Cognito). Powers KYC for fintechs and marketplaces.", industry: "Security", founded: 2014, seedYear: 2014, seriesAYear: 2019, status: "active" },
   { name: "Sqreen", batch: "W18", valuation: 0.22, raised: "$35M", category: "moderate", story: "Runtime application security platform. Datadog acquired to expand their security portfolio.", industry: "Security", founded: 2015, seedYear: 2018, seriesAYear: 2019, status: "acquired" },
+  // MORE NOTABLE COMPANIES
+  { name: "Firebase", batch: "S11", valuation: 0.085, raised: "$12.6M", category: "sleeper", story: "Mobile/web dev platform. Google acquired for ~$85M in 2014. Became a core Google Cloud product used by millions of developers.", industry: "Dev Tools", founded: 2011, seedYear: 2011, seriesAYear: 2013, status: "acquired" },
+  { name: "Product Hunt", batch: "S14", valuation: 0.02, raised: "$7.3M", category: "moderate", story: "Tech product discovery platform. Where the startup world launches products. AngelList acquired in 2016.", industry: "Media", founded: 2013, seedYear: 2014, status: "acquired" },
+  { name: "HackerRank", batch: "S11", valuation: 1, raised: "$115M", category: "sleeper", story: "Developer skills assessment platform used by 3,000+ companies for technical hiring.", industry: "HR Tech", founded: 2009, seedYear: 2012, seriesAYear: 2014, unicornYear: 2021, status: "active" },
+  { name: "QuickNode", batch: "W21", valuation: 0.8, raised: "$85M", category: "moderate", story: "'AWS for blockchain.' Infrastructure powering Web3 apps and dApps across major chains.", industry: "Crypto", founded: 2017, seedYear: 2021, seriesAYear: 2022, status: "active" },
+  { name: "Wefunder", batch: "W13", valuation: 0.1, raised: "$15M", category: "sleeper", story: "Leading equity crowdfunding platform. $800M+ invested through the platform by everyday investors.", industry: "Fintech", founded: 2011, seedYear: 2013, status: "active" },
+  { name: "Goldbelly", batch: "W15", valuation: 0.5, raised: "$100M", category: "sleeper", story: "Ships iconic restaurant food nationwide — Katz's pastrami, Lou Malnati's pizza. Food marketplace unicorn-in-waiting.", industry: "Food", founded: 2013, seedYear: 2015, seriesAYear: 2017, status: "active" },
+  { name: "LendUp", batch: "W12", valuation: 0, raised: "$350M", category: "hot-failed", story: "Alternative lending for the underbanked. Raised $350M but CFPB shut them down in 2021 for deceptive practices.", industry: "Fintech", founded: 2012, seedYear: 2012, seriesAYear: 2014, status: "dead" },
+  { name: "9GAG", batch: "W12", valuation: 0.1, raised: "$2.8M", category: "sleeper", story: "Viral meme and entertainment platform. 200M+ monthly users. Built a massive audience on almost no funding.", industry: "Media", founded: 2008, seedYear: 2012, status: "active" },
+  { name: "Songkick", batch: "S07", valuation: 0.05, raised: "$17M", category: "moderate", story: "Concert discovery and ticketing platform. Warner Music Group acquired in 2017.", industry: "Music", founded: 2007, seedYear: 2007, seriesAYear: 2010, status: "acquired" },
+  { name: "Platzi", batch: "W15", valuation: 0.15, raised: "$62M", category: "moderate", story: "Largest online tech education platform in Latin America. Teaching millions to code in Spanish.", industry: "EdTech", founded: 2012, seedYear: 2015, seriesAYear: 2018, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -387,7 +398,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            255 companies tracked · 20 years of data
+            265 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -397,7 +408,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 255 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 265 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -959,7 +970,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "255 companies tracked across 20 years of YC batches",
+              "265 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

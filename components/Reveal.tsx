@@ -1,33 +1,44 @@
 "use client";
-import { useEffect, useRef, ReactNode } from "react";
+import { useRef, ReactNode } from "react";
+import { motion, useInView } from "framer-motion";
 
-export function Reveal({ children, delay = 0, as: As = "div", className = "" }: {
+type Props = {
   children: ReactNode;
   delay?: number;
-  as?: React.ElementType;
   className?: string;
-}) {
-  const ref = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setTimeout(() => el.classList.add("in"), delay);
-            obs.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [delay]);
+  direction?: "up" | "down" | "left" | "right" | "none";
+};
+
+const offsets = {
+  up: { y: 32 },
+  down: { y: -32 },
+  left: { x: 32 },
+  right: { x: -32 },
+  none: {},
+};
+
+export function Reveal({
+  children,
+  delay = 0,
+  className = "",
+  direction = "up",
+}: Props) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px 0px" });
+
   return (
-    <As ref={ref as React.Ref<never>} className={`reveal ${className}`}>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, ...offsets[direction] }}
+      animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...offsets[direction] }}
+      transition={{
+        duration: 0.7,
+        delay: delay / 1000,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={className}
+    >
       {children}
-    </As>
+    </motion.div>
   );
 }

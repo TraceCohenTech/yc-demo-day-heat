@@ -8,6 +8,7 @@ import {
   Legend,
 } from "recharts";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 /* ── DATA ── */
 
@@ -482,46 +483,80 @@ export default function Home() {
   return (
     <main>
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-yc-dark min-h-[85vh] sm:min-h-screen flex flex-col justify-center">
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+      <section className="relative overflow-hidden bg-yc-dark min-h-[85vh] sm:min-h-screen flex flex-col justify-center hero-grain">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FF6600]/5 via-transparent to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF6600]/30 to-transparent" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
+          >
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
             300 companies tracked · 20 years of data
-          </div>
+          </motion.div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl sm:text-6xl lg:text-[5.5rem] font-bold text-white"
+          >
             Does Demo Day<br />
             hype predict<br />
-            <span className="text-[#FF6600]">success?</span>
-          </h1>
+            <span className="text-[#FF6600] inline-block">success?</span>
+          </motion.h1>
 
-          <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
+          >
             We tracked 300 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
-          </p>
+          </motion.p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-12"
+          >
             {[
               { big: "0.09", label: "R² correlation", sub: "Demo Day hype → valuation" },
               { big: "~25%", label: "Look like winners", sub: "at the end of YC batch" },
               { big: "~6%", label: "Actually become", sub: "unicorns ($1B+)" },
               { big: "50%", label: "Ultimately", sub: "fail entirely" },
             ].map((s, i) => (
-              <div key={i} className="border border-white/10 rounded-xl p-4 sm:p-5 bg-white/5 backdrop-blur-sm">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="stat-card border border-white/8 rounded-xl p-4 sm:p-5 bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.06] transition-colors duration-300"
+              >
                 <p className="text-2xl sm:text-3xl font-bold text-[#FF6600] tabular-nums">{s.big}</p>
                 <p className="text-sm font-medium text-white/90 mt-1">{s.label}</p>
-                <p className="text-xs text-white/50 mt-0.5">{s.sub}</p>
-              </div>
+                <p className="text-xs text-white/40 mt-0.5">{s.sub}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <p className="text-xs text-white/30 mt-8">Not affiliated with Y Combinator. Independent research by <a href="https://x.com/Trace_Cohen" className="text-[#FF6600]/70 hover:text-[#FF6600]">@Trace_Cohen</a></p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            className="text-xs text-white/25 mt-8"
+          >
+            Not affiliated with Y Combinator. Independent research by <a href="https://x.com/Trace_Cohen" className="text-[#FF6600]/60 hover:text-[#FF6600] transition-colors">@Trace_Cohen</a>
+          </motion.p>
         </div>
       </section>
+
+      <div className="gradient-line" />
 
       {/* ── THE THESIS ── */}
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
@@ -540,7 +575,7 @@ export default function Home() {
 
         <Reveal delay={100}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
-            <div className="rounded-2xl border-2 border-[#FF6600]/20 bg-[#FFF3EB] p-6">
+            <div className="rounded-2xl border-2 border-[#FF6600]/20 bg-[#FFF3EB] p-6 card-hover">
               <p className="text-sm font-bold text-[#FF6600] uppercase tracking-wider">The Sleepers</p>
               <p className="text-4xl sm:text-5xl font-bold text-yc-dark mt-2">
                 $<CountUp to={Math.round(sleepersTotal)} duration={2000} />B+
@@ -556,7 +591,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-2xl border-2 border-red-200 bg-red-50 p-6">
+            <div className="rounded-2xl border-2 border-red-200 bg-red-50 p-6 card-hover">
               <p className="text-sm font-bold text-red-600 uppercase tracking-wider">The Darlings That Died</p>
               <p className="text-4xl sm:text-5xl font-bold text-yc-dark mt-2">$0</p>
               <p className="text-neutral-600 text-sm mt-2">{hotFailed.length} companies that were hyped at Demo Day but raised {hotFailedRaised} and failed</p>

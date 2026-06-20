@@ -214,6 +214,10 @@ const COMPANIES: Company[] = [
   { name: "Census", batch: "S19", valuation: 0.1, raised: "$80M", category: "hot-failed", story: "Reverse ETL company that lost the category war to Hightouch. Down-exit acquisition by Fivetran in 2025.", industry: "Data", founded: 2018, seedYear: 2019, seriesAYear: 2021, status: "acquired" },
   { name: "Orb", batch: "W22", valuation: 0.3, raised: "$44M", category: "sleeper", story: "Ex-Asana engineers built usage-based billing infrastructure powering Vercel, Replit, and Perplexity.", industry: "Fintech", founded: 2021, seedYear: 2022, seriesAYear: 2023, status: "active" },
   { name: "Merge", batch: "S21", valuation: 0.5, raised: "$75M", category: "moderate", story: "Unified API for HR, payroll, ATS, CRM integrations. Build 200+ integrations at once.", industry: "Dev Tools", founded: 2020, seedYear: 2021, seriesAYear: 2022, status: "active" },
+  // CONSUMER
+  { name: "Lugg", batch: "S15", valuation: 0, raised: "$5.6M", category: "hot-failed", story: "'Uber for moving.' Hit $17.6M revenue but filed Chapter 11 in May 2024 after accumulating $3M+ debt.", industry: "Logistics", founded: 2015, seedYear: 2015, status: "dead" },
+  { name: "Nurx", batch: "W16", valuation: 0.3, raised: "$96M", category: "moderate", story: "Telehealth for birth control and PrEP. Chelsea Clinton on board. Scaled to $300M, merged into Thirty Madison.", industry: "Healthcare", founded: 2014, seedYear: 2016, seriesAYear: 2017, status: "acquired" },
+  { name: "Muzz", batch: "S17", valuation: 0.1, raised: "$7M", category: "sleeper", story: "World's largest Muslim dating app. 10M+ members, 500K+ weddings facilitated. Quietly dominant in its niche.", industry: "Social", founded: 2015, seedYear: 2017, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -311,7 +315,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            186 companies tracked · 20 years of data
+            189 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -321,7 +325,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 186 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 189 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -883,7 +887,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "186 companies tracked across 20 years of YC batches",
+              "189 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

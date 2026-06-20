@@ -240,6 +240,15 @@ const COMPANIES: Company[] = [
   { name: "BetterUp", batch: "S16", valuation: 4.7, raised: "$567M", category: "hot-won", story: "Digital coaching and mental fitness platform. Prince Harry became Chief Impact Officer. $4.7B valuation.", industry: "Healthcare", founded: 2013, seedYear: 2016, seriesAYear: 2016, unicornYear: 2021, status: "active" },
   { name: "Sift", batch: "S11", valuation: 1.3, raised: "$157M", category: "sleeper", story: "Digital trust and safety platform detecting fraud in real-time. Powers fraud prevention for 34K+ sites.", industry: "Security", founded: 2011, seedYear: 2011, seriesAYear: 2014, unicornYear: 2021, status: "active" },
   { name: "Owner.com", batch: "W18", valuation: 1, raised: "$182M", category: "moderate", story: "Online ordering platform for independent restaurants. Hit $1B with $120M Series C in May 2025.", industry: "Restaurant Tech", founded: 2020, seedYear: 2020, seriesAYear: 2022, unicornYear: 2025, status: "active" },
+  // MORE UNICORNS
+  { name: "Legora", batch: "W24", valuation: 5.6, raised: "$600M", category: "hot-won", story: "YC's fastest startup to reach unicorn. Collaborative AI platform used by 800+ law firms across 50+ markets.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, unicornYear: 2025, status: "active" },
+  { name: "Nourish", batch: "W21", valuation: 1.75, raised: "$100M", category: "sleeper", story: "Connects patients with dietitians via telehealth, covered by insurance. Tackling chronic disease through nutrition.", industry: "Healthcare", founded: 2021, seedYear: 2021, seriesAYear: 2023, unicornYear: 2025, status: "active" },
+  { name: "Papa", batch: "S18", valuation: 1.4, raised: "$301M", category: "moderate", story: "'Grandkids on demand' — matches older adults with companions for transport, tasks, and social support. SoftBank-backed.", industry: "Healthcare", founded: 2017, seedYear: 2018, seriesAYear: 2019, unicornYear: 2021, status: "active" },
+  { name: "Kapital", batch: "W22", valuation: 1.3, raised: "$200M", category: "hot-won", story: "AI neobank for LatAm small businesses. 300K customers across US, Mexico, Colombia with $3B balance sheet.", industry: "Fintech", founded: 2020, seedYear: 2021, seriesAYear: 2022, unicornYear: 2025, status: "active" },
+  { name: "Gem", batch: "S17", valuation: 1.2, raised: "$148M", category: "sleeper", story: "Talent engagement platform unifying recruiting data. Used by Lyft, Spotify, Affirm. 800+ business customers.", industry: "HR Tech", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
+  { name: "Onebrief", batch: "S21", valuation: 1.1, raised: "$336M", category: "sleeper", story: "Cloud-native military operational planning. Defense tech unicorn turning planning into reusable building blocks.", industry: "Defense", founded: 2019, seedYear: 2020, seriesAYear: 2022, unicornYear: 2025, status: "active" },
+  { name: "Vendr", batch: "S19", valuation: 1, raised: "$216M", category: "moderate", story: "AI SaaS purchasing platform that negotiates software deals. Saved customers $250M+ across $2.5B in SaaS purchases.", industry: "SaaS", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2022, status: "active" },
+  { name: "Imbue", batch: "S17", valuation: 1, raised: "$220M", category: "sleeper", story: "Women-led AI unicorn building reasoning and coding systems. Nvidia-backed with access to 10,000 GPUs.", industry: "AI", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2023, status: "active" },
 ];
 
 const sleepers = COMPANIES.filter((c) => c.category === "sleeper");
@@ -337,7 +346,7 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm text-white/80 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            210 companies tracked · 20 years of data
+            218 companies tracked · 20 years of data
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-[0.95]">
@@ -347,7 +356,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/60 mt-8 max-w-xl leading-relaxed">
-            We tracked 210 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 218 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </p>
 
@@ -909,7 +918,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "210 companies tracked across 20 years of YC batches",
+              "218 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

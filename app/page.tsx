@@ -84,7 +84,6 @@ const COMPANIES: Company[] = [
   { name: "Flockjay", batch: "W19", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 10. 40% job placement rate. Shut down ~2022.", industry: "Education", founded: 2018, seedYear: 2019, status: "dead" },
   { name: "Retool", batch: "W17", valuation: 3.2, raised: "$445M", category: "moderate", story: "Internal tools builder. Quiet Demo Day but became default for ops teams.", industry: "Dev Tools", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
   { name: "Vanta", batch: "W18", valuation: 4.15, raised: "$353M", category: "moderate", story: "SOC 2 compliance automation. Grew to $4.15B valuation.", industry: "Security", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
-  { name: "Applied Intuition", batch: "S17", valuation: 15, raised: "$1.05B", category: "sleeper", story: "AV simulation tools. Under the radar at Demo Day. Series F at $15B.", industry: "Autonomous", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
   { name: "Lattice", batch: "W16", valuation: 3, raised: "$329M", category: "moderate", story: "People management platform. Steady SaaS grower.", industry: "HR", founded: 2015, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
   { name: "Ironclad", batch: "S15", valuation: 3.2, raised: "$333M", category: "moderate", story: "Contract lifecycle management. Accel-backed.", industry: "Legal", founded: 2014, seedYear: 2015, seriesAYear: 2017, unicornYear: 2022, status: "active" },
   { name: "Zip", batch: "S20", valuation: 2.2, raised: "$370M", category: "hot-won", story: "Procurement platform. Raised $1.7M at Demo Day, then exploded.", industry: "SaaS", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2022, status: "active" },
@@ -160,7 +159,6 @@ const COMPANIES: Company[] = [
   { name: "Watsi", batch: "W13", valuation: 0, raised: "$5M", category: "moderate", story: "First-ever YC nonprofit. Paul Graham personally championed them. Crowdfunds medical treatments — helped 33K+ people.", industry: "Healthcare", founded: 2012, seedYear: 2013, status: "active" },
   // 2021+ ERA — AI BOOM
   { name: "Anysphere", batch: "S22", valuation: 60, raised: "$3.4B", category: "hot-won", story: "Built Cursor, the AI code editor. $0 to $2B ARR in 3 years. Fastest-growing dev tool in history.", industry: "AI", founded: 2022, seedYear: 2022, seriesAYear: 2023, unicornYear: 2025, status: "active" },
-  { name: "Cognition", batch: "S23", valuation: 25, raised: "$1.6B", category: "hot-won", story: "Built Devin, the AI software engineer. Three IOI gold medalists. ARR from $1M to $73M in 9 months.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, unicornYear: 2025, status: "active" },
   { name: "Glean", batch: "S19", valuation: 7.2, raised: "$765M", category: "hot-won", story: "AI enterprise search. $300M ARR, up 89% YoY. Used by hundreds of companies.", industry: "AI", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2024, status: "active" },
   { name: "LangChain", batch: "W23", valuation: 1.25, raised: "$260M", category: "hot-won", story: "Open-source LLM framework became default infrastructure for building AI apps. Sequoia + Benchmark backed.", industry: "AI", founded: 2022, seedYear: 2023, seriesAYear: 2024, unicornYear: 2025, status: "active" },
   { name: "Pika", batch: "S23", valuation: 0.7, raised: "$135M", category: "hot-won", story: "Stanford AI PhD dropouts built AI video generation competing with Runway and Sora. Meta explored $500M acquisition.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2023, status: "active" },
@@ -185,7 +183,7 @@ const COMPANIES: Company[] = [
   { name: "Pave", batch: "W20", valuation: 1.6, raised: "$175M", category: "sleeper", story: "Compensation benchmarking used by 900+ companies. One-third of customers from the YC network. Quiet but dominant.", industry: "HR Tech", founded: 2019, seedYear: 2020, seriesAYear: 2021, unicornYear: 2022, status: "active" },
   // S22-S25 AI BOOM
   { name: "Resend", batch: "W23", valuation: 0.15, raised: "$21.5M", category: "hot-won", story: "Built by Zeno Rocha, creator of React Email. Developer-favorite email API displacing SendGrid/Mailgun with beautiful DX.", industry: "Dev Tools", founded: 2023, seedYear: 2023, seriesAYear: 2024, status: "active" },
-  { name: "Firecrawl", batch: "W24", valuation: 0.1, raised: "$16.2M", category: "hot-won", story: "Web scraping API built for LLMs. Essential infrastructure for RAG pipelines and AI agents. Backed by Shopify CEO.", industry: "AI", founded: 2024, seedYear: 2024, seriesAYear: 2025, status: "active" },
+  { name: "Firecrawl", batch: "S22", valuation: 0.1, raised: "$16.2M", category: "hot-won", story: "Web scraping API built for LLMs. Essential infrastructure for RAG pipelines and AI agents. Backed by Shopify CEO.", industry: "AI", founded: 2024, seedYear: 2024, seriesAYear: 2025, status: "active" },
   { name: "Gumloop", batch: "W24", valuation: 0.3, raised: "$70M", category: "hot-won", story: "No-code AI agent builder used by Shopify, Ramp, Instacart. Aims to be $1B company with just 10 employees.", industry: "AI", founded: 2024, seedYear: 2024, seriesAYear: 2025, status: "active" },
   { name: "Browserbase", batch: "S23", valuation: 0.3, raised: "$67.5M", category: "hot-won", story: "Headless browser infrastructure for AI agents. 88% of Fortune 100 signed up. Backed by Patrick Collison and Guillermo Rauch.", industry: "AI", founded: 2024, seedYear: 2024, seriesAYear: 2024, status: "active" },
   { name: "E2B", batch: "W23", valuation: 0.15, raised: "$35M", category: "hot-won", story: "Open-source sandboxes for AI-generated code execution. Used by Perplexity, Hugging Face, and 88% of Fortune 100.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2025, status: "active" },
@@ -469,7 +467,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
           >
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            275 companies tracked · 20 years of data
+            273 companies tracked · 20 years of data
           </motion.div>
 
           <motion.h1
@@ -489,7 +487,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We tracked 275 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 273 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </motion.p>
 
@@ -603,7 +601,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 275 companies</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 273 companies</h2>
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
@@ -1200,7 +1198,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "275 companies tracked across 20 years of YC batches",
+              "273 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

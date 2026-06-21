@@ -243,6 +243,16 @@ const COMPANIES: Company[] = [
   { name: "Sendwave", batch: "S12", valuation: 0.5, raised: "$10M", category: "sleeper", story: "Instant no-fee money transfers to Africa. WorldRemit acquired for $500M on just $10M raised.", industry: "Fintech", founded: 2014, seedYear: 2014, status: "acquired" },
   { name: "Caper AI", batch: "W16", valuation: 0.35, raised: "$36M", category: "moderate", story: "AI smart shopping carts for cashier-less checkout. Instacart acquired for $350M in 2021.", industry: "Retail Tech", founded: 2016, seedYear: 2016, seriesAYear: 2019, status: "acquired" },
   { name: "Fivestars", batch: "W11", valuation: 0.317, raised: "$115M", category: "moderate", story: "Customer loyalty and payments for small businesses. 60M+ members. Acquired by SumUp.", industry: "Fintech", founded: 2011, seedYear: 2011, seriesAYear: 2013, status: "acquired" },
+  { name: "Protocol Labs", batch: "S14", valuation: 0.6, raised: "$255M", category: "hot-won", story: "Built IPFS and Filecoin — foundational internet protocols. Filecoin ICO raised $205M in 2017, the largest token sale at the time. Market cap peaked above $10B.", industry: "Crypto/Web3", founded: 2014, seedYear: 2014, seriesAYear: 2017, unicornYear: 2017, status: "active" },
+  { name: "Lambda School", batch: "S17", valuation: 0.05, raised: "$118M", category: "hot-failed", story: "Free coding bootcamp — pay only after landing a job (ISAs). Massive hype, $118M raised, valued at $600M. Regulatory issues, lawsuits, rebranded to Bloom.", industry: "EdTech", founded: 2017, seedYear: 2017, seriesAYear: 2019, status: "active" },
+  { name: "Caviar", batch: "W14", valuation: 0.41, raised: "$16M", category: "sleeper", story: "Premium food delivery. Square acquired for $90M in 2014, then DoorDash acquired from Square for $410M in 2019. Big win for founders.", industry: "Food Delivery", founded: 2012, seedYear: 2014, status: "acquired" },
+  { name: "Atrium", batch: "W18", valuation: 0, raised: "$75M", category: "hot-failed", story: "Justin Kan (Twitch co-founder) tried to disrupt law with AI + lawyers. Raised $75M from a16z, YC. Shut down in 2020, laid off 100+ people.", industry: "Legal Tech", founded: 2017, seedYear: 2018, seriesAYear: 2018, status: "dead" },
+  { name: "Matterport", batch: "W12", valuation: 1.6, raised: "$160M", category: "hot-failed", story: "3D spatial data platform. SPAC'd at $2.9B in 2021, peaked above $8B. Crashed to under $1B. CoStar acquired for $1.6B — a fraction of peak hype.", industry: "PropTech", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2021, status: "acquired" },
+  { name: "WePay", batch: "S11", valuation: 0.4, raised: "$75M", category: "sleeper", story: "Payment platform for marketplaces. JPMorgan Chase acquired for ~$400M — JPM's first major fintech acquisition.", industry: "Fintech", founded: 2008, seedYear: 2011, seriesAYear: 2012, status: "acquired" },
+  { name: "North", batch: "W13", valuation: 0.18, raised: "$267M", category: "hot-failed", story: "Smart glasses (Focals) — the most consumer-friendly AR glasses ever made. Raised $267M, but Google acquired for just $180M. A cautionary hardware tale.", industry: "Hardware", founded: 2012, seedYear: 2013, seriesAYear: 2014, status: "acquired" },
+  { name: "Presto", batch: "W12", valuation: 0.01, raised: "$70M", category: "hot-failed", story: "Restaurant automation tech for McDonald's and Chili's. SPAC'd at $1B in 2021. Crashed 99%. One of YC's worst SPAC outcomes.", industry: "Restaurant Tech", founded: 2008, seedYear: 2012, seriesAYear: 2015, status: "public" },
+  { name: "Lucira Health", batch: "S14", valuation: 0.39, raised: "$85M", category: "moderate", story: "First FDA-authorized at-home COVID-19 molecular test. IPO'd during pandemic. Pfizer acquired for $390M.", industry: "Healthcare", founded: 2013, seedYear: 2014, seriesAYear: 2017, status: "acquired" },
+  { name: "Pardes Biosciences", batch: "S21", valuation: 0.05, raised: "$220M", category: "hot-failed", story: "Oral antiviral for COVID. IPO'd in 2021 at $1.2B. Drug failed trials, company pivoted to autoimmune. Stock collapsed.", industry: "Biotech", founded: 2020, seedYear: 2021, seriesAYear: 2021, status: "public" },
   // NOTABLE ACQUISITIONS
   { name: "Parakey", batch: "S06", valuation: 0, raised: "$0.02M", category: "sleeper", story: "Founded by Firefox co-creators Blake Ross and Joe Hewitt. Facebook's very first acquisition. Hewitt built Facebook's iPhone app.", industry: "Web", founded: 2006, seedYear: 2006, status: "acquired" },
   { name: "Zenter", batch: "W07", valuation: 0, raised: "$0.02M", category: "sleeper", story: "Web-based presentation tool acquired by Google months after demo day. Became the foundation for Google Slides.", industry: "Productivity", founded: 2007, seedYear: 2007, status: "acquired" },
@@ -453,7 +463,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
           >
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            259 companies tracked · 20 years of data
+            269 companies tracked · 20 years of data
           </motion.div>
 
           <motion.h1
@@ -473,7 +483,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We tracked 259 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 269 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </motion.p>
 
@@ -587,7 +597,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 259 companies</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 269 companies</h2>
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
@@ -1184,7 +1194,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "259 companies tracked across 20 years of YC batches",
+              "269 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

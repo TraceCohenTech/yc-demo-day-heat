@@ -120,7 +120,6 @@ const COMPANIES: Company[] = [
   { name: "Clearbit", batch: "W14", valuation: 0.5, raised: "$74M", category: "moderate", story: "Data enrichment API. Acquired by HubSpot in 2023.", industry: "Data", founded: 2014, seedYear: 2014, seriesAYear: 2016, status: "acquired" },
   { name: "Vetcove", batch: "S16", valuation: 1.6, raised: "$120M", category: "sleeper", story: "Amazon for veterinarians. Quietly grew to $1.6B. Zero hype at Demo Day.", industry: "Healthcare", founded: 2015, seedYear: 2016, seriesAYear: 2019, unicornYear: 2024, status: "active" },
   { name: "Helion Energy", batch: "W14", valuation: 15.5, raised: "$1.5B", category: "sleeper", story: "Fusion energy startup. Sam Altman became chairman. Contract to power Microsoft. $15.5B.", industry: "Energy", founded: 2013, seedYear: 2014, seriesAYear: 2015, unicornYear: 2021, status: "active" },
-  { name: "Verkada", batch: "W17", valuation: 5.8, raised: "$757M", category: "sleeper", story: "Enterprise security cameras sounded boring at Demo Day. Cloud-managed physical security grew to $5.8B.", industry: "Security", founded: 2016, seedYear: 2017, seriesAYear: 2018, unicornYear: 2021, status: "active" },
   { name: "Mercury", batch: "S19", valuation: 5.2, raised: "$546M", category: "sleeper", story: "Banking for startups when neobanks were crowded. 40%+ of YC batches now bank with Mercury.", industry: "Fintech", founded: 2017, seedYear: 2017, seriesAYear: 2020, unicornYear: 2022, status: "active" },
   { name: "Oklo", batch: "S14", valuation: 6.16, raised: "$1.9B", category: "sleeper", story: "Nuclear microreactor company. Sam Altman chairman. Went public via SPAC 2024. ~$6B market cap.", industry: "Nuclear", founded: 2013, seedYear: 2014, seriesAYear: 2016, unicornYear: 2024, status: "public" },
   { name: "Rigetti Computing", batch: "S14", valuation: 6.16, raised: "$298M", category: "moderate", story: "Quantum computing hardware. Went public via SPAC. Volatile but hit $6B amid quantum hype.", industry: "Quantum", founded: 2013, seedYear: 2014, seriesAYear: 2017, unicornYear: 2024, status: "public" },
@@ -159,15 +158,11 @@ const COMPANIES: Company[] = [
   { name: "Watsi", batch: "W13", valuation: 0, raised: "$5M", category: "moderate", story: "First-ever YC nonprofit. Paul Graham personally championed them. Crowdfunds medical treatments — helped 33K+ people.", industry: "Healthcare", founded: 2012, seedYear: 2013, status: "active" },
   // 2021+ ERA — AI BOOM
   { name: "Anysphere", batch: "S22", valuation: 60, raised: "$3.4B", category: "hot-won", story: "Built Cursor, the AI code editor. $0 to $2B ARR in 3 years. Fastest-growing dev tool in history.", industry: "AI", founded: 2022, seedYear: 2022, seriesAYear: 2023, unicornYear: 2025, status: "active" },
-  { name: "Glean", batch: "S19", valuation: 7.2, raised: "$765M", category: "hot-won", story: "AI enterprise search. $300M ARR, up 89% YoY. Used by hundreds of companies.", industry: "AI", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2024, status: "active" },
-  { name: "LangChain", batch: "W23", valuation: 1.25, raised: "$260M", category: "hot-won", story: "Open-source LLM framework became default infrastructure for building AI apps. Sequoia + Benchmark backed.", industry: "AI", founded: 2022, seedYear: 2023, seriesAYear: 2024, unicornYear: 2025, status: "active" },
-  { name: "Pika", batch: "S23", valuation: 0.7, raised: "$135M", category: "hot-won", story: "Stanford AI PhD dropouts built AI video generation competing with Runway and Sora. Meta explored $500M acquisition.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2023, status: "active" },
   { name: "Bland AI", batch: "S23", valuation: 0.6, raised: "$106M", category: "hot-won", story: "Rejected by 180 investors during YC. Now handles 3.5M+ AI phone calls per week for 250+ enterprise customers.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2024, status: "active" },
   { name: "Retell AI", batch: "W24", valuation: 0.5, raised: "$4.6M", category: "sleeper", story: "Voice AI platform. Hit $60M ARR on just $4.6M raised — 650% YoY growth. Insane capital efficiency.", industry: "AI", founded: 2023, seedYear: 2024, status: "active" },
   { name: "Corgi Insurance", batch: "S24", valuation: 2.6, raised: "$108M", category: "hot-won", story: "Full-stack insurance carrier for startups. $630M in Jan 2026, unicorn by May, $2.6B by late May. Fastest YC insurtech ever.", industry: "Insurance", founded: 2024, seedYear: 2024, seriesAYear: 2026, unicornYear: 2026, status: "active" },
   // CLASSIC DEEP DIVE
   { name: "Auctomatic", batch: "W08", valuation: 0.005, raised: "$0.1M", category: "sleeper", story: "Patrick and John Collison's first startup (pre-Stripe). Acquired for $5M. They returned to YC with Stripe in S09.", industry: "E-commerce", founded: 2007, seedYear: 2008, status: "acquired" },
-  { name: "Spire Global", batch: "S12", valuation: 0.53, raised: "$290M", category: "moderate", story: "Nanosatellite constellation for weather, maritime, and aviation data. SPAC'd at $1.6B in 2021, now $533M. Ticker: SPIR.", industry: "Space", founded: 2012, seedYear: 2012, seriesAYear: 2015, status: "public" },
   { name: "Triplebyte", batch: "S15", valuation: 0, raised: "$45M", category: "hot-failed", story: "Technical hiring platform by YC partner Harj Taggar. Tried to fix engineering interviews. Struggled, acquired by Karat.", industry: "HR Tech", founded: 2015, seedYear: 2015, seriesAYear: 2018, status: "acquired" },
   // S16-W19 MID ERA
   { name: "Athelas", batch: "S16", valuation: 7, raised: "$136M", category: "sleeper", story: "Started as blood diagnostics device, pivoted to healthcare AI platform (now Commure). $7B valuation on just $136M raised — remarkable capital efficiency.", industry: "Healthcare", founded: 2016, seedYear: 2016, seriesAYear: 2019, unicornYear: 2022, status: "active" },
@@ -175,7 +170,6 @@ const COMPANIES: Company[] = [
   { name: "Mux", batch: "W16", valuation: 1, raised: "$177M", category: "sleeper", story: "Video API infrastructure for developers. Quietly became the backend for streaming across thousands of companies.", industry: "Dev Tools", founded: 2015, seedYear: 2016, seriesAYear: 2019, unicornYear: 2021, status: "active" },
   { name: "Outschool", batch: "W16", valuation: 3, raised: "$260M", category: "hot-won", story: "Marketplace for live online kids' classes. Exploded during COVID to $3B valuation. Largest platform of its kind.", industry: "EdTech", founded: 2015, seedYear: 2016, seriesAYear: 2019, unicornYear: 2021, status: "active" },
   { name: "Standard Cognition", batch: "S17", valuation: 0.1, raised: "$236M", category: "hot-failed", story: "Cashierless checkout backed by SoftBank at $1B. Quietly abandoned core product, pivoted to generic AI cameras. Zombie unicorn.", industry: "Retail Tech", founded: 2017, seedYear: 2017, seriesAYear: 2018, unicornYear: 2021, status: "active" },
-  { name: "Abnormal Security", batch: "S19", valuation: 5.1, raised: "$534M", category: "hot-won", story: "AI email security detecting phishing and social engineering. $200M ARR. One of the fastest-growing cybersecurity companies ever.", industry: "Security", founded: 2018, seedYear: 2019, seriesAYear: 2020, unicornYear: 2023, status: "active" },
   { name: "Melio", batch: "W19", valuation: 2.5, raised: "$654M", category: "hot-won", story: "B2B payments for SMBs. Raised at $4B peak in 2021. Acquired by Xero for $2.5B — strong exit even if below peak.", industry: "Fintech", founded: 2018, seedYear: 2019, seriesAYear: 2020, unicornYear: 2021, status: "acquired" },
   // W20-W21 ERA
   { name: "Jeeves", batch: "S20", valuation: 2.1, raised: "$380M", category: "hot-won", story: "Global corporate expense management for emerging markets. Hit $1B+ annualized transaction volume within 11 months of launch.", industry: "Fintech", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2022, status: "active" },
@@ -186,9 +180,6 @@ const COMPANIES: Company[] = [
   { name: "Firecrawl", batch: "S22", valuation: 0.1, raised: "$16.2M", category: "hot-won", story: "Web scraping API built for LLMs. Essential infrastructure for RAG pipelines and AI agents. Backed by Shopify CEO.", industry: "AI", founded: 2024, seedYear: 2024, seriesAYear: 2025, status: "active" },
   { name: "Gumloop", batch: "W24", valuation: 0.3, raised: "$70M", category: "hot-won", story: "No-code AI agent builder used by Shopify, Ramp, Instacart. Aims to be $1B company with just 10 employees.", industry: "AI", founded: 2024, seedYear: 2024, seriesAYear: 2025, status: "active" },
   { name: "Browserbase", batch: "S23", valuation: 0.3, raised: "$67.5M", category: "hot-won", story: "Headless browser infrastructure for AI agents. 88% of Fortune 100 signed up. Backed by Patrick Collison and Guillermo Rauch.", industry: "AI", founded: 2024, seedYear: 2024, seriesAYear: 2024, status: "active" },
-  { name: "E2B", batch: "W23", valuation: 0.15, raised: "$35M", category: "hot-won", story: "Open-source sandboxes for AI-generated code execution. Used by Perplexity, Hugging Face, and 88% of Fortune 100.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2025, status: "active" },
-  { name: "Limitless AI", batch: "W22", valuation: 0.37, raised: "$34.3M", category: "hot-won", story: "Built the Limitless Pendant wearable for recording conversations. Pivoted from Rewind screen recording. Acquired by Meta for 'personal superintelligence.'", industry: "AI", founded: 2020, seedYear: 2022, seriesAYear: 2023, status: "acquired" },
-  { name: "Letta", batch: "W24", valuation: 0.07, raised: "$10M", category: "sleeper", story: "Spun out of UC Berkeley's MemGPT research. Builds tiered memory for AI agents. Backed by Google's Jeff Dean and Founders Fund.", industry: "AI", founded: 2024, seedYear: 2024, status: "active" },
   { name: "OpenPipe", batch: "S23", valuation: 0, raised: "$7.2M", category: "moderate", story: "Built tools to replace GPT-4 with cheaper fine-tuned models. Acqui-hired by CoreWeave for inference expertise.", industry: "AI", founded: 2023, seedYear: 2024, status: "acquired" },
   { name: "Skyvern", batch: "W24", valuation: 0.02, raised: "$2.7M", category: "sleeper", story: "AI browser automation with 21.9K GitHub stars and 30K+ users. Automates complex web workflows without code.", industry: "AI", founded: 2024, seedYear: 2025, status: "active" },
   // INTERNATIONAL
@@ -264,7 +255,6 @@ const COMPANIES: Company[] = [
   { name: "Flutter", batch: "W12", valuation: 0.04, raised: "$2M", category: "sleeper", story: "Gesture recognition — control your computer with hand waves via webcam. Google acquired for ~$40M for the tech.", industry: "AI", founded: 2012, seedYear: 2012, status: "acquired" },
   // LATEST BATCHES (2024-2025)
   { name: "Vapi", batch: "W24", valuation: 0.3, raised: "$75.2M", category: "hot-won", story: "Voice AI developer platform for natural phone call agents. Series A at $130M, then Series B 14 months later.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, status: "active" },
-  { name: "Ema", batch: "W24", valuation: 0.25, raised: "$61M", category: "hot-won", story: "'Universal AI employee.' Tripled customer base since launch. KPMG strategic investment. $15.2M ARR.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, status: "active" },
   { name: "Browser Use", batch: "W25", valuation: 0.1, raised: "$17M", category: "hot-won", story: "Open-source browser automation for AI agents. Went viral — 50K GitHub stars in 3 months, 28K daily downloads.", industry: "AI", founded: 2024, seedYear: 2025, status: "active" },
   { name: "Pingo AI", batch: "S25", valuation: 0.06, raised: "$0.5M", category: "hot-won", story: "AI language learning hit $500K MRR in 14 months with 300K+ users. Growing 70% monthly. The Duolingo killer.", industry: "EdTech", founded: 2025, seedYear: 2025, status: "active" },
   { name: "Perseus Defense", batch: "S25", valuation: 0.05, raised: "$6M", category: "hot-won", story: "Building America's Iron Dome for drones — 15-inch mini-missiles under $5K each. Multiple US military branches testing.", industry: "Defense", founded: 2025, seedYear: 2025, status: "active" },
@@ -291,8 +281,6 @@ const COMPANIES: Company[] = [
   { name: "9GAG", batch: "S12", valuation: 0.1, raised: "$2.8M", category: "sleeper", story: "Viral meme and entertainment platform. 200M+ monthly users. Built a massive audience on almost no funding.", industry: "Media", founded: 2008, seedYear: 2012, status: "active" },
   // PUSH TO 300
   { name: "HoneyBook", batch: "S14", valuation: 2.4, raised: "$498M", category: "hot-won", story: "Client management for freelancers and small businesses — contracts, invoicing, payments in one platform.", industry: "SaaS", founded: 2013, seedYear: 2015, seriesAYear: 2017, unicornYear: 2021, status: "active" },
-  { name: "Freenome", batch: "S16", valuation: 2.4, raised: "$860M", category: "hot-won", story: "AI-powered blood test for early cancer detection using cell-free DNA. In late-stage clinical trials.", industry: "Biotech", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
-  { name: "Writer", batch: "W20", valuation: 1.9, raised: "$326M", category: "hot-won", story: "Enterprise AI writing and content generation with full-stack LLM approach. Major enterprise adoption.", industry: "AI", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2024, status: "active" },
   { name: "Maven Clinic", batch: "S14", valuation: 1.4, raised: "$300M", category: "hot-won", story: "Largest virtual clinic for women's and family health — fertility, maternity, pediatrics.", industry: "Healthcare", founded: 2014, seedYear: 2015, seriesAYear: 2017, unicornYear: 2022, status: "active" },
   { name: "Incredible Health", batch: "W19", valuation: 1.6, raised: "$110M", category: "sleeper", story: "Reverse-recruiting for nurses — hospitals apply to candidates, not the other way around.", industry: "Healthcare", founded: 2017, seedYear: 2019, seriesAYear: 2020, unicornYear: 2022, status: "active" },
   { name: "Shippo", batch: "S14", valuation: 1, raised: "$300M", category: "moderate", story: "Shipping API helping e-commerce businesses access best carrier rates and print labels.", industry: "Logistics", founded: 2013, seedYear: 2014, seriesAYear: 2016, unicornYear: 2021, status: "active" },
@@ -303,10 +291,8 @@ const COMPANIES: Company[] = [
   { name: "InfluxData", batch: "W13", valuation: 0.5, raised: "$165M", category: "moderate", story: "Creator of InfluxDB, the leading open-source time-series database for metrics and IoT data.", industry: "Data", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "active" },
   { name: "Lob", batch: "W14", valuation: 0.3, raised: "$100M", category: "sleeper", story: "Direct mail automation API enabling programmatic sending of physical letters and postcards.", industry: "API", founded: 2013, seedYear: 2014, seriesAYear: 2017, status: "active" },
   { name: "Snackpass", batch: "S18", valuation: 0.4, raised: "$90M", category: "moderate", story: "Social food ordering app for college campuses blending commerce with group ordering and gifting.", industry: "Food", founded: 2017, seedYear: 2018, seriesAYear: 2020, status: "active" },
-  { name: "Copy.ai", batch: "W21", valuation: 0.2, raised: "$30M", category: "moderate", story: "Early mover in AI copywriting for marketing teams. One of the first generative AI consumer products.", industry: "AI", founded: 2020, seedYear: 2021, seriesAYear: 2022, status: "active" },
   { name: "Iterable", batch: "S13", valuation: 2, raised: "$342M", category: "moderate", story: "Omnichannel marketing automation for email, SMS, push. Clients include DoorDash and Priceline.", industry: "Marketing", founded: 2013, seedYear: 2013, seriesAYear: 2016, unicornYear: 2021, status: "active" },
   { name: "Coda", batch: "S14", valuation: 1.4, raised: "$240M", category: "moderate", story: "All-in-one doc combining documents, spreadsheets, and apps. Founded by former YouTube head Shishir Mehrotra.", industry: "Productivity", founded: 2014, seedYear: 2014, seriesAYear: 2017, unicornYear: 2021, status: "active" },
-  { name: "Watershed", batch: "S19", valuation: 1.8, raised: "$185M", category: "sleeper", story: "Enterprise carbon accounting platform. Unicorn in ~2.5 years. Clients include Airbnb, Stripe, Spotify.", industry: "Climate Tech", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2022, status: "active" },
   { name: "AtoB", batch: "S20", valuation: 0.8, raised: "$155M", category: "moderate", story: "Modern fuel card and fleet payments. Stripe-like API for the $800B trucking payments industry.", industry: "Fintech", founded: 2019, seedYear: 2020, seriesAYear: 2021, status: "active" },
   { name: "Iron Ox", batch: "W16", valuation: 0.5, raised: "$99M", category: "sleeper", story: "Autonomous robotic greenhouses for sustainable farming. Backed by Bill Gates' Breakthrough Energy Ventures.", industry: "AgTech", founded: 2016, seedYear: 2016, seriesAYear: 2018, status: "active" },
   { name: "Pulley", batch: "W20", valuation: 0.25, raised: "$50M", category: "sleeper", story: "Cap table and equity management built for YC startups. Simplifies 409A valuations and equity grants.", industry: "Fintech", founded: 2020, seedYear: 2020, seriesAYear: 2021, status: "active" },
@@ -467,7 +453,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
           >
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            273 companies tracked · 20 years of data
+            259 companies tracked · 20 years of data
           </motion.div>
 
           <motion.h1
@@ -487,7 +473,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We tracked 273 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 259 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </motion.p>
 
@@ -601,7 +587,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 273 companies</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 259 companies</h2>
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
@@ -1198,7 +1184,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "273 companies tracked across 20 years of YC batches",
+              "259 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

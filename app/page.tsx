@@ -28,7 +28,7 @@ type Company = {
 };
 
 const COMPANIES: Company[] = [
-  { name: "Airbnb", batch: "W09", valuation: 84, raised: "$6.4B", category: "sleeper", story: "7+ VC rejections. Sold cereal boxes to survive. Fred Wilson publicly passed.", industry: "Travel", founded: 2008, seedYear: 2009, seriesAYear: 2011, unicornYear: 2014, status: "public" },
+  { name: "Airbnb", batch: "W09", valuation: 84, raised: "$6.4B", category: "hot-won", story: "Voted #1 in their batch. Raised from Sequoia. Sold cereal boxes to survive early on.", industry: "Travel", founded: 2008, seedYear: 2009, seriesAYear: 2011, unicornYear: 2014, status: "public" },
   { name: "Stripe", batch: "S09", valuation: 159, raised: "$9.4B", category: "hot-won", story: "First customer in 2 weeks via YC network. Sequoia early. Still private at $159B.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2012, unicornYear: 2014, status: "active" },
   { name: "Coinbase", batch: "S12", valuation: 43, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto", founded: 2012, seedYear: 2012, seriesAYear: 2013, unicornYear: 2017, status: "public" },
   { name: "DoorDash", batch: "S13", valuation: 72, raised: "$2.5B", category: "sleeper", story: "Bottom half of batch at Demo Day. Nearly died in 2017–18.", industry: "Delivery", founded: 2013, seedYear: 2013, seriesAYear: 2014, unicornYear: 2018, status: "public" },
@@ -41,7 +41,7 @@ const COMPANIES: Company[] = [
   { name: "Brex", batch: "W17", valuation: 5.15, raised: "$1.5B", category: "hot-won", story: "Ribbit Capital led $7M Series A pre-Demo Day. Acquired for $5.15B.", industry: "Fintech", founded: 2017, seedYear: 2017, seriesAYear: 2018, unicornYear: 2018, status: "acquired" },
   { name: "Reddit", batch: "S05", valuation: 33, raised: "$1.3B", category: "sleeper", story: "19 years from YC to IPO. Longest timeline of any YC company.", industry: "Social", founded: 2005, seedYear: 2005, seriesAYear: 2007, unicornYear: 2017, status: "public" },
   { name: "Instacart", batch: "S12", valuation: 10, raised: "$2.9B", category: "sleeper", story: "Applied late. Rejected multiple times. Delivered beer to Garry Tan's door.", industry: "Delivery", founded: 2012, seedYear: 2012, seriesAYear: 2013, unicornYear: 2015, status: "public" },
-  { name: "Gusto", batch: "W12", valuation: 9.5, raised: "$746M", category: "moderate", story: "Steady builder. No Demo Day hype. Grew into $9.5B company.", industry: "HR", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2019, status: "active" },
+  { name: "Gusto", batch: "W12", valuation: 9.5, raised: "$746M", category: "hot-won", story: "Highest-priced round of its batch. Grew steadily into $9.5B company.", industry: "HR", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2019, status: "active" },
   { name: "GitLab", batch: "W15", valuation: 4.7, raised: "$414M", category: "sleeper", story: "All-remote model made fundraising difficult. Series B was a grind. IPO'd, now ~$4.7B.", industry: "Dev Tools", founded: 2011, seedYear: 2015, seriesAYear: 2016, unicornYear: 2019, status: "public" },
   { name: "Flexport", batch: "W14", valuation: 1, raised: "$2.7B", category: "moderate", story: "Logistics. Peaked at $8B. CEO ousted, cratered to ~$1B on secondaries.", industry: "Logistics", founded: 2013, seedYear: 2014, seriesAYear: 2015, unicornYear: 2019, status: "active" },
   { name: "Flock Safety", batch: "S17", valuation: 8.4, raised: "$381M", category: "hot-won", story: "Garry Tan funded seed at Demo Day on the spot. 'Home run.'", industry: "Security", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
@@ -83,7 +83,6 @@ const COMPANIES: Company[] = [
   { name: "ZeroDown", batch: "W19", valuation: 0, raised: "$10M+", category: "hot-failed", story: "Raised $10M+ pre-Demo Day at $75M valuation. Shut down.", industry: "Real Estate", founded: 2018, seedYear: 2019, status: "dead" },
   { name: "Flockjay", batch: "W19", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 10. 40% job placement rate. Shut down ~2022.", industry: "Education", founded: 2018, seedYear: 2019, status: "dead" },
   { name: "Retool", batch: "W17", valuation: 3.2, raised: "$445M", category: "moderate", story: "Internal tools builder. Quiet Demo Day but became default for ops teams.", industry: "Dev Tools", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
-  { name: "Ramp", batch: "W19", valuation: 44, raised: "$2.35B", category: "hot-won", story: "Raised fast post-Demo Day. Series F at $44B (June 2026). Fastest-growing YC fintech.", industry: "Fintech", founded: 2019, seedYear: 2019, seriesAYear: 2020, unicornYear: 2021, status: "active" },
   { name: "Vanta", batch: "W18", valuation: 4.15, raised: "$353M", category: "moderate", story: "SOC 2 compliance automation. Grew to $4.15B valuation.", industry: "Security", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2022, status: "active" },
   { name: "Applied Intuition", batch: "S17", valuation: 15, raised: "$1.05B", category: "sleeper", story: "AV simulation tools. Under the radar at Demo Day. Series F at $15B.", industry: "Autonomous", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
   { name: "Lattice", batch: "W16", valuation: 3, raised: "$329M", category: "moderate", story: "People management platform. Steady SaaS grower.", industry: "HR", founded: 2015, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
@@ -122,7 +121,6 @@ const COMPANIES: Company[] = [
   { name: "Clearbit", batch: "W14", valuation: 0.5, raised: "$74M", category: "moderate", story: "Data enrichment API. Acquired by HubSpot in 2023.", industry: "Data", founded: 2014, seedYear: 2014, seriesAYear: 2016, status: "acquired" },
   { name: "Vetcove", batch: "S16", valuation: 1.6, raised: "$120M", category: "sleeper", story: "Amazon for veterinarians. Quietly grew to $1.6B. Zero hype at Demo Day.", industry: "Healthcare", founded: 2015, seedYear: 2016, seriesAYear: 2019, unicornYear: 2024, status: "active" },
   { name: "Helion Energy", batch: "W14", valuation: 15.5, raised: "$1.5B", category: "sleeper", story: "Fusion energy startup. Sam Altman became chairman. Contract to power Microsoft. $15.5B.", industry: "Energy", founded: 2013, seedYear: 2014, seriesAYear: 2015, unicornYear: 2021, status: "active" },
-  { name: "Vercel", batch: "W21", valuation: 9.3, raised: "$563M", category: "hot-won", story: "Founded as ZEIT. Creators of Next.js. Rode AI cloud wave to $9.3B with $340M ARR.", industry: "Dev Tools", founded: 2015, seedYear: 2016, seriesAYear: 2020, unicornYear: 2021, status: "active" },
   { name: "Verkada", batch: "W17", valuation: 5.8, raised: "$757M", category: "sleeper", story: "Enterprise security cameras sounded boring at Demo Day. Cloud-managed physical security grew to $5.8B.", industry: "Security", founded: 2016, seedYear: 2017, seriesAYear: 2018, unicornYear: 2021, status: "active" },
   { name: "Mercury", batch: "S19", valuation: 5.2, raised: "$546M", category: "sleeper", story: "Banking for startups when neobanks were crowded. 40%+ of YC batches now bank with Mercury.", industry: "Fintech", founded: 2017, seedYear: 2017, seriesAYear: 2020, unicornYear: 2022, status: "active" },
   { name: "Oklo", batch: "S14", valuation: 6.16, raised: "$1.9B", category: "sleeper", story: "Nuclear microreactor company. Sam Altman chairman. Went public via SPAC 2024. ~$6B market cap.", industry: "Nuclear", founded: 2013, seedYear: 2014, seriesAYear: 2016, unicornYear: 2024, status: "public" },
@@ -163,7 +161,6 @@ const COMPANIES: Company[] = [
   // 2021+ ERA — AI BOOM
   { name: "Anysphere", batch: "S22", valuation: 60, raised: "$3.4B", category: "hot-won", story: "Built Cursor, the AI code editor. $0 to $2B ARR in 3 years. Fastest-growing dev tool in history.", industry: "AI", founded: 2022, seedYear: 2022, seriesAYear: 2023, unicornYear: 2025, status: "active" },
   { name: "Cognition", batch: "S23", valuation: 25, raised: "$1.6B", category: "hot-won", story: "Built Devin, the AI software engineer. Three IOI gold medalists. ARR from $1M to $73M in 9 months.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, unicornYear: 2025, status: "active" },
-  { name: "Mercor", batch: "S23", valuation: 10, raised: "$500M+", category: "hot-won", story: "AI recruiting platform pivoted to AI training labor. Three 21-year-old college dropouts became youngest self-made billionaires.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2024, unicornYear: 2025, status: "active" },
   { name: "Glean", batch: "S19", valuation: 7.2, raised: "$765M", category: "hot-won", story: "AI enterprise search. $300M ARR, up 89% YoY. Used by hundreds of companies.", industry: "AI", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2024, status: "active" },
   { name: "LangChain", batch: "W23", valuation: 1.25, raised: "$260M", category: "hot-won", story: "Open-source LLM framework became default infrastructure for building AI apps. Sequoia + Benchmark backed.", industry: "AI", founded: 2022, seedYear: 2023, seriesAYear: 2024, unicornYear: 2025, status: "active" },
   { name: "Pika", batch: "S23", valuation: 0.7, raised: "$135M", category: "hot-won", story: "Stanford AI PhD dropouts built AI video generation competing with Runway and Sora. Meta explored $500M acquisition.", industry: "AI", founded: 2023, seedYear: 2023, seriesAYear: 2023, status: "active" },
@@ -347,7 +344,7 @@ const categoryBreakdown = [
 ];
 
 const pieData = [
-  { name: "Top 5 (Stripe, Airbnb, DoorDash, Cursor, Ramp)", value: 55, fill: "#FF6600" },
+  { name: "Top 5 (Stripe, Airbnb, DoorDash, Cursor, Scale AI)", value: 55, fill: "#FF6600" },
   { name: "Other unicorns", value: 35, fill: "#3b82f6" },
   { name: "Remaining ~90%", value: 10, fill: "#e5e5e5" },
 ];
@@ -472,7 +469,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
           >
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            278 companies tracked · 20 years of data
+            275 companies tracked · 20 years of data
           </motion.div>
 
           <motion.h1
@@ -492,7 +489,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We tracked 278 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 275 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </motion.p>
 
@@ -606,7 +603,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 278 companies</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 275 companies</h2>
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
@@ -789,7 +786,7 @@ export default function Home() {
             <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Power Law</div>
             <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">5 companies = 55%+ of all value</h2>
             <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">
-              YC&apos;s returns follow an extreme power law. Stripe, Airbnb, DoorDash, Cursor, and Ramp account for over half of all YC portfolio value. Three of those five were sleepers.
+              YC&apos;s returns follow an extreme power law. Stripe, Airbnb, DoorDash, Cursor, and Scale AI account for over half of all YC portfolio value.
             </p>
           </Reveal>
 
@@ -1203,7 +1200,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "278 companies tracked across 20 years of YC batches",
+              "275 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

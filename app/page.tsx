@@ -447,6 +447,15 @@ export default function Home() {
 
   const maxVal = Math.max(...COMPANIES.map((c) => c.valuation));
 
+  // Unique batches actually in the dataset, sorted chronologically (e.g. W09, S09, ...)
+  const heroBatches = Array.from(new Set(COMPANIES.map((c) => c.batch)))
+    .sort((a, b) => {
+      const ay = parseInt(a.slice(1), 10);
+      const by = parseInt(b.slice(1), 10);
+      if (ay !== by) return ay - by;
+      return a[0] === b[0] ? 0 : a[0] === "W" ? -1 : 1; // Winter before Summer within a year
+    });
+
   const filteredCompanies = filter === "all" ? COMPANIES : COMPANIES.filter((c) => c.category === filter);
   const searched = search
     ? filteredCompanies.filter(c => c.name.toLowerCase().includes(search.toLowerCase()) || c.industry.toLowerCase().includes(search.toLowerCase()) || c.batch.toLowerCase().includes(search.toLowerCase()))
@@ -519,16 +528,9 @@ export default function Home() {
             aria-hidden="true"
           >
             <div className="batch-track">
-              {(() => {
-                const batches: string[] = [];
-                for (let y = 5; y <= 25; y++) {
-                  const yy = String(y).padStart(2, "0");
-                  batches.push(`W${yy}`, `S${yy}`);
-                }
-                return [...batches, ...batches].map((b, i) => (
-                  <span key={i} className="batch-chip">{b}</span>
-                ));
-              })()}
+              {[...heroBatches, ...heroBatches].map((b, i) => (
+                <span key={i} className="batch-chip">{b}</span>
+              ))}
             </div>
           </motion.div>
 

@@ -457,29 +457,47 @@ export default function Home() {
     <main>
       {/* ── HERO ── */}
       <section className="relative overflow-hidden bg-yc-dark min-h-[85vh] sm:min-h-screen flex flex-col justify-center hero-grain">
+        <div className="absolute inset-0 yc-grid" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[120%] h-[420px] bg-[#FF6600]/10 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#FF6600]/5 via-transparent to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF6600]/30 to-transparent" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 py-20 w-full">
+          {/* YC-style logo lockup */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center gap-3 mb-10"
           >
-            <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            274 companies tracked · 20 years of data
+            <span className="yc-mark">Y</span>
+            <div className="leading-tight">
+              <p className="text-white font-bold text-sm tracking-tight">Demo Day Heat Check</p>
+              <p className="text-white/40 text-xs font-medium tracking-wide">An independent data study</p>
+            </div>
+            <span className="ml-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/8 text-xs text-white/60 backdrop-blur-sm border border-white/5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6600] pulse-dot" />
+              274 companies · 20 years
+            </span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl sm:text-6xl lg:text-[5.5rem] font-bold text-white"
           >
             Does Demo Day<br />
-            hype predict<br />
-            <span className="text-[#FF6600] inline-block">success?</span>
+            hype predict{" "}
+            <span className="relative inline-block text-[#FF6600]">
+              success?
+              <motion.span
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute -bottom-1 left-0 right-0 h-[3px] bg-[#FF6600] origin-left rounded-full"
+              />
+            </span>
           </motion.h1>
 
           <motion.p
@@ -491,6 +509,28 @@ export default function Home() {
             We tracked 274 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </motion.p>
+
+          {/* Batch marquee */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="batch-mask mt-10 overflow-hidden"
+            aria-hidden="true"
+          >
+            <div className="batch-track">
+              {(() => {
+                const batches: string[] = [];
+                for (let y = 5; y <= 25; y++) {
+                  const yy = String(y).padStart(2, "0");
+                  batches.push(`W${yy}`, `S${yy}`);
+                }
+                return [...batches, ...batches].map((b, i) => (
+                  <span key={i} className="batch-chip">{b}</span>
+                ));
+              })()}
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

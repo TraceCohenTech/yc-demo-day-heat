@@ -92,6 +92,65 @@ button, a, select, [role="button"] {
   opacity: 1;
 }
 
+/* YC blueprint grid (hero background) */
+.yc-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,102,0,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,102,0,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 75%);
+}
+
+/* YC orange square logo mark */
+.yc-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  background: var(--yc-orange);
+  color: #fff;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  box-shadow: 0 6px 20px rgba(255,102,0,0.4);
+}
+
+/* Batch marquee */
+.batch-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+@keyframes batch-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.batch-track {
+  display: inline-flex;
+  gap: 10px;
+  white-space: nowrap;
+  animation: batch-scroll 40s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .batch-track { animation: none; }
+}
+.batch-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+}
+
 /* Recharts */
 .recharts-tooltip-wrapper { outline: none !important; }
 

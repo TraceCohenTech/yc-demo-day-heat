@@ -247,6 +247,11 @@ const COMPANIES: Company[] = [
   { name: "Lambda School", batch: "S17", valuation: 0.05, raised: "$118M", category: "hot-failed", story: "Free coding bootcamp — pay only after landing a job (ISAs). Massive hype, $118M raised, valued at $600M. Regulatory issues, lawsuits, rebranded to Bloom.", industry: "EdTech", founded: 2017, seedYear: 2017, seriesAYear: 2019, status: "active" },
   { name: "Caviar", batch: "W14", valuation: 0.41, raised: "$16M", category: "sleeper", story: "Premium food delivery. Square acquired for $90M in 2014, then DoorDash acquired from Square for $410M in 2019. Big win for founders.", industry: "Food Delivery", founded: 2012, seedYear: 2014, status: "acquired" },
   { name: "Atrium", batch: "W18", valuation: 0, raised: "$75M", category: "hot-failed", story: "Justin Kan (Twitch co-founder) tried to disrupt law with AI + lawyers. Raised $75M from a16z, YC. Shut down in 2020, laid off 100+ people.", industry: "Legal Tech", founded: 2017, seedYear: 2018, seriesAYear: 2018, status: "dead" },
+  { name: "Jasper", batch: "W18", valuation: 1.2, raised: "$131M", category: "hot-failed", story: "AI content generation platform. Unicorn in 18 months ($1.5B). Then ChatGPT launched and the moat evaporated. Valuation cut ~20%. The AI commodity cautionary tale.", industry: "AI", founded: 2021, seedYear: 2021, seriesAYear: 2022, unicornYear: 2022, status: "active" },
+  { name: "Rigetti Computing", batch: "S14", valuation: 0.15, raised: "$254M", category: "hot-failed", story: "Full-stack quantum computing. SPAC'd in 2022. Stock crashed 90%+ from peak. Quantum remains a long bet, but they're still building.", industry: "Quantum Computing", founded: 2013, seedYear: 2014, seriesAYear: 2016, status: "public" },
+  { name: "Owner.com", batch: "W18", valuation: 1.0, raised: "$170M", category: "sleeper", story: "Restaurant marketing platform. Founder dropped out of high school. Pivoted during COVID. Hit $1B unicorn valuation in 2025 on $120M Series C.", industry: "Restaurant Tech", founded: 2018, seedYear: 2018, seriesAYear: 2021, unicornYear: 2025, status: "active" },
+  { name: "Wave Mobile Money", batch: "W12", valuation: 1.7, raised: "$200M", category: "sleeper", story: "Mobile money for Africa. $1.7B valuation. Largest fintech in Francophone Africa. Processes billions in transactions across Senegal, Côte d'Ivoire, and more.", industry: "Fintech", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2021, status: "active" },
+  { name: "Salt Security", batch: "W16", valuation: 1.4, raised: "$271M", category: "moderate", story: "API security platform. Raised $271M, hit $1.4B valuation. Protects APIs for major enterprises. Quiet YC unicorn in cybersecurity.", industry: "Cybersecurity", founded: 2016, seedYear: 2016, seriesAYear: 2019, unicornYear: 2022, status: "active" },
   { name: "Matterport", batch: "W12", valuation: 1.6, raised: "$160M", category: "hot-failed", story: "3D spatial data platform. SPAC'd at $2.9B in 2021, peaked above $8B. Crashed to under $1B. CoStar acquired for $1.6B — a fraction of peak hype.", industry: "PropTech", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2021, status: "acquired" },
   { name: "WePay", batch: "S11", valuation: 0.4, raised: "$75M", category: "sleeper", story: "Payment platform for marketplaces. JPMorgan Chase acquired for ~$400M — JPM's first major fintech acquisition.", industry: "Fintech", founded: 2008, seedYear: 2011, seriesAYear: 2012, status: "acquired" },
   { name: "North", batch: "W13", valuation: 0.18, raised: "$267M", category: "hot-failed", story: "Smart glasses (Focals) — the most consumer-friendly AR glasses ever made. Raised $267M, but Google acquired for just $180M. A cautionary hardware tale.", industry: "Hardware", founded: 2012, seedYear: 2013, seriesAYear: 2014, status: "acquired" },
@@ -463,7 +468,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 text-sm text-white/70 mb-8 backdrop-blur-sm border border-white/5"
           >
             <span className="w-2 h-2 rounded-full bg-[#FF6600] pulse-dot" />
-            269 companies tracked · 20 years of data
+            274 companies tracked · 20 years of data
           </motion.div>
 
           <motion.h1
@@ -483,7 +488,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We tracked 269 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
+            We tracked 274 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">The answer surprised us.</span>
           </motion.p>
 
@@ -597,7 +602,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 269 companies</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 274 companies</h2>
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
@@ -1194,7 +1199,7 @@ export default function Home() {
               "First Round Review: GOAT's Path to PMF",
               "YC Graveyard Database (821+ companies)",
               "Eqvista: Top 100 YC Companies",
-              "269 companies tracked across 20 years of YC batches",
+              "274 companies tracked across 20 years of YC batches",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

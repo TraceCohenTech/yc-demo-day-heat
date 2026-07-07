@@ -1311,6 +1311,52 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {/* ── HOW THIS COMPARES ── */}
+      <section className="border-t border-neutral-200 bg-neutral-50">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+          <Reveal>
+            <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">How This Compares</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">We&apos;re not the only ones counting.</h2>
+            <p className="text-neutral-500 mt-3 text-sm sm:text-base max-w-2xl">
+              Other independent analyses of YC&apos;s outcome data land at different numbers than ours. Here&apos;s the honest comparison, and why they likely diverge.
+            </p>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="mt-8 overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-neutral-100 bg-neutral-50">
+                    <th className="text-left px-4 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Metric</th>
+                    <th className="text-right px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">This study</th>
+                    <th className="text-right px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Other estimates</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { metric: "Unicorn rate", ours: "2.7% (137 of 5,157)", other: "1.8% – 4.5%, depending on cohort maturity" },
+                    { metric: "Failure / shutdown rate", ours: "20.1%, verified per company", other: "13%, self-reported estimate" },
+                    { metric: "Mature-cohort unicorn rate", ours: "5.9% (batches ≤2019)", other: "5% – 6.5%, using paid valuation databases" },
+                  ].map((row) => (
+                    <tr key={row.metric} className="border-b border-neutral-50">
+                      <td className="px-4 py-2.5 font-medium text-yc-dark">{row.metric}</td>
+                      <td className="px-3 py-2.5 text-right text-[#FF6600] font-semibold">{row.ours}</td>
+                      <td className="px-3 py-2.5 text-right text-neutral-500">{row.other}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+
+          <Reveal delay={150}>
+            <p className="text-neutral-600 text-sm mt-6 leading-relaxed max-w-3xl">
+Once you control for cohort maturity, our number converges almost exactly with everyone else&apos;s: 5.9% of our pre-2020 batches became unicorns, right in the 5%–6.5% range other analyses report using paid valuation databases. The headline 2.7% figure looks lower mainly because our dataset runs all the way through 2025, including hundreds of companies still too young to have hit $1B yet — the same maturity-bias every other analysis has to correct for. Our failure rate is likely the most accurate number in this table, since it comes directly from YC&apos;s own status field verified individually per company, not a self-reported or modeled estimate. Every serious analysis lands on the same underlying conclusion regardless of the exact percentage: YC roughly doubles a startup&apos;s unconditional odds of reaching unicorn status versus the general venture-backed baseline.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── SOURCES ── */}
       <section className="border-t border-neutral-200 bg-white">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 py-12">
@@ -1325,6 +1371,7 @@ export default function Home() {
               "813 individually researched Public/Acquired company outcomes",
               "Rebel Fund: What Predicts YC Success (Jared Heyman)",
               "Rebel Fund: Power Law of YC Startups",
+              "Palle Broe, \"Pulling Back the Curtain on the Magic of YC\" (Lenny's Newsletter, Feb 2025)",
               "5,157 total companies; 5,025 analyzed where genuine contemporaneous press exists",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>

@@ -398,10 +398,10 @@ const unicornScatter = COMPANIES
 
 
 const CATEGORY_META: Record<string, { label: string; color: string; bg: string }> = {
-  sleeper: { label: "Not Covered → Unicorn", color: "#FF6600", bg: "#FFF3EB" },
+  sleeper: { label: "No Press Pick → Unicorn", color: "#FF6600", bg: "#FFF3EB" },
   "hot-won": { label: "Press Pick → Unicorn", color: "#10b981", bg: "#ecfdf5" },
   "hot-failed": { label: "Press Pick → No Unicorn", color: "#ef4444", bg: "#fef2f2" },
-  moderate: { label: "No Unicorn / No Signal", color: "#3b82f6", bg: "#eff6ff" },
+  moderate: { label: "No Unicorn (or No Press Data)", color: "#3b82f6", bg: "#eff6ff" },
 };
 
 function ValuationBar({ company, maxVal }: { company: Company; maxVal: number }) {
@@ -442,6 +442,17 @@ export default function Home() {
   const [filter, setFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
   const [chartTab, setChartTab] = useState<"vintage" | "industry" | "unicorns">("vintage");
+  const [sortField, setSortField] = useState<"name" | "batch" | "valuation" | "industry" | "category" | "status">("valuation");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+
+  const toggleSort = (field: typeof sortField) => {
+    if (sortField === field) {
+      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+    } else {
+      setSortField(field);
+      setSortDir(field === "name" || field === "batch" || field === "industry" || field === "category" || field === "status" ? "asc" : "desc");
+    }
+  };
 
   const maxVal = Math.max(...COMPANIES.map((c) => c.valuation));
 
@@ -458,7 +469,16 @@ export default function Home() {
   const searched = search
     ? filteredCompanies.filter(c => c.name.toLowerCase().includes(search.toLowerCase()) || c.industry.toLowerCase().includes(search.toLowerCase()) || c.batch.toLowerCase().includes(search.toLowerCase()))
     : filteredCompanies;
-  const sorted = [...searched].sort((a, b) => b.valuation - a.valuation);
+  const sorted = [...searched].sort((a, b) => {
+    let cmp = 0;
+    if (sortField === "name") cmp = a.name.localeCompare(b.name);
+    else if (sortField === "industry") cmp = a.industry.localeCompare(b.industry);
+    else if (sortField === "category") cmp = CATEGORY_META[a.category].label.localeCompare(CATEGORY_META[b.category].label);
+    else if (sortField === "status") cmp = a.status.localeCompare(b.status);
+    else if (sortField === "batch") cmp = batchToYear(a.batch) - batchToYear(b.batch) || a.batch.localeCompare(b.batch);
+    else cmp = a.valuation - b.valuation;
+    return sortDir === "asc" ? cmp : -cmp;
+  });
 
   return (
     <main>
@@ -681,12 +701,26 @@ export default function Home() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left px-4 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Company</th>
-                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Batch</th>
-                <th className="text-right px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider">Valuation</th>
-                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider hidden sm:table-cell">Industry</th>
-                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider hidden md:table-cell">Category</th>
-                <th className="text-left px-3 py-3 font-semibold text-neutral-500 text-xs uppercase tracking-wider hidden lg:table-cell">Status</th>
+                {([
+                  { key: "name", label: "Company", align: "text-left", cls: "px-4 py-3" },
+                  { key: "batch", label: "Batch", align: "text-left", cls: "px-3 py-3" },
+                  { key: "valuation", label: "Valuation", align: "text-right", cls: "px-3 py-3" },
+                  { key: "industry", label: "Industry", align: "text-left", cls: "px-3 py-3 hidden sm:table-cell" },
+                  { key: "category", label: "Category", align: "text-left", cls: "px-3 py-3 hidden md:table-cell" },
+                  { key: "status", label: "Status", align: "text-left", cls: "px-3 py-3 hidden lg:table-cell" },
+                ] as const).map((col) => (
+                  <th key={col.key} className={`${col.align} ${col.cls} font-semibold text-neutral-500 text-xs uppercase tracking-wider select-none`}>
+                    <button
+                      onClick={() => toggleSort(col.key)}
+                      className={`inline-flex items-center gap-1 hover:text-yc-dark transition ${sortField === col.key ? "text-yc-dark" : ""}`}
+                    >
+                      {col.label}
+                      <span className="text-[10px] opacity-60">
+                        {sortField === col.key ? (sortDir === "asc" ? "▲" : "▼") : "↕"}
+                      </span>
+                    </button>
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
@@ -1207,6 +1241,82 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── THE MATH ── */}
+      <section className="bg-yc-dark text-white">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+          <Reveal>
+            <div className="inline-block px-3 py-1 rounded-full bg-white/10 text-[#FF9955] text-xs font-bold uppercase tracking-widest mb-4">The Math</div>
+            <h2 className="text-3xl sm:text-5xl font-bold">We ran the regression.<br />Here&apos;s the receipt.</h2>
+            <p className="text-white/50 mt-3 text-sm sm:text-base max-w-2xl">
+              Logistic regression on unicorn outcome (binary) as a function of Demo Day press coverage (hot), controlling for batch era. N = 4,716 companies with verified contemporaneous press signal.
+            </p>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="mt-10 rounded-2xl border border-white/10 bg-black/30 p-6 sm:p-8 font-mono text-sm overflow-x-auto">
+              <p className="text-white/40 text-xs uppercase tracking-widest mb-3">Model specification</p>
+              <p className="text-[#FF9955] whitespace-pre">
+{`logit(P(unicorn)) = β₀ + β₁·hot + β₂·era`}
+              </p>
+              <p className="text-white/40 text-xs uppercase tracking-widest mt-6 mb-3">Odds ratio</p>
+              <p className="text-[#FF9955] whitespace-pre">
+{`OR(hot) = exp(β₁) = 0.92   (95% CI spans 1.0 → not significant)`}
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={150}>
+            <div className="mt-6 overflow-x-auto rounded-2xl border border-white/10">
+              <table className="w-full text-sm font-mono">
+                <thead>
+                  <tr className="border-b border-white/10 bg-white/5">
+                    <th className="text-left px-4 py-3 text-white/50 text-xs uppercase tracking-wider">Dependent var.</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider">Odds ratio (hot)</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider">p-value</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden sm:table-cell">Pseudo R²</th>
+                    <th className="text-left px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden md:table-cell">Verdict</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { dep: "unicorn (raw)", or: "1.47", p: "0.25", r2: "0.001", verdict: "not significant", sig: false },
+                    { dep: "unicorn (era-adjusted)", or: "0.92", p: "0.82", r2: "0.119", verdict: "not significant", sig: false },
+                    { dep: "failed / shut down", or: "0.74", p: "0.066", r2: "0.010", verdict: "borderline", sig: null },
+                    { dep: "IPO", or: "2.26", p: "0.13", r2: "0.005", verdict: "not significant", sig: false },
+                    { dep: "acquired", or: "1.38", p: "0.046", r2: "0.001", verdict: "marginally significant", sig: true },
+                  ].map((row) => (
+                    <tr key={row.dep} className="border-b border-white/5">
+                      <td className="px-4 py-2.5 text-white/80">{row.dep}</td>
+                      <td className="px-3 py-2.5 text-right text-[#FF9955]">{row.or}</td>
+                      <td className="px-3 py-2.5 text-right text-white/60">{row.p}</td>
+                      <td className="px-3 py-2.5 text-right text-white/60 hidden sm:table-cell">{row.r2}</td>
+                      <td className={`px-3 py-2.5 hidden md:table-cell ${row.sig === true ? "text-emerald-400" : row.sig === null ? "text-amber-400" : "text-white/40"}`}>{row.verdict}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+
+          <Reveal delay={200}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Robustness: mature batches only</p>
+                <p className="text-white/70 text-sm mt-2">Restricting to batches ≤ 2019 (9+ years to mature): OR(unicorn) = 1.12, p = 0.75. Same conclusion — no reliable hype effect.</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Sample construction</p>
+                <p className="text-white/70 text-sm mt-2">441 companies excluded — no surviving contemporaneous press exists for their batch (mostly pre-2012 and the COVID-transition W20 batch). Excluded, not mislabeled.</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Why R² is so low</p>
+                <p className="text-white/70 text-sm mt-2">Startup outcomes are power-law distributed — a handful of decacorns dominate total value. Binary hype labels can&apos;t explain variance dominated by a few extreme outliers.</p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

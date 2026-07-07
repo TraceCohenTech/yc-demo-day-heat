@@ -18,6 +18,7 @@ type Company = {
   valuation: number;
   raised: string;
   category: "sleeper" | "hot-won" | "hot-failed" | "moderate";
+  noSignal?: boolean;
   story: string;
   industry: string;
   founded: number;
@@ -28,8 +29,8 @@ type Company = {
 };
 
 const COMPANIES: Company[] = [
-  { name: "Airbnb", batch: "W09", valuation: 84, raised: "$6.4B", category: "sleeper", story: "No mention in contemporaneous W09 Demo Day press coverage (which spotlighted Foodoro, Echodio, Heyzap). Sold cereal boxes to survive early on.", industry: "Travel", founded: 2008, seedYear: 2009, seriesAYear: 2011, unicornYear: 2014, status: "public" },
-  { name: "Stripe", batch: "S09", valuation: 159, raised: "$9.4B", category: "sleeper", story: "First customer in 2 weeks via YC network. Sequoia early. Still private at $159B.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2012, unicornYear: 2014, status: "active" },
+  { name: "Airbnb", batch: "W09", valuation: 84, raised: "$6.4B", noSignal: true, category: "sleeper", story: "No genuine \"top picks\" press coverage survives for W09's Demo Day at all — only neutral, complete rosters with no evaluative framing. Sold cereal boxes to survive early on.", industry: "Travel", founded: 2008, seedYear: 2009, seriesAYear: 2011, unicornYear: 2014, status: "public" },
+  { name: "Stripe", batch: "S09", valuation: 159, raised: "$9.4B", noSignal: true, category: "sleeper", story: "First customer in 2 weeks via YC network. Sequoia early. Still private at $159B.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2012, unicornYear: 2014, status: "active" },
   { name: "Coinbase", batch: "S12", valuation: 43, raised: "$1.9B", category: "sleeper", story: "Only $320K committed when pitching a $1M seed round.", industry: "Crypto", founded: 2012, seedYear: 2012, seriesAYear: 2013, unicornYear: 2017, status: "public" },
   { name: "DoorDash", batch: "S13", valuation: 72, raised: "$2.5B", category: "sleeper", story: "Bottom half of batch at Demo Day. Nearly died in 2017–18.", industry: "Delivery", founded: 2013, seedYear: 2013, seriesAYear: 2014, unicornYear: 2018, status: "public" },
   { name: "Cruise", batch: "W14", valuation: 1, raised: "$16B", category: "sleeper", story: "Not in TechCrunch's top 8 picks. GM acquired for ~$1B in 2016 — a huge YC win. Peaked at $30B before pedestrian incident in 2023 led GM to shut down the robotaxi unit.", industry: "Autonomous", founded: 2013, seedYear: 2014, seriesAYear: 2015, status: "acquired" },
@@ -39,7 +40,7 @@ const COMPANIES: Company[] = [
   { name: "OpenSea", batch: "W18", valuation: 0, raised: "$427M", category: "moderate", story: "Peaked at $13B during NFT mania. Sold to Coinbase for undisclosed amount at massive loss.", industry: "Crypto", founded: 2017, seedYear: 2018, seriesAYear: 2021, unicornYear: 2021, status: "acquired" },
   { name: "Faire", batch: "W17", valuation: 5.2, raised: "$1.7B", category: "sleeper", story: "Raised $3.4M seed from Khosla shortly after YC. Peaked at $12.6B, down-round to $5.2B.", industry: "Wholesale", founded: 2017, seedYear: 2017, seriesAYear: 2018, unicornYear: 2019, status: "active" },
   { name: "Brex", batch: "W17", valuation: 5.15, raised: "$1.5B", category: "sleeper", story: "Ribbit Capital led $7M Series A pre-Demo Day. Acquired for $5.15B.", industry: "Fintech", founded: 2017, seedYear: 2017, seriesAYear: 2018, unicornYear: 2018, status: "acquired" },
-  { name: "Reddit", batch: "S05", valuation: 33, raised: "$1.3B", category: "sleeper", story: "19 years from YC to IPO. Longest timeline of any YC company.", industry: "Social", founded: 2005, seedYear: 2005, seriesAYear: 2007, unicornYear: 2017, status: "public" },
+  { name: "Reddit", batch: "S05", valuation: 33, raised: "$1.3B", noSignal: true, category: "sleeper", story: "19 years from YC to IPO. Longest timeline of any YC company.", industry: "Social", founded: 2005, seedYear: 2005, seriesAYear: 2007, unicornYear: 2017, status: "public" },
   { name: "Instacart", batch: "S12", valuation: 10, raised: "$2.9B", category: "sleeper", story: "Applied late. Rejected multiple times. Delivered beer to Garry Tan's door.", industry: "Delivery", founded: 2012, seedYear: 2012, seriesAYear: 2013, unicornYear: 2015, status: "public" },
   { name: "Gusto", batch: "W12", valuation: 9.5, raised: "$746M", category: "sleeper", story: "Highest-priced round of its batch. Grew steadily into $9.5B company.", industry: "HR", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2019, status: "active" },
   { name: "GitLab", batch: "W15", valuation: 4.7, raised: "$414M", category: "sleeper", story: "All-remote model made fundraising difficult. Series B was a grind. IPO'd, now ~$4.7B.", industry: "Dev Tools", founded: 2011, seedYear: 2015, seriesAYear: 2016, unicornYear: 2019, status: "public" },
@@ -63,8 +64,8 @@ const COMPANIES: Company[] = [
   { name: "Podium", batch: "W16", valuation: 3, raised: "$419M", category: "sleeper", story: "Customer engagement platform.", industry: "SaaS", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2021, status: "active" },
   { name: "Twitch", batch: "W07", valuation: 0.97, raised: "$35M", category: "moderate", story: "Started as Justin.tv. Pivoted to gaming streams. $970M Amazon exit.", industry: "Streaming", founded: 2007, seedYear: 2007, seriesAYear: 2008, status: "acquired" },
   { name: "Algolia", batch: "W14", valuation: 2.25, raised: "$334M", category: "sleeper", story: "Search API. $2.25B valuation.", industry: "Dev Tools", founded: 2012, seedYear: 2014, seriesAYear: 2015, unicornYear: 2021, status: "active" },
-  { name: "PagerDuty", batch: "S10", valuation: 0.66, raised: "$524M", category: "moderate", story: "Already had paying customers at YC. IPO'd. Stock declined to ~$660M market cap.", industry: "DevOps", founded: 2009, seedYear: 2010, seriesAYear: 2013, status: "public" },
-  { name: "Mixpanel", batch: "S09", valuation: 1, raised: "$277M", category: "sleeper", story: "Analytics. Same batch as Stripe.", industry: "Analytics", founded: 2009, seedYear: 2009, seriesAYear: 2012, status: "active" },
+  { name: "PagerDuty", batch: "S10", valuation: 0.66, raised: "$524M", noSignal: true, category: "moderate", story: "Already had paying customers at YC. IPO'd. Stock declined to ~$660M market cap.", industry: "DevOps", founded: 2009, seedYear: 2010, seriesAYear: 2013, status: "public" },
+  { name: "Mixpanel", batch: "S09", valuation: 1, raised: "$277M", noSignal: true, category: "sleeper", story: "Analytics. Same batch as Stripe.", industry: "Analytics", founded: 2009, seedYear: 2009, seriesAYear: 2012, status: "active" },
   { name: "Amplitude", batch: "W12", valuation: 0.87, raised: "$336M", category: "moderate", story: "Product analytics. IPO'd. Market cap ~$870M.", industry: "Analytics", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "public" },
   { name: "PlanGrid", batch: "W12", valuation: 0.875, raised: "$69M", category: "moderate", story: "Construction tech. Acquired by Autodesk for $875M.", industry: "Construction", founded: 2011, seedYear: 2012, seriesAYear: 2014, status: "acquired" },
   { name: "Heroku", batch: "W08", valuation: 0.212, raised: "$13M", category: "moderate", story: "Cloud platform. Acquired by Salesforce for $212M.", industry: "Cloud", founded: 2007, seedYear: 2008, seriesAYear: 2009, status: "acquired" },
@@ -73,7 +74,7 @@ const COMPANIES: Company[] = [
   { name: "Embark Trucks", batch: "W16", valuation: 0, raised: "$317M", category: "moderate", story: "SPAC at $5.2B. Stock crashed to $60M. Shut down 2023.", industry: "Autonomous", founded: 2016, seedYear: 2016, seriesAYear: 2018, status: "dead" },
   { name: "Momentus", batch: "S18", valuation: 0, raised: "$160M", category: "moderate", story: "SPAC at $1B+. SEC fraud charges. Collapsed.", industry: "Space", founded: 2017, seedYear: 2018, seriesAYear: 2019, status: "dead" },
   { name: "Notable Labs", batch: "W15", valuation: 0, raised: "$55M", category: "moderate", story: "Public biotech company. Filed for bankruptcy Oct 2024.", industry: "Biotech", founded: 2014, seedYear: 2015, seriesAYear: 2017, status: "dead" },
-  { name: "Homejoy", batch: "W10", valuation: 0, raised: "$40M", category: "moderate", story: "Massive Demo Day buzz. On-demand cleaning. Shut down 2015.", industry: "Services", founded: 2012, seedYear: 2012, seriesAYear: 2013, status: "dead" },
+  { name: "Homejoy", batch: "W10", valuation: 0, raised: "$40M", noSignal: true, category: "moderate", story: "On-demand cleaning marketplace. No surviving press data on Demo Day reception for this batch. Shut down 2015 amid worker-classification lawsuits.", industry: "Services", founded: 2012, seedYear: 2012, seriesAYear: 2013, status: "dead" },
   { name: "SpoonRocket", batch: "S13", valuation: 0, raised: "$13.5M", category: "hot-failed", story: "TechCrunch top 8. $2M run rate. 112% weekly growth. Dead by 2016.", industry: "Delivery", founded: 2013, seedYear: 2013, seriesAYear: 2014, status: "dead" },
   { name: "Mattermark", batch: "S12", valuation: 0, raised: "$17M", category: "moderate", story: "a16z + Foundry. Fire-sold for <$1M. Stock worthless.", industry: "Data", founded: 2012, seedYear: 2012, seriesAYear: 2014, status: "dead" },
   { name: "Buttercoin", batch: "S13", valuation: 0, raised: "Funded", category: "hot-failed", story: "TechCrunch top 8. Bitcoin exchange. Dead by April 2015.", industry: "Crypto", founded: 2013, seedYear: 2013, status: "dead" },
@@ -93,9 +94,9 @@ const COMPANIES: Company[] = [
   { name: "Ginkgo Bioworks", batch: "S14", valuation: 0.4, raised: "$2.8B", category: "moderate", story: "SPAC at $17.5B valuation. Stock crashed 97%. Synthetic biology hype cycle.", industry: "Biotech", founded: 2009, seedYear: 2014, seriesAYear: 2015, unicornYear: 2020, status: "public" },
   { name: "Convoy", batch: "W15", valuation: 0, raised: "$900M", category: "moderate", story: "Jeff Bezos invested. Valued at $3.8B. Shut down Oct 2023.", industry: "Logistics", founded: 2015, seedYear: 2015, seriesAYear: 2017, unicornYear: 2019, status: "dead" },
   { name: "Pebble", batch: "W11", valuation: 0, raised: "$16M+", category: "moderate", story: "Kickstarter record $10M. Sold to Fitbit for parts. Pioneer that lost to Apple Watch.", industry: "Hardware", founded: 2012, seedYear: 2012, status: "dead" },
-  { name: "Docker", batch: "S10", valuation: 2.1, raised: "$392M", category: "sleeper", story: "Applied as dotCloud (PaaS). Container side project became the product.", industry: "Dev Tools", founded: 2008, seedYear: 2010, seriesAYear: 2013, unicornYear: 2015, status: "active" },
+  { name: "Docker", batch: "S10", valuation: 2.1, raised: "$392M", noSignal: true, category: "sleeper", story: "Applied as dotCloud (PaaS). Container side project became the product.", industry: "Dev Tools", founded: 2008, seedYear: 2010, seriesAYear: 2013, unicornYear: 2015, status: "active" },
   { name: "Weebly", batch: "W07", valuation: 0.35, raised: "$35M", category: "hot-failed", story: "Named a Demo Day standout by TechCrunch's contemporaneous W07 coverage. Website builder acquired by Square for $365M in 2018 — never reached unicorn scale.", industry: "Dev Tools", founded: 2006, seedYear: 2007, seriesAYear: 2012, status: "acquired" },
-  { name: "Optimizely", batch: "W10", valuation: 0.6, raised: "$251M", category: "moderate", story: "A/B testing. Acquired by Episerver for ~$600M.", industry: "Analytics", founded: 2010, seedYear: 2010, seriesAYear: 2013, status: "acquired" },
+  { name: "Optimizely", batch: "W10", valuation: 0.6, raised: "$251M", noSignal: true, category: "moderate", story: "A/B testing. Acquired by Episerver for ~$600M.", industry: "Analytics", founded: 2010, seedYear: 2010, seriesAYear: 2013, status: "acquired" },
   { name: "Machine Zone", batch: "S08", valuation: 0.8, raised: "$8M", category: "moderate", story: "Game of War made $1B+/year. Kate Upton Super Bowl ads. Peak $5B. Acquired by Tripledot for $800M.", industry: "Gaming", founded: 2008, seedYear: 2008, unicornYear: 2014, status: "acquired" },
   { name: "Sendbird", batch: "W16", valuation: 1.05, raised: "$221M", category: "sleeper", story: "Chat API for apps. Grew to unicorn status from South Korea.", industry: "Dev Tools", founded: 2013, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
   { name: "Kalshi", batch: "W19", valuation: 1, raised: "$166M", category: "sleeper", story: "CFTC-regulated prediction market. Bet on elections going mainstream.", industry: "Fintech", founded: 2018, seedYear: 2019, seriesAYear: 2021, unicornYear: 2024, status: "active" },
@@ -103,7 +104,7 @@ const COMPANIES: Company[] = [
   { name: "Relativity Space", batch: "S16", valuation: 4.2, raised: "$1.3B", category: "sleeper", story: "3D-printed rockets. Raised at $4.2B valuation. First launch 2023.", industry: "Space", founded: 2015, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
   { name: "Boom Supersonic", batch: "W16", valuation: 1.5, raised: "$700M", category: "sleeper", story: "Building supersonic jets. United ordered 15. Series B at $1.5B, far below hype.", industry: "Aviation", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2024, status: "active" },
   { name: "Loom", batch: "S16", valuation: 0.975, raised: "$203M", category: "moderate", story: "Async video messaging. Acquired by Atlassian for $975M — never reached unicorn scale despite a $1.53B private peak valuation.", industry: "SaaS", founded: 2015, seedYear: 2016, seriesAYear: 2019, status: "acquired" },
-  { name: "Wufoo", batch: "W06", valuation: 0.035, raised: "$118K", category: "moderate", story: "Only raised $118K ever. Acquired by SurveyMonkey for $35M. Pure YC ethos.", industry: "SaaS", founded: 2006, seedYear: 2006, status: "acquired" },
+  { name: "Wufoo", batch: "W06", valuation: 0.035, raised: "$118K", noSignal: true, category: "moderate", story: "Only raised $118K ever. Acquired by SurveyMonkey for $35M. Pure YC ethos.", industry: "SaaS", founded: 2006, seedYear: 2006, status: "acquired" },
   { name: "Socialcam", batch: "W12", valuation: 0.06, raised: "$8M", category: "moderate", story: "Video sharing app. Hit #1 in App Store. Acquired by Autodesk for $60M in 6 months.", industry: "Social", founded: 2012, seedYear: 2012, status: "acquired" },
   { name: "Panorama Education", batch: "S13", valuation: 0.4, raised: "$105M", category: "hot-failed", story: "Mark Zuckerberg's first angel investment. K-12 data analytics.", industry: "Education", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "active" },
   { name: "Mintlify", batch: "W22", valuation: 0.15, raised: "$20M", category: "moderate", story: "Developer docs platform. AI-powered documentation.", industry: "Dev Tools", founded: 2022, seedYear: 2022, seriesAYear: 2023, status: "active" },
@@ -132,13 +133,13 @@ const COMPANIES: Company[] = [
   { name: "BillionToOne", batch: "S17", valuation: 1, raised: "$230M", category: "sleeper", story: "Prenatal genetic testing 10x more accurate than competitors. Grew from diagnostics niche to unicorn.", industry: "Biotech", founded: 2016, seedYear: 2017, seriesAYear: 2020, unicornYear: 2023, status: "active" },
   { name: "Stoke Space", batch: "W21", valuation: 2, raised: "$175M", category: "sleeper", story: "Fully reusable rocket by Blue Origin veterans. Quietly building while SpaceX dominates headlines.", industry: "Space", founded: 2019, seedYear: 2021, seriesAYear: 2023, unicornYear: 2024, status: "active" },
   { name: "Go1", batch: "S15", valuation: 2, raised: "$414M", category: "sleeper", story: "Australian corporate learning aggregator. Overlooked at Demo Day. World's largest curated e-learning library.", industry: "EdTech", founded: 2015, seedYear: 2015, seriesAYear: 2017, unicornYear: 2022, status: "active" },
-  { name: "Scribd", batch: "S06", valuation: 0.45, raised: "$107M", category: "moderate", story: "One of YC's earliest companies. Pivoted from doc sharing to 'Netflix for books.' Survived 20 years.", industry: "Media", founded: 2006, seedYear: 2006, seriesAYear: 2008, status: "active" },
+  { name: "Scribd", batch: "S06", valuation: 0.45, raised: "$107M", noSignal: true, category: "moderate", story: "One of YC's earliest companies. Pivoted from doc sharing to 'Netflix for books.' Survived 20 years.", industry: "Media", founded: 2006, seedYear: 2006, seriesAYear: 2008, status: "active" },
   { name: "Boosted", batch: "S12", valuation: 0, raised: "$72M", category: "moderate", story: "Electric skateboard pioneer with devoted fans. Killed by Trump-era tariffs on Chinese components. Shut down 2020.", industry: "Hardware", founded: 2012, seedYear: 2012, seriesAYear: 2015, status: "dead" },
   { name: "Weave", batch: "W14", valuation: 0.7, raised: "$168M", category: "moderate", story: "Communication platform for small healthcare businesses. Went public on NYSE 2021.", industry: "SaaS", founded: 2008, seedYear: 2015, seriesAYear: 2017, status: "public" },
   // CLASSIC ERA ADDITIONS
-  { name: "Loopt", batch: "S05", valuation: 0.043, raised: "$30M", category: "moderate", story: "Sam Altman's first startup. Location-sharing app. Acquired by Green Dot for $43M. Altman went on to run YC and then OpenAI.", industry: "Mobile", founded: 2005, seedYear: 2005, seriesAYear: 2006, status: "acquired" },
-  { name: "Xobni", batch: "S06", valuation: 0.06, raised: "$42M", category: "moderate", story: "'Inbox' spelled backwards. Smart email search for Outlook. Yahoo acquired for ~$60M, then shut it down.", industry: "Productivity", founded: 2006, seedYear: 2006, seriesAYear: 2008, status: "acquired" },
-  { name: "OMGPOP", batch: "S06", valuation: 0.2, raised: "$17M", category: "moderate", story: "Created Draw Something — 50M downloads in 50 days. Zynga bought for $210M then shut it down within a year.", industry: "Gaming", founded: 2006, seedYear: 2006, seriesAYear: 2007, status: "dead" },
+  { name: "Loopt", batch: "S05", valuation: 0.043, raised: "$30M", noSignal: true, category: "moderate", story: "Sam Altman's first startup. Location-sharing app. Acquired by Green Dot for $43M. Altman went on to run YC and then OpenAI.", industry: "Mobile", founded: 2005, seedYear: 2005, seriesAYear: 2006, status: "acquired" },
+  { name: "Xobni", batch: "S06", valuation: 0.06, raised: "$42M", noSignal: true, category: "moderate", story: "'Inbox' spelled backwards. Smart email search for Outlook. Yahoo acquired for ~$60M, then shut it down.", industry: "Productivity", founded: 2006, seedYear: 2006, seriesAYear: 2008, status: "acquired" },
+  { name: "OMGPOP", batch: "S06", valuation: 0.2, raised: "$17M", noSignal: true, category: "moderate", story: "Created Draw Something — 50M downloads in 50 days. Zynga bought for $210M then shut it down within a year.", industry: "Gaming", founded: 2006, seedYear: 2006, seriesAYear: 2007, status: "dead" },
   { name: "Disqus", batch: "S07", valuation: 0, raised: "$14.6M", category: "hot-failed", story: "Dominant third-party commenting system used by millions of websites. Acquired by Zeta Global for ad-tech data.", industry: "Web", founded: 2007, seedYear: 2007, seriesAYear: 2011, status: "acquired" },
   { name: "Posterous", batch: "S08", valuation: 0, raised: "$10.1M", category: "moderate", story: "Dead-simple blogging co-founded by Garry Tan (now YC President). Twitter acqui-hired the team, killed the product.", industry: "Social", founded: 2008, seedYear: 2008, seriesAYear: 2010, status: "dead" },
   { name: "Genius", batch: "S11", valuation: 0.4, raised: "$94M", category: "moderate", story: "Started as Rap Genius. a16z $40M Series B. Google briefly de-indexed them for SEO manipulation. Never hit unicorn.", industry: "Media", founded: 2009, seedYear: 2011, seriesAYear: 2012, status: "active" },
@@ -177,7 +178,7 @@ const COMPANIES: Company[] = [
   { name: "ClearTax", batch: "S14", valuation: 0.7, raised: "$141M", category: "moderate", story: "First India-focused startup to join YC. Automates tax filing for Indian workers and businesses. Rebranded to 'Clear.'", industry: "Fintech", founded: 2011, seedYear: 2014, seriesAYear: 2017, status: "active" },
   { name: "Mono", batch: "W21", valuation: 0.03, raised: "$20M", category: "moderate", story: "'Plaid for Africa.' Powered millions of bank account linkages. First YC-to-YC exit in Africa — acquired by Flutterwave.", industry: "Fintech", founded: 2020, seedYear: 2020, seriesAYear: 2021, status: "acquired" },
   // NOTABLE FAILURES
-  { name: "Kiko", batch: "S05", valuation: 0, raised: "$0.07M", category: "moderate", story: "YC's very first company. Built a web calendar, then Google Calendar launched. Sold on eBay for $258K. Founders pivoted to Justin.tv → Twitch ($970M).", industry: "Productivity", founded: 2005, seedYear: 2005, status: "dead" },
+  { name: "Kiko", batch: "S05", valuation: 0, raised: "$0.07M", noSignal: true, category: "moderate", story: "YC's very first company. Built a web calendar, then Google Calendar launched. Sold on eBay for $258K. Founders pivoted to Justin.tv → Twitch ($970M).", industry: "Productivity", founded: 2005, seedYear: 2005, status: "dead" },
   { name: "Exec", batch: "W12", valuation: 0, raised: "$3.3M", category: "hot-failed", story: "Justin Kan's on-demand errand service. Couldn't scale past SF, hiked rates, pivoted to cleaning. Acqui-hired by Handy.", industry: "On-Demand", founded: 2012, seedYear: 2012, status: "dead" },
   { name: "Tutorspree", batch: "W11", valuation: 0, raised: "$1.8M", category: "moderate", story: "'Airbnb for tutoring' backed by Sequoia. Users bypassed the platform to work directly. Co-founder Aaron Harris became a YC partner.", industry: "EdTech", founded: 2011, seedYear: 2011, status: "dead" },
   // FINTECH / B2B SAAS
@@ -243,14 +244,14 @@ const COMPANIES: Company[] = [
   { name: "Lucira Health", batch: "S14", valuation: 0.39, raised: "$85M", category: "moderate", story: "First FDA-authorized at-home COVID-19 molecular test. IPO'd during pandemic. Pfizer acquired for $390M.", industry: "Healthcare", founded: 2013, seedYear: 2014, seriesAYear: 2017, status: "acquired" },
   { name: "Pardes Biosciences", batch: "S21", valuation: 0.05, raised: "$220M", category: "moderate", story: "Oral antiviral for COVID. IPO'd in 2021 at $1.2B. Drug failed trials, company pivoted to autoimmune. Stock collapsed.", industry: "Biotech", founded: 2020, seedYear: 2021, seriesAYear: 2021, status: "public" },
   // NOTABLE ACQUISITIONS
-  { name: "Parakey", batch: "S06", valuation: 0, raised: "$0.02M", category: "moderate", story: "Founded by Firefox co-creators Blake Ross and Joe Hewitt. Facebook's very first acquisition. Hewitt built Facebook's iPhone app.", industry: "Web", founded: 2006, seedYear: 2006, status: "acquired" },
+  { name: "Parakey", batch: "S06", valuation: 0, raised: "$0.02M", noSignal: true, category: "moderate", story: "Founded by Firefox co-creators Blake Ross and Joe Hewitt. Facebook's very first acquisition. Hewitt built Facebook's iPhone app.", industry: "Web", founded: 2006, seedYear: 2006, status: "acquired" },
   { name: "Zenter", batch: "W07", valuation: 0, raised: "$0.02M", category: "moderate", story: "Web-based presentation tool acquired by Google months after demo day. Became the foundation for Google Slides.", industry: "Productivity", founded: 2007, seedYear: 2007, status: "acquired" },
   { name: "AppJet", batch: "S07", valuation: 0, raised: "$0.7M", category: "moderate", story: "Built EtherPad — one of the first real-time collaborative editors. Google acquired it and the tech became Google Docs.", industry: "Productivity", founded: 2007, seedYear: 2007, status: "acquired" },
   { name: "Omnisio", batch: "W08", valuation: 0, raised: "$0.1M", category: "hot-failed", story: "Video annotation and editing tool. Google acquired and integrated into YouTube's editing capabilities.", industry: "Media", founded: 2007, seedYear: 2008, status: "acquired" },
-  { name: "Cloudkick", batch: "W09", valuation: 0, raised: "$2.8M", category: "moderate", story: "Cloud server monitoring. Rackspace acquired 11 months after launch. Founder Alex Polvi later founded CoreOS (also acquired).", industry: "DevOps", founded: 2009, seedYear: 2009, status: "acquired" },
-  { name: "Bump", batch: "S09", valuation: 0.03, raised: "$19.9M", category: "moderate", story: "Contact-sharing app — bump phones to exchange info. 125M+ downloads. Google acquired for ~$30M. Team built Google Photos.", industry: "Mobile", founded: 2008, seedYear: 2009, status: "acquired" },
-  { name: "Rapportive", batch: "S10", valuation: 0.015, raised: "$1M", category: "moderate", story: "Gmail plugin showing rich social profiles of contacts. LinkedIn acquired. Founder Rahul Vohra later created Superhuman.", industry: "SaaS", founded: 2010, seedYear: 2010, status: "acquired" },
-  { name: "Cue", batch: "W10", valuation: 0.05, raised: "$5.8M", category: "moderate", story: "Started as Greplin (personal search), pivoted to Cue assistant. Apple acquired for ~$50M to bolster Siri.", industry: "AI", founded: 2009, seedYear: 2010, status: "acquired" },
+  { name: "Cloudkick", batch: "W09", valuation: 0, raised: "$2.8M", noSignal: true, category: "moderate", story: "Cloud server monitoring. Rackspace acquired 11 months after launch. Founder Alex Polvi later founded CoreOS (also acquired).", industry: "DevOps", founded: 2009, seedYear: 2009, status: "acquired" },
+  { name: "Bump", batch: "S09", valuation: 0.03, raised: "$19.9M", noSignal: true, category: "moderate", story: "Contact-sharing app — bump phones to exchange info. 125M+ downloads. Google acquired for ~$30M. Team built Google Photos.", industry: "Mobile", founded: 2008, seedYear: 2009, status: "acquired" },
+  { name: "Rapportive", batch: "S10", valuation: 0.015, raised: "$1M", noSignal: true, category: "moderate", story: "Gmail plugin showing rich social profiles of contacts. LinkedIn acquired. Founder Rahul Vohra later created Superhuman.", industry: "SaaS", founded: 2010, seedYear: 2010, status: "acquired" },
+  { name: "Cue", batch: "W10", valuation: 0.05, raised: "$5.8M", noSignal: true, category: "moderate", story: "Started as Greplin (personal search), pivoted to Cue assistant. Apple acquired for ~$50M to bolster Siri.", industry: "AI", founded: 2009, seedYear: 2010, status: "acquired" },
   { name: "Flutter", batch: "W12", valuation: 0.04, raised: "$2M", category: "moderate", story: "Gesture recognition — control your computer with hand waves via webcam. Google acquired for ~$40M for the tech.", industry: "AI", founded: 2012, seedYear: 2012, status: "acquired" },
   // LATEST BATCHES (2024-2025)
   { name: "Vapi", batch: "W24", valuation: 0.3, raised: "$75.2M", category: "moderate", story: "Voice AI developer platform for natural phone call agents. Series A at $130M, then Series B 14 months later.", industry: "AI", founded: 2023, seedYear: 2024, seriesAYear: 2024, status: "active" },
@@ -265,7 +266,7 @@ const COMPANIES: Company[] = [
   { name: "uBiome", batch: "S14", valuation: 0, raised: "$109M", category: "moderate", story: "Raised $109M to decode the microbiome. FBI raided offices over insurance billing fraud. Founders charged.", industry: "Biotech", founded: 2012, seedYear: 2014, seriesAYear: 2016, status: "dead" },
   { name: "Airware", batch: "W13", valuation: 0, raised: "$118M", category: "moderate", story: "Enterprise drone software. Raised $118M but DJI ate their lunch on hardware. Burned cash on obsolete tech. Shut down 2018.", industry: "Drones", founded: 2011, seedYear: 2013, seriesAYear: 2015, status: "dead" },
   { name: "Modern Fertility", batch: "S17", valuation: 0.225, raised: "$22M", category: "moderate", story: "At-home fertility hormone testing. Democratized reproductive health data. Ro acquired for $225M in 2021.", industry: "Healthcare", founded: 2017, seedYear: 2017, seriesAYear: 2019, status: "acquired" },
-  { name: "FutureAdvisor", batch: "S10", valuation: 0.15, raised: "$21.5M", category: "moderate", story: "Robo-advisor for automated wealth management. BlackRock — world's largest asset manager — acquired for $150M.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2013, status: "acquired" },
+  { name: "FutureAdvisor", batch: "S10", valuation: 0.15, raised: "$21.5M", noSignal: true, category: "moderate", story: "Robo-advisor for automated wealth management. BlackRock — world's largest asset manager — acquired for $150M.", industry: "Fintech", founded: 2010, seedYear: 2010, seriesAYear: 2013, status: "acquired" },
   { name: "Sqreen", batch: "W18", valuation: 0.22, raised: "$35M", category: "moderate", story: "Runtime application security platform. Datadog acquired to expand their security portfolio.", industry: "Security", founded: 2015, seedYear: 2018, seriesAYear: 2019, status: "acquired" },
   // MORE NOTABLE COMPANIES
   { name: "Firebase", batch: "S11", valuation: 0.085, raised: "$12.6M", category: "moderate", story: "Mobile/web dev platform. Google acquired for ~$85M in 2014. Became a core Google Cloud product used by millions of developers.", industry: "Dev Tools", founded: 2011, seedYear: 2011, seriesAYear: 2013, status: "acquired" },
@@ -375,15 +376,25 @@ const unicornScatter = COMPANIES
 
 
 const CATEGORY_META: Record<string, { label: string; color: string; bg: string }> = {
-  sleeper: { label: "No Press Pick → Unicorn", color: "#FF6600", bg: "#FFF3EB" },
+  sleeper: { label: "Confirmed Not Picked → Unicorn", color: "#FF6600", bg: "#FFF3EB" },
   "hot-won": { label: "Press Pick → Unicorn", color: "#10b981", bg: "#ecfdf5" },
   "hot-failed": { label: "Press Pick → No Unicorn", color: "#ef4444", bg: "#fef2f2" },
   moderate: { label: "No Unicorn (or No Press Data)", color: "#3b82f6", bg: "#eff6ff" },
 };
 
+// Batches predating any recoverable contemporaneous press coverage (S05, S06, S09,
+// S10, W06, W09, W10) get an honest "no data" label instead of implying they were
+// confirmed overlooked by press that we know covered their batch.
+function getCompanyMeta(company: Company) {
+  if (company.noSignal) {
+    return { label: "No Press Data This Old", color: "#78716c", bg: "#f5f5f4" };
+  }
+  return CATEGORY_META[company.category];
+}
+
 function ValuationBar({ company, maxVal }: { company: Company; maxVal: number }) {
   const pct = company.valuation > 0 ? Math.max((company.valuation / maxVal) * 100, 2) : 0;
-  const meta = CATEGORY_META[company.category];
+  const meta = getCompanyMeta(company);
   return (
     <div className="flex items-center gap-3 py-2 group">
       <div className="w-28 sm:w-36 shrink-0 text-right">
@@ -702,7 +713,7 @@ export default function Home() {
             </thead>
             <tbody>
               {sorted.slice(0, 50).map((c, i) => {
-                const meta = CATEGORY_META[c.category];
+                const meta = getCompanyMeta(c);
                 return (
                   <tr key={c.name} className={`border-b border-neutral-50 hover:bg-neutral-50 transition ${i % 2 === 0 ? "" : "bg-neutral-25"}`}>
                     <td className="px-4 py-2.5">
@@ -987,7 +998,7 @@ export default function Home() {
                     <p className="text-xs text-neutral-500 mb-4">Years from founding to $1B+ valuation</p>
                     <div className="space-y-1">
                       {fastest.map((c) => {
-                        const meta = CATEGORY_META[c.category];
+                        const meta = getCompanyMeta(c);
                         const pct = Math.max((c.yearsToUnicorn / maxFastest) * 100, 8);
                         return (
                           <div key={c.name} className="flex items-center gap-3 py-1.5 group">

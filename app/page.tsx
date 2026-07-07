@@ -922,7 +922,7 @@ export default function Home() {
             <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Funding Velocity</div>
             <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">How fast did they scale?</h2>
             <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">
-              Time from founding to unicorn status ($1B+ valuation). The fastest got there in 1–2 years. Some took over a decade. Many never made it.
+              Press coverage is one proxy for Demo Day heat, but not the only one — how fast a company closes its next round, and which investors show up, matter too. We don&apos;t have free, comprehensive data on round oversubscription or investor prestige across 5,000+ companies, but we can measure speed: time from founding to unicorn status. The fastest got there in 1–2 years. Some took over a decade. Many never made it.
             </p>
           </Reveal>
 
@@ -1228,7 +1228,7 @@ export default function Home() {
             <div className="inline-block px-3 py-1 rounded-full bg-white/10 text-[#FF9955] text-xs font-bold uppercase tracking-widest mb-4">The Math</div>
             <h2 className="text-3xl sm:text-5xl font-bold">We ran the regression.<br />Here&apos;s the receipt.</h2>
             <p className="text-white/50 mt-3 text-sm sm:text-base max-w-2xl">
-              Logistic regression on unicorn outcome (binary) as a function of Demo Day press coverage (hot), controlling for batch era. N = 5,025 companies with verified contemporaneous press signal.
+              Logistic regression on unicorn outcome (binary) as a function of press coverage at Demo Day (hot), controlling for batch era. Press coverage is one measurable proxy for early heat — not a complete score. Funding velocity and investor prestige likely matter too, but aren&apos;t available as free, comprehensive data across 5,000+ companies. N = 5,025 companies with verified contemporaneous press signal.
             </p>
           </Reveal>
 

@@ -481,7 +481,7 @@ export default function Home() {
             </div>
             <span className="ml-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/8 text-xs text-white/60 backdrop-blur-sm border border-white/5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FF6600] pulse-dot" />
-              5,025 verified · 20 years
+              5,022 verified · 20 years
             </span>
           </motion.div>
 
@@ -510,7 +510,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We verified 5,025 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels — to find out if Demo Day buzz predicts long-term outcomes.<br />
+            We verified 5,022 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels — to find out if Demo Day buzz predicts long-term outcomes.<br />
             <span className="text-white/90 font-semibold">It mostly doesn&apos;t.</span>
           </motion.p>
 
@@ -537,7 +537,7 @@ export default function Home() {
           >
             {[
               { big: "1.04", label: "Era-adjusted odds ratio", sub: "hot vs. unicorn odds — not significant" },
-              { big: "5,025", label: "Companies analyzed", sub: "20 yrs, verified via research" },
+              { big: "5,022", label: "Companies analyzed", sub: "20 yrs, verified via research" },
               { big: "2.5%", label: "Actually become", sub: "unicorns ($1B+), full population" },
               { big: "~19%", label: "Ultimately", sub: "fail entirely (verified)" },
             ].map((s, i) => (
@@ -578,7 +578,7 @@ export default function Home() {
               are worth <span className="text-[#FF6600]">${Math.round(sleepersTotal)}B+</span> today.
             </h2>
             <p className="text-neutral-600 mt-4 text-base sm:text-lg leading-relaxed max-w-2xl">
-              Airbnb was rejected 7+ times. DoorDash was bottom half of its batch. Coinbase couldn&apos;t fill a $1M round. Some of the companies investors fought over at Demo Day raised hundreds of millions and are now worth $0 — but on average, across 5,025 verified companies, press coverage barely moves the odds once you adjust for the era each batch launched in.
+              Airbnb was rejected 7+ times. DoorDash was bottom half of its batch. Coinbase couldn&apos;t fill a $1M round. Some of the companies investors fought over at Demo Day raised hundreds of millions and are now worth $0 — but on average, across 5,022 verified companies, press coverage barely moves the odds once you adjust for the era each batch launched in.
             </p>
           </div>
         </Reveal>
@@ -640,7 +640,7 @@ export default function Home() {
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
           <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">242 notable companies</h2>
-          <p className="text-neutral-500 mt-2 text-sm sm:text-base">An illustrative subset of the full 5,025-company verified dataset, labeled using real hot/unicorn signal. Search by name, industry, or batch. Filter by category.</p>
+          <p className="text-neutral-500 mt-2 text-sm sm:text-base">An illustrative subset of the full 5,022-company verified dataset, labeled using real hot/unicorn signal. Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -797,7 +797,7 @@ export default function Home() {
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">TechCrunch Cross-Reference</div>
           <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">Three batches where<br />the pundits missed it.</h2>
-          <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">In these three illustrative batches, TechCrunch&apos;s &ldquo;Top Picks&rdquo; missed the biggest eventual winner — but across all 5,025 verified companies, press coverage doesn&apos;t reliably predict outcomes in either direction once era is controlled for.</p>
+          <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">In these three illustrative batches, TechCrunch&apos;s &ldquo;Top Picks&rdquo; missed the biggest eventual winner — but across all 5,022 verified companies, press coverage doesn&apos;t reliably predict outcomes in either direction once era is controlled for.</p>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
@@ -877,8 +877,8 @@ export default function Home() {
             <Reveal delay={100}>
               <div className="space-y-4">
                 {[
-                  { n: "0.19%", label: "of YC companies are decacorns", sub: "10 of 5,157 verified companies, >$10B" },
-                  { n: "2.6%", label: "become unicorns at all", sub: "136 of 5,157 verified companies" },
+                  { n: "0.19%", label: "of YC companies are decacorns", sub: "10 of 5,154 verified companies, >$10B" },
+                  { n: "2.6%", label: "become unicorns at all", sub: "136 of 5,154 verified companies" },
                   { n: "1,039", label: "companies confirmed inactive", sub: "20% of the full verified population" },
                   { n: "5/5", label: "of the top 5 had no Demo Day press pick", sub: "Coinbase, DoorDash, Instacart, Rigetti Computing confirmed overlooked — Airbnb's batch predates available press coverage" },
                 ].map((s, i) => (
@@ -1228,7 +1228,7 @@ export default function Home() {
             <div className="inline-block px-3 py-1 rounded-full bg-white/10 text-[#FF9955] text-xs font-bold uppercase tracking-widest mb-4">The Math</div>
             <h2 className="text-3xl sm:text-5xl font-bold">We ran the regression.<br />Here&apos;s the receipt.</h2>
             <p className="text-white/50 mt-3 text-sm sm:text-base max-w-2xl">
-              Logistic regression on unicorn outcome (binary) as a function of press coverage at Demo Day (hot), controlling for batch era. Press coverage is one measurable proxy for early heat — not a complete score. Funding velocity and investor prestige likely matter too, but aren&apos;t available as free, comprehensive data across 5,000+ companies. N = 5,025 companies with verified contemporaneous press signal.
+              Logistic regression on unicorn outcome (binary) as a function of press coverage at Demo Day (hot), controlling for batch era and industry (press coverage skews ~2x toward Consumer companies, so industry composition alone could otherwise explain a spurious effect). Press coverage is one measurable proxy for early heat — not a complete score. Funding velocity and investor prestige likely matter too, but aren&apos;t available as free, comprehensive data across 5,000+ companies. N = 5,022 companies with verified contemporaneous press signal.
             </p>
           </Reveal>
 
@@ -1259,12 +1259,12 @@ export default function Home() {
                 </thead>
                 <tbody>
                   {[
-                    { dep: "unicorn (raw)", or: "1.64", p: "0.11", r2: "0.001", verdict: "not significant", sig: false },
-                    { dep: "unicorn (era-adjusted)", or: "1.04", p: "0.90", r2: "0.119", verdict: "not significant", sig: false },
-                    { dep: "failed / shut down", or: "0.78", p: "0.107", r2: "0.006", verdict: "not significant", sig: false },
-                    { dep: "IPO", or: "2.19", p: "0.145", r2: "0.005", verdict: "not significant", sig: false },
-                    { dep: "acquired", or: "1.44", p: "0.016", r2: "0.001", verdict: "significant", sig: true },
-                    { dep: "reached Growth stage (era-adj.)", or: "1.44", p: "0.008", r2: "0.075", verdict: "significant", sig: true },
+                    { dep: "unicorn (raw)", or: "1.65", p: "0.10", r2: "0.001", verdict: "not significant", sig: false },
+                    { dep: "unicorn (era + industry adj.)", or: "1.05", p: "0.88", r2: "0.127", verdict: "not significant", sig: false },
+                    { dep: "failed / shut down (era + industry adj.)", or: "0.74", p: "0.056", r2: "0.076", verdict: "not significant", sig: false },
+                    { dep: "IPO (era + industry adj.)", or: "1.38", p: "0.56", r2: "0.173", verdict: "not significant", sig: false },
+                    { dep: "acquired (era + industry adj.)", or: "1.08", p: "0.65", r2: "0.074", verdict: "not significant", sig: false },
+                    { dep: "reached Growth stage (era + industry adj.)", or: "1.46", p: "0.006", r2: "0.083", verdict: "significant", sig: true },
                   ].map((row) => (
                     <tr key={row.dep} className="border-b border-white/5">
                       <td className="px-4 py-2.5 text-white/80">{row.dep}</td>
@@ -1283,7 +1283,7 @@ export default function Home() {
             <div className="mt-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
               <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">The one real, significant finding</p>
               <p className="text-white/80 text-sm sm:text-base mt-2 leading-relaxed">
-                Press coverage doesn&apos;t predict who becomes a unicorn — but it does predict who scales. Press-covered companies have <strong className="text-emerald-400">22% bigger teams</strong> (p=0.011) and are <strong className="text-emerald-400">1.44x more likely to reach YC&apos;s &quot;Growth&quot; stage</strong> (p=0.008), both holding after controlling for batch era. Hype is a real, measurable scaling signal — it just doesn&apos;t reliably predict the extreme, rare outcome of hitting $1B+.
+                Press coverage doesn&apos;t predict who becomes a unicorn — but it does predict who scales. Press-covered companies have <strong className="text-emerald-400">23% bigger teams</strong> (p=0.009) and are <strong className="text-emerald-400">1.46x more likely to reach YC&apos;s &quot;Growth&quot; stage</strong> (p=0.006), both holding after controlling for batch era <em>and</em> industry composition. Hype is a real, measurable scaling signal — it just doesn&apos;t reliably predict the extreme, rare outcome of hitting $1B+.
               </p>
             </div>
           </Reveal>
@@ -1292,7 +1292,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
               <div className="rounded-xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Robustness: mature batches only</p>
-                <p className="text-white/70 text-sm mt-2">Restricting to batches ≤ 2019 (9+ years to mature): OR(unicorn) = 1.28, p = 0.44. Same conclusion — no reliable hype effect on unicorn odds specifically.</p>
+                <p className="text-white/70 text-sm mt-2">Restricting to batches ≤ 2019 (9+ years to mature): OR(unicorn) = 1.29, p = 0.42. Same conclusion — no reliable hype effect on unicorn odds specifically.</p>
               </div>
               <div className="rounded-xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Sample construction</p>
@@ -1314,7 +1314,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">The signal isn&apos;t in the sizzle.</h2>
             <p className="text-xl sm:text-2xl text-[#FF6600] font-semibold mt-4">It&apos;s in the scale — just not the outliers.</p>
             <p className="text-neutral-600 text-base sm:text-lg mt-8 leading-relaxed max-w-xl mx-auto">
-              We verified 5,025 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels. The raw numbers show hot-covered companies with a modest edge on unicorn odds (odds ratio 1.64), but once we control for the era each batch launched in, that edge nearly vanishes (odds ratio 1.04, not statistically significant). Demo Day press coverage does not reliably predict which companies become unicorns. But it does predict something real: press-covered companies end up with meaningfully bigger teams and are significantly more likely to reach growth stage, even after controlling for era. Hype is a genuine scaling signal — it just can&apos;t pick the handful of extreme, power-law outliers that end up dominating total portfolio value.
+              We verified 5,022 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels. The raw numbers show hot-covered companies with a modest edge on unicorn odds (odds ratio 1.65), but once we control for both batch era and industry composition (press skews heavily toward Consumer), that edge nearly vanishes (odds ratio 1.05, not statistically significant). Demo Day press coverage does not reliably predict which companies become unicorns. But it does predict something real: press-covered companies end up with meaningfully bigger teams and are significantly more likely to reach growth stage, even after controlling for both era and industry. Hype is a genuine scaling signal — it just can&apos;t pick the handful of extreme, power-law outliers that end up dominating total portfolio value.
             </p>
           </div>
         </Reveal>
@@ -1343,9 +1343,9 @@ export default function Home() {
                 </thead>
                 <tbody>
                   {[
-                    { metric: "Unicorn rate", ours: "2.6% (136 of 5,157)", other: "1.8% – 4.5%, depending on cohort maturity" },
+                    { metric: "Unicorn rate", ours: "2.6% (136 of 5,154)", other: "1.8% – 4.5%, depending on cohort maturity" },
                     { metric: "Failure / shutdown rate", ours: "20.1%, verified per company", other: "13%, self-reported estimate" },
-                    { metric: "Mature-cohort unicorn rate", ours: "5.8% (batches ≤2019)", other: "5% – 6.5%, using paid valuation databases" },
+                    { metric: "Mature-cohort unicorn rate", ours: "5.6% (batches ≤2019)", other: "5% – 6.5%, using paid valuation databases" },
                   ].map((row) => (
                     <tr key={row.metric} className="border-b border-neutral-50">
                       <td className="px-4 py-2.5 font-medium text-yc-dark">{row.metric}</td>
@@ -1360,7 +1360,7 @@ export default function Home() {
 
           <Reveal delay={150}>
             <p className="text-neutral-600 text-sm mt-6 leading-relaxed max-w-3xl">
-Once you control for cohort maturity, our number converges almost exactly with everyone else&apos;s: 5.9% of our pre-2020 batches became unicorns, right in the 5%–6.5% range other analyses report using paid valuation databases. The headline 2.7% figure looks lower mainly because our dataset runs all the way through 2025, including hundreds of companies still too young to have hit $1B yet — the same maturity-bias every other analysis has to correct for. Our failure rate is likely the most accurate number in this table, since it comes directly from YC&apos;s own status field verified individually per company, not a self-reported or modeled estimate. Every serious analysis lands on the same underlying conclusion regardless of the exact percentage: YC roughly doubles a startup&apos;s unconditional odds of reaching unicorn status versus the general venture-backed baseline.
+Once you control for cohort maturity, our number converges almost exactly with everyone else&apos;s: 5.6% of our pre-2020 batches became unicorns, right in the 5%–6.5% range other analyses report using paid valuation databases. The headline 2.6% figure looks lower mainly because our dataset runs all the way through 2025, including hundreds of companies still too young to have hit $1B yet — the same maturity-bias every other analysis has to correct for. Our failure rate is likely the most accurate number in this table, since it comes directly from YC&apos;s own status field verified individually per company, not a self-reported or modeled estimate. Every serious analysis lands on the same underlying conclusion regardless of the exact percentage: YC roughly doubles a startup&apos;s unconditional odds of reaching unicorn status versus the general venture-backed baseline.
             </p>
           </Reveal>
         </div>
@@ -1376,12 +1376,12 @@ Once you control for cohort maturity, our number converges almost exactly with e
               download
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yc-dark text-white text-xs font-bold hover:bg-neutral-800 transition-colors"
             >
-              ⬇ Download full dataset (5,157 companies, CSV)
+              ⬇ Download full dataset (5,154 companies, CSV)
             </a>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
             {[
-              "Y Combinator's public company directory (all 5,157 companies, batches S05–S25)",
+              "Y Combinator's public company directory (all 5,154 companies, batches S05–S25)",
               "TechCrunch, VentureBeat & The Next Web contemporaneous Demo Day coverage (30+ batches)",
               "Wayback Machine archival recovery of dead TechCrunch gallery pages",
               "CB Insights & Crunchbase current unicorn lists (cross-referenced)",
@@ -1390,7 +1390,7 @@ Once you control for cohort maturity, our number converges almost exactly with e
               "Rebel Fund: What Predicts YC Success (Jared Heyman)",
               "Rebel Fund: Power Law of YC Startups",
               "Palle Broe, \"Pulling Back the Curtain on the Magic of YC\" (Lenny's Newsletter, Feb 2025)",
-              "5,157 total companies; 5,025 analyzed where genuine contemporaneous press exists",
+              "5,154 total companies; 5,022 analyzed where genuine contemporaneous press exists",
             ].map((s) => (
               <p key={s} className="text-xs text-neutral-500 py-1">{s}</p>
             ))}

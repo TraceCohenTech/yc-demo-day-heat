@@ -484,7 +484,7 @@ export default function Home() {
             </div>
             <span className="ml-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/8 text-xs text-white/60 backdrop-blur-sm border border-white/5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FF6600] pulse-dot" />
-              273 companies · 20 years
+              4,716 verified · 20 years
             </span>
           </motion.div>
 
@@ -513,8 +513,8 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-white/50 mt-8 max-w-xl leading-relaxed"
           >
-            We tracked 273 of the most hyped YC companies across 20 years to find out if fundraising momentum at Demo Day predicts long-term outcomes.<br />
-            <span className="text-white/90 font-semibold">The answer surprised us.</span>
+            We verified 4,716 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels — to find out if Demo Day buzz predicts long-term outcomes.<br />
+            <span className="text-white/90 font-semibold">It mostly doesn&apos;t.</span>
           </motion.p>
 
           {/* Batch marquee */}
@@ -642,8 +642,8 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">All 273 companies</h2>
-          <p className="text-neutral-500 mt-2 text-sm sm:text-base">Search by name, industry, or batch. Filter by category.</p>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">273 notable companies</h2>
+          <p className="text-neutral-500 mt-2 text-sm sm:text-base">An illustrative subset of the full 4,716-company verified dataset, labeled using real hot/unicorn signal. Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
         <div className="mt-6 flex flex-col sm:flex-row gap-3">

@@ -1361,6 +1361,7 @@ export default function Home() {
                   { label: "IPO", or: 1.38, ciLo: 0.47, ciHi: 4.07, p: 0.56, sig: false },
                   { label: "acquired", or: 1.08, ciLo: 0.79, ciHi: 1.47, p: 0.65, sig: false },
                   { label: "reached Growth stage", or: 1.46, ciLo: 1.12, ciHi: 1.92, p: 0.006, sig: true },
+                  { label: "total funding raised (era adj.)", or: 1.29, ciLo: 1.01, ciHi: 1.66, p: 0.044, sig: true },
                 ]}
               />
             </div>
@@ -1390,6 +1391,7 @@ export default function Home() {
                     { dep: "IPO (era + industry adj.)", coef: "0.322", se: "0.552", z: "0.58", or: "1.38", ci: "[0.47, 4.07]", p: "0.559", r2: "0.173", verdict: "not significant", sig: false },
                     { dep: "acquired (era + industry adj.)", coef: "0.073", se: "0.160", z: "0.45", or: "1.08", ci: "[0.79, 1.47]", p: "0.650", r2: "0.074", verdict: "not significant", sig: false },
                     { dep: "reached Growth stage (era + industry adj.)", coef: "0.381", se: "0.137", z: "2.77", or: "1.46", ci: "[1.12, 1.92]", p: "0.006", r2: "0.083", verdict: "significant", sig: true },
+                    { dep: "total funding raised, log (era adj., OLS)", coef: "0.256", se: "0.127", z: "2.02", or: "1.29", ci: "[1.01, 1.66]", p: "0.044", r2: "0.074", verdict: "significant", sig: true },
                   ].map((row) => (
                     <tr key={row.dep} className="border-b border-white/5">
                       <td className="px-4 py-2.5 text-white/80">{row.dep}</td>
@@ -1410,9 +1412,9 @@ export default function Home() {
 
           <Reveal delay={200}>
             <div className="mt-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
-              <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">The one real, significant finding</p>
+              <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">The real, significant findings</p>
               <p className="text-white/80 text-sm sm:text-base mt-2 leading-relaxed">
-                Press coverage doesn&apos;t predict who becomes a unicorn — but it does predict who scales. Press-covered companies have <strong className="text-emerald-400">23% bigger teams</strong> (p=0.009) and are <strong className="text-emerald-400">1.46x more likely to reach YC&apos;s &quot;Growth&quot; stage</strong> (p=0.006), both holding after controlling for batch era <em>and</em> industry composition. Hype is a real, measurable scaling signal — it just doesn&apos;t reliably predict the extreme, rare outcome of hitting $1B+.
+                Press coverage doesn&apos;t predict who becomes a unicorn — but it does predict who scales and who raises. Press-covered companies have <strong className="text-emerald-400">23% bigger teams</strong> (p=0.009) and are <strong className="text-emerald-400">1.46x more likely to reach YC&apos;s &quot;Growth&quot; stage</strong> (p=0.006), both holding after controlling for batch era <em>and</em> industry composition. We also individually researched total funding raised for 620 companies (310 hot, 310 matched not-hot) — a dataset that doesn&apos;t exist anywhere else — and found press-covered companies raise <strong className="text-emerald-400">1.5x more capital</strong> (median $3.0M vs $2.0M, p=0.021 Mann-Whitney; 1.29x era-adjusted, p=0.044). Hype is a real, measurable signal for scale and fundraising — it just doesn&apos;t reliably predict the extreme, rare outcome of hitting $1B+.
               </p>
             </div>
           </Reveal>
@@ -1443,7 +1445,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">The signal isn&apos;t in the sizzle.</h2>
             <p className="text-xl sm:text-2xl text-[#FF6600] font-semibold mt-4">It&apos;s in the scale — just not the outliers.</p>
             <p className="text-neutral-600 text-base sm:text-lg mt-8 leading-relaxed max-w-xl mx-auto">
-              We verified 5,022 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels. The raw numbers show hot-covered companies with a modest edge on unicorn odds (odds ratio 1.65), but once we control for both batch era and industry composition (press skews heavily toward Consumer), that edge nearly vanishes (odds ratio 1.05, not statistically significant). Demo Day press coverage does not reliably predict which companies become unicorns. But it does predict something real: press-covered companies end up with meaningfully bigger teams and are significantly more likely to reach growth stage, even after controlling for both era and industry. Hype is a genuine scaling signal — it just can&apos;t pick the handful of extreme, power-law outliers that end up dominating total portfolio value.
+              We verified 5,022 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels. The raw numbers show hot-covered companies with a modest edge on unicorn odds (odds ratio 1.65), but once we control for both batch era and industry composition (press skews heavily toward Consumer), that edge nearly vanishes (odds ratio 1.05, not statistically significant). Demo Day press coverage does not reliably predict which companies become unicorns. But it does predict something real: press-covered companies end up with meaningfully bigger teams, are significantly more likely to reach growth stage, and — based on individually researched funding data for 620 companies — raise about 1.5x more capital, all holding after controlling for era. Hype is a genuine scaling and fundraising signal — it just can&apos;t pick the handful of extreme, power-law outliers that end up dominating total portfolio value.
             </p>
           </div>
         </Reveal>
@@ -1516,6 +1518,7 @@ Once you control for cohort maturity, our number converges almost exactly with e
               "CB Insights & Crunchbase current unicorn lists (cross-referenced)",
               "YC's own \"top company\" flagship designation (91 companies)",
               "813 individually researched Public/Acquired company outcomes",
+              "620 companies individually researched for total funding raised (310 hot, 310 matched not-hot)",
               "Rebel Fund: What Predicts YC Success (Jared Heyman)",
               "Rebel Fund: Power Law of YC Startups",
               "Palle Broe, \"Pulling Back the Curtain on the Magic of YC\" (Lenny's Newsletter, Feb 2025)",

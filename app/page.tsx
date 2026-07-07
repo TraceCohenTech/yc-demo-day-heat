@@ -392,6 +392,83 @@ function getCompanyMeta(company: Company) {
   return CATEGORY_META[company.category];
 }
 
+type ForestRow = { label: string; or: number; ciLo: number; ciHi: number; p: number; sig: boolean };
+
+function ForestPlot({ rows }: { rows: ForestRow[] }) {
+  // log-scale x-axis from 0.3x to 5x so the OR=1 null line sits center-ish
+  const xMin = 0.3, xMax = 5;
+  const toX = (v: number) => {
+    const clamped = Math.max(xMin, Math.min(xMax, v));
+    return ((Math.log(clamped) - Math.log(xMin)) / (Math.log(xMax) - Math.log(xMin))) * 100;
+  };
+  const nullX = toX(1);
+  const ticks = [0.5, 1, 2, 3, 5];
+
+  return (
+    <div className="font-mono">
+      <div className="relative h-6 mb-2">
+        {ticks.map((t) => (
+          <span
+            key={t}
+            className="absolute text-[10px] text-white/30 -translate-x-1/2"
+            style={{ left: `${toX(t)}%` }}
+          >
+            {t}x
+          </span>
+        ))}
+      </div>
+      <div className="relative">
+        {/* null-effect reference line */}
+        <div
+          className="absolute top-0 bottom-0 w-px bg-white/20"
+          style={{ left: `${nullX}%`, borderLeft: "1px dashed rgba(255,255,255,0.25)" }}
+        />
+        <div className="space-y-5">
+          {rows.map((row) => (
+            <div key={row.label} className="relative h-8">
+              <div className="absolute -top-4 left-0 text-[11px] text-white/60 whitespace-nowrap">{row.label}</div>
+              {/* CI whisker */}
+              <div
+                className="absolute top-1/2 h-px"
+                style={{
+                  left: `${toX(row.ciLo)}%`,
+                  width: `${Math.max(0, toX(row.ciHi) - toX(row.ciLo))}%`,
+                  backgroundColor: row.sig ? "#34d399" : "rgba(255,153,85,0.5)",
+                  transform: "translateY(-50%)",
+                }}
+              />
+              {/* whisker end caps */}
+              <div className="absolute top-1/2 w-px h-2.5" style={{ left: `${toX(row.ciLo)}%`, backgroundColor: row.sig ? "#34d399" : "rgba(255,153,85,0.5)", transform: "translate(0, -50%)" }} />
+              <div className="absolute top-1/2 w-px h-2.5" style={{ left: `${toX(row.ciHi)}%`, backgroundColor: row.sig ? "#34d399" : "rgba(255,153,85,0.5)", transform: "translate(0, -50%)" }} />
+              {/* point estimate */}
+              <div
+                className="absolute top-1/2 rounded-full"
+                style={{
+                  left: `${toX(row.or)}%`,
+                  width: 11, height: 11,
+                  backgroundColor: row.sig ? "#34d399" : "#FF9955",
+                  boxShadow: row.sig ? "0 0 12px rgba(52,211,153,0.8)" : "0 0 10px rgba(255,153,85,0.6)",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+              <div
+                className="absolute top-1/2 text-[11px] font-bold whitespace-nowrap"
+                style={{
+                  left: `${toX(row.or)}%`,
+                  transform: `translate(${toX(row.or) > 70 ? "-110%" : "14px"}, -50%)`,
+                  color: row.sig ? "#34d399" : "#FF9955",
+                }}
+              >
+                {row.or.toFixed(2)}x
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ValuationBar({ company, maxVal }: { company: Company; maxVal: number }) {
   const pct = company.valuation > 0 ? Math.max((company.valuation / maxVal) * 100, 2) : 0;
   const meta = getCompanyMeta(company);
@@ -1244,15 +1321,48 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="mt-10 rounded-2xl border border-white/10 bg-black/30 p-6 sm:p-8 font-mono text-sm overflow-x-auto">
-              <p className="text-white/40 text-xs uppercase tracking-widest mb-3">Model specification</p>
-              <p className="text-[#FF9955] whitespace-pre">
-{`logit(P(unicorn)) = β₀ + β₁·hot + β₂·era`}
-              </p>
-              <p className="text-white/40 text-xs uppercase tracking-widest mt-6 mb-3">Odds ratio</p>
-              <p className="text-[#FF9955] whitespace-pre">
-{`OR(hot) = exp(β₁) = 1.04   (95% CI spans 1.0 → not significant)`}
-              </p>
+            <div className="mt-10 rounded-2xl border border-white/10 bg-black/50 overflow-hidden shadow-[0_0_60px_-15px_rgba(255,153,85,0.25)]">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/[0.03]">
+                <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                <span className="ml-3 text-white/30 text-xs font-mono">python3 — logit_regression.py</span>
+              </div>
+              <div className="p-6 sm:p-8 font-mono text-sm overflow-x-auto">
+                <p className="text-white/40">
+                  <span className="text-emerald-400">$</span> python3 logit_regression.py --dep unicorn --controls era,industry
+                </p>
+                <p className="text-white/40 text-xs uppercase tracking-widest mt-6 mb-3">Model specification</p>
+                <p className="text-[#FF9955] whitespace-pre">
+{`logit(P(unicorn)) = β₀ + β₁·hot + β₂·era₁₋₃ + β₃·industry₁₋₆`}
+                </p>
+                <p className="text-white/40 text-xs uppercase tracking-widest mt-6 mb-3">Coefficient on hot (statsmodels Logit summary)</p>
+                <p className="text-white/70 whitespace-pre text-xs sm:text-sm">
+{`  coef = 0.0468    std err = 0.319    z = 0.147    P>|z| = 0.883`}
+                </p>
+                <p className="text-[#FF9955] whitespace-pre mt-2">
+{`  OR(hot) = exp(0.0468) = 1.048   95% CI [0.560, 1.960]`}
+                </p>
+                <p className="text-white/30 text-xs mt-4">→ CI spans 1.0. Cannot reject the null. No significant effect.</p>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={130}>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-6 sm:p-8">
+              <p className="text-white/40 text-xs uppercase tracking-widest mb-1">Forest plot</p>
+              <p className="text-white/30 text-xs mb-8">Odds ratio for &quot;hot&quot; on each outcome, era + industry adjusted. Whiskers = 95% CI. Dashed line = no effect (OR=1).</p>
+              <ForestPlot
+                rows={[
+                  { label: "unicorn (raw, no controls)", or: 1.65, ciLo: 0.90, ciHi: 3.03, p: 0.10, sig: false },
+                  { label: "unicorn (era + industry adj.)", or: 1.05, ciLo: 0.56, ciHi: 1.96, p: 0.88, sig: false },
+                  { label: "unicorn (mature batches ≤2019)", or: 1.29, ciLo: 0.69, ciHi: 2.41, p: 0.42, sig: false },
+                  { label: "failed / shut down", or: 0.74, ciLo: 0.55, ciHi: 1.01, p: 0.056, sig: false },
+                  { label: "IPO", or: 1.38, ciLo: 0.47, ciHi: 4.07, p: 0.56, sig: false },
+                  { label: "acquired", or: 1.08, ciLo: 0.79, ciHi: 1.47, p: 0.65, sig: false },
+                  { label: "reached Growth stage", or: 1.46, ciLo: 1.12, ciHi: 1.92, p: 0.006, sig: true },
+                ]}
+              />
             </div>
           </Reveal>
 
@@ -1262,26 +1372,34 @@ export default function Home() {
                 <thead>
                   <tr className="border-b border-white/10 bg-white/5">
                     <th className="text-left px-4 py-3 text-white/50 text-xs uppercase tracking-wider">Dependent var.</th>
-                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider">Odds ratio (hot)</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider">β (hot)</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden lg:table-cell">SE</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden lg:table-cell">z</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider">OR</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden sm:table-cell">95% CI</th>
                     <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider">p-value</th>
-                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden sm:table-cell">Pseudo R²</th>
+                    <th className="text-right px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden md:table-cell">Pseudo R²</th>
                     <th className="text-left px-3 py-3 text-white/50 text-xs uppercase tracking-wider hidden md:table-cell">Verdict</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { dep: "unicorn (raw)", or: "1.65", p: "0.10", r2: "0.001", verdict: "not significant", sig: false },
-                    { dep: "unicorn (era + industry adj.)", or: "1.05", p: "0.88", r2: "0.127", verdict: "not significant", sig: false },
-                    { dep: "failed / shut down (era + industry adj.)", or: "0.74", p: "0.056", r2: "0.076", verdict: "not significant", sig: false },
-                    { dep: "IPO (era + industry adj.)", or: "1.38", p: "0.56", r2: "0.173", verdict: "not significant", sig: false },
-                    { dep: "acquired (era + industry adj.)", or: "1.08", p: "0.65", r2: "0.074", verdict: "not significant", sig: false },
-                    { dep: "reached Growth stage (era + industry adj.)", or: "1.46", p: "0.006", r2: "0.083", verdict: "significant", sig: true },
+                    { dep: "unicorn (raw)", coef: "0.503", se: "0.310", z: "1.63", or: "1.65", ci: "[0.90, 3.03]", p: "0.104", r2: "0.001", verdict: "not significant", sig: false },
+                    { dep: "unicorn (era + industry adj.)", coef: "0.047", se: "0.319", z: "0.15", or: "1.05", ci: "[0.56, 1.96]", p: "0.883", r2: "0.127", verdict: "not significant", sig: false },
+                    { dep: "failed / shut down (era + industry adj.)", coef: "-0.296", se: "0.155", z: "-1.91", or: "0.74", ci: "[0.55, 1.01]", p: "0.056", r2: "0.076", verdict: "not significant", sig: false },
+                    { dep: "IPO (era + industry adj.)", coef: "0.322", se: "0.552", z: "0.58", or: "1.38", ci: "[0.47, 4.07]", p: "0.559", r2: "0.173", verdict: "not significant", sig: false },
+                    { dep: "acquired (era + industry adj.)", coef: "0.073", se: "0.160", z: "0.45", or: "1.08", ci: "[0.79, 1.47]", p: "0.650", r2: "0.074", verdict: "not significant", sig: false },
+                    { dep: "reached Growth stage (era + industry adj.)", coef: "0.381", se: "0.137", z: "2.77", or: "1.46", ci: "[1.12, 1.92]", p: "0.006", r2: "0.083", verdict: "significant", sig: true },
                   ].map((row) => (
                     <tr key={row.dep} className="border-b border-white/5">
                       <td className="px-4 py-2.5 text-white/80">{row.dep}</td>
-                      <td className="px-3 py-2.5 text-right text-[#FF9955]">{row.or}</td>
-                      <td className="px-3 py-2.5 text-right text-white/60">{row.p}</td>
-                      <td className="px-3 py-2.5 text-right text-white/60 hidden sm:table-cell">{row.r2}</td>
+                      <td className="px-3 py-2.5 text-right text-white/60">{row.coef}</td>
+                      <td className="px-3 py-2.5 text-right text-white/40 hidden lg:table-cell">{row.se}</td>
+                      <td className="px-3 py-2.5 text-right text-white/40 hidden lg:table-cell">{row.z}</td>
+                      <td className="px-3 py-2.5 text-right text-[#FF9955] font-bold">{row.or}</td>
+                      <td className="px-3 py-2.5 text-right text-white/40 hidden sm:table-cell">{row.ci}</td>
+                      <td className={`px-3 py-2.5 text-right font-bold ${row.sig ? "text-emerald-400" : "text-white/60"}`}>{row.p}</td>
+                      <td className="px-3 py-2.5 text-right text-white/60 hidden md:table-cell">{row.r2}</td>
                       <td className={`px-3 py-2.5 hidden md:table-cell ${row.sig === true ? "text-emerald-400" : row.sig === null ? "text-amber-400" : "text-white/40"}`}>{row.verdict}</td>
                     </tr>
                   ))}

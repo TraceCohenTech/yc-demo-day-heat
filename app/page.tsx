@@ -102,7 +102,7 @@ const COMPANIES: Company[] = [
   { name: "PostHog", batch: "W20", valuation: 1.4, raised: "$180M", category: "sleeper", story: "Pivoted 6 times in 6 months, launched MVP on Hacker News, hit 1,500 GitHub stars in 2 weeks. Open-source product analytics unicorn.", industry: "Analytics", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2025, status: "active" },
   { name: "Relativity Space", batch: "S16", valuation: 4.2, raised: "$1.3B", category: "sleeper", story: "3D-printed rockets. Raised at $4.2B valuation. First launch 2023.", industry: "Space", founded: 2015, seedYear: 2016, seriesAYear: 2018, unicornYear: 2021, status: "active" },
   { name: "Boom Supersonic", batch: "W16", valuation: 1.5, raised: "$700M", category: "sleeper", story: "Building supersonic jets. United ordered 15. Series B at $1.5B, far below hype.", industry: "Aviation", founded: 2014, seedYear: 2016, seriesAYear: 2017, unicornYear: 2024, status: "active" },
-  { name: "Loom", batch: "S16", valuation: 1.53, raised: "$203M", category: "sleeper", story: "Async video messaging. Acquired by Atlassian for $975M.", industry: "SaaS", founded: 2015, seedYear: 2016, seriesAYear: 2019, status: "acquired" },
+  { name: "Loom", batch: "S16", valuation: 0.975, raised: "$203M", category: "moderate", story: "Async video messaging. Acquired by Atlassian for $975M — never reached unicorn scale despite a $1.53B private peak valuation.", industry: "SaaS", founded: 2015, seedYear: 2016, seriesAYear: 2019, status: "acquired" },
   { name: "Wufoo", batch: "W06", valuation: 0.035, raised: "$118K", category: "moderate", story: "Only raised $118K ever. Acquired by SurveyMonkey for $35M. Pure YC ethos.", industry: "SaaS", founded: 2006, seedYear: 2006, status: "acquired" },
   { name: "Socialcam", batch: "W12", valuation: 0.06, raised: "$8M", category: "moderate", story: "Video sharing app. Hit #1 in App Store. Acquired by Autodesk for $60M in 6 months.", industry: "Social", founded: 2012, seedYear: 2012, status: "acquired" },
   { name: "Panorama Education", batch: "S13", valuation: 0.4, raised: "$105M", category: "hot-failed", story: "Mark Zuckerberg's first angel investment. K-12 data analytics.", industry: "Education", founded: 2012, seedYear: 2013, seriesAYear: 2015, status: "active" },
@@ -126,7 +126,7 @@ const COMPANIES: Company[] = [
   { name: "Clipboard Health", batch: "W17", valuation: 1.3, raised: "$94M", category: "sleeper", story: "Healthcare staffing marketplace. Hit unicorn on just $94M raised — most capital-efficient YC unicorn.", industry: "Healthcare", founded: 2016, seedYear: 2017, seriesAYear: 2021, unicornYear: 2022, status: "active" },
   { name: "Xendit", batch: "S15", valuation: 1, raised: "$530M", category: "sleeper", story: "First Southeast Asian YC company. Pivoted from Bitcoin to payment infrastructure. Processes $15B/year in Indonesia.", industry: "Fintech", founded: 2015, seedYear: 2015, seriesAYear: 2018, unicornYear: 2021, status: "active" },
   { name: "Paystack", batch: "W16", valuation: 0.2, raised: "$11.7M", category: "moderate", story: "First Nigerian YC company. Processed half of Nigeria's online transactions. Acquired by Stripe for $200M+.", industry: "Fintech", founded: 2015, seedYear: 2016, seriesAYear: 2018, status: "acquired" },
-  { name: "Newfront", batch: "W18", valuation: 2.2, raised: "$310M", category: "sleeper", story: "Modern commercial insurance brokerage. Digitized old-school industry to $2.2B.", industry: "Insurance", founded: 2017, seedYear: 2018, seriesAYear: 2019, unicornYear: 2022, status: "active" },
+  { name: "Newfront", batch: "W18", valuation: 1.3, raised: "$310M", category: "sleeper", story: "Modern commercial insurance brokerage. Digitized old-school industry, hit unicorn status in 2022. Acquired by WTW in 2026 for $1.3B.", industry: "Insurance", founded: 2017, seedYear: 2018, seriesAYear: 2019, unicornYear: 2022, status: "acquired" },
   { name: "GoCardless", batch: "S11", valuation: 2.1, raised: "$540M", category: "sleeper", story: "UK bank-to-bank payments. One of YC's earliest international successes. Acquired in 2025.", industry: "Fintech", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2022, status: "acquired" },
   { name: "Honeylove", batch: "S18", valuation: 2.3, raised: "$13.2M", category: "sleeper", story: "DTC shapewear by an EDM artist. Only raised $13M. One of YC's most capital-efficient consumer brands.", industry: "DTC", founded: 2018, seedYear: 2018, seriesAYear: 2022, unicornYear: 2022, status: "active" },
   { name: "BillionToOne", batch: "S17", valuation: 1, raised: "$230M", category: "sleeper", story: "Prenatal genetic testing 10x more accurate than competitors. Grew from diagnostics niche to unicorn.", industry: "Biotech", founded: 2016, seedYear: 2017, seriesAYear: 2020, unicornYear: 2023, status: "active" },
@@ -214,7 +214,7 @@ const COMPANIES: Company[] = [
   { name: "Kapital", batch: "W22", valuation: 1.3, raised: "$200M", category: "sleeper", story: "AI neobank for LatAm small businesses. 300K customers across US, Mexico, Colombia with $3B balance sheet.", industry: "Fintech", founded: 2020, seedYear: 2021, seriesAYear: 2022, unicornYear: 2025, status: "active" },
   { name: "Gem", batch: "S17", valuation: 1.2, raised: "$148M", category: "sleeper", story: "Talent engagement platform unifying recruiting data. Used by Lyft, Spotify, Affirm. 800+ business customers.", industry: "HR Tech", founded: 2017, seedYear: 2017, seriesAYear: 2019, unicornYear: 2021, status: "active" },
   { name: "Onebrief", batch: "S21", valuation: 1.1, raised: "$336M", category: "sleeper", story: "Cloud-native military operational planning. Defense tech unicorn turning planning into reusable building blocks.", industry: "Defense", founded: 2019, seedYear: 2020, seriesAYear: 2022, unicornYear: 2025, status: "active" },
-  { name: "Vendr", batch: "S19", valuation: 0, raised: "$216M", category: "moderate", story: "AI SaaS purchasing platform. Raised $216M, hit unicorn, then shut down in 2023.", industry: "SaaS", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2022, status: "dead" },
+  { name: "Vendr", batch: "S19", valuation: 0, raised: "$216M", category: "moderate", story: "SaaS purchasing platform. Raised $216M at a reported $1.2B private valuation in 2022 — never confirmed to have closed a $1B+ round or exit.", industry: "SaaS", founded: 2019, seedYear: 2019, seriesAYear: 2021, status: "active" },
   { name: "Imbue", batch: "S17", valuation: 1, raised: "$220M", category: "sleeper", story: "Women-led AI unicorn building reasoning and coding systems. Nvidia-backed with access to 10,000 GPUs.", industry: "AI", founded: 2020, seedYear: 2020, seriesAYear: 2021, unicornYear: 2023, status: "active" },
   // FINAL SWEEP
   { name: "Prometheus", batch: "S19", valuation: 1.5, raised: "$24.1M", category: "sleeper", story: "First e-fuels unicorn. Removes CO2 from air, uses solar/wind to make zero-net-carbon gasoline cheaper than fossil fuels.", industry: "Climate", founded: 2019, seedYear: 2019, seriesAYear: 2021, unicornYear: 2022, status: "active" },
@@ -234,7 +234,6 @@ const COMPANIES: Company[] = [
   { name: "Caviar", batch: "W14", valuation: 0.41, raised: "$16M", category: "moderate", story: "Premium food delivery. Square acquired for $90M in 2014, then DoorDash acquired from Square for $410M in 2019. Big win for founders.", industry: "Food Delivery", founded: 2012, seedYear: 2014, status: "acquired" },
   { name: "Atrium", batch: "W18", valuation: 0, raised: "$75M", category: "moderate", story: "Justin Kan (Twitch co-founder) tried to disrupt law with AI + lawyers. Raised $75M from a16z, YC. Shut down in 2020, laid off 100+ people.", industry: "Legal Tech", founded: 2017, seedYear: 2018, seriesAYear: 2018, status: "dead" },
   { name: "Jasper", batch: "W18", valuation: 1.2, raised: "$131M", category: "sleeper", story: "AI content generation platform. Unicorn in 18 months ($1.5B). Then ChatGPT launched and the moat evaporated. Valuation cut ~20%. The AI commodity cautionary tale.", industry: "AI", founded: 2021, seedYear: 2021, seriesAYear: 2022, unicornYear: 2022, status: "active" },
-  { name: "Rigetti Computing", batch: "S14", valuation: 0.15, raised: "$254M", category: "moderate", story: "Full-stack quantum computing. SPAC'd in 2022. Stock crashed 90%+ from peak. Quantum remains a long bet, but they're still building.", industry: "Quantum Computing", founded: 2013, seedYear: 2014, seriesAYear: 2016, status: "public" },
   { name: "Wave Mobile Money", batch: "W12", valuation: 1.7, raised: "$200M", category: "sleeper", story: "Mobile money for Africa. $1.7B valuation. Largest fintech in Francophone Africa. Processes billions in transactions across Senegal, Côte d'Ivoire, and more.", industry: "Fintech", founded: 2018, seedYear: 2018, seriesAYear: 2020, unicornYear: 2021, status: "active" },
   { name: "Salt Security", batch: "W16", valuation: 1.4, raised: "$271M", category: "sleeper", story: "API security platform. Raised $271M, hit $1.4B valuation. Protects APIs for major enterprises. Quiet YC unicorn in cybersecurity.", industry: "Cybersecurity", founded: 2016, seedYear: 2016, seriesAYear: 2019, unicornYear: 2022, status: "active" },
   { name: "Matterport", batch: "W12", valuation: 1.6, raised: "$160M", category: "sleeper", story: "3D spatial data platform. SPAC'd at $2.9B in 2021, peaked above $8B. Crashed to under $1B. CoStar acquired for $1.6B — a fraction of peak hype.", industry: "PropTech", founded: 2011, seedYear: 2012, seriesAYear: 2014, unicornYear: 2021, status: "acquired" },
@@ -301,7 +300,7 @@ const hotFailedRaised = "$1.5B+";
 
 const tcBatches = [
   { batch: "S13", year: 2013, picks: 8, failed: 3, failedNames: "SpoonRocket, Buttercoin, Standard Treasury", missed: "DoorDash ($71B IPO)" },
-  { batch: "W14", year: 2014, picks: 8, failed: 5, failedNames: "Dating Ring (#2), Kimono Labs, Boostable, BatteryOS…", missed: "Cruise ($30B exit)" },
+  { batch: "W14", year: 2014, picks: 8, failed: 5, failedNames: "Dating Ring (#2), Kimono Labs, Boostable, BatteryOS…", missed: "Cruise ($1B exit)" },
   { batch: "W19", year: 2019, picks: 10, failed: 3, failedNames: "Flockjay, Docucharm, Parker (bankrupt)", missed: "Deel ($17.3B)" },
 ];
 
@@ -320,7 +319,7 @@ const categoryBreakdown = [
 ];
 
 const pieData = [
-  { name: "Top 5 (Airbnb, Coinbase, DoorDash, Instacart, Cruise)", value: 68, fill: "#FF6600" },
+  { name: "Top 5 (Airbnb, Coinbase, DoorDash, Instacart, Rigetti Computing)", value: 72, fill: "#FF6600" },
   { name: "All other verified unicorns", value: 32, fill: "#3b82f6" },
 ];
 
@@ -640,7 +639,7 @@ export default function Home() {
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>
           <div className="inline-block px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-bold uppercase tracking-widest mb-4">Full Directory</div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">243 notable companies</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">242 notable companies</h2>
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">An illustrative subset of the full 5,025-company verified dataset, labeled using real hot/unicorn signal. Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
@@ -835,9 +834,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
           <Reveal>
             <div className="inline-block px-3 py-1 rounded-full bg-[#FFF3EB] text-[#FF6600] text-xs font-bold uppercase tracking-widest mb-4">Power Law</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">5 companies = 68% of all value</h2>
+            <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">5 companies = 72% of all value</h2>
             <p className="text-neutral-500 mt-2 text-sm sm:text-base max-w-2xl">
-              YC&apos;s returns follow an extreme power law. Airbnb, Coinbase, DoorDash, Instacart, and Cruise account for over two-thirds of all verified YC portfolio value — and none of them were named as Demo Day press picks.
+              YC&apos;s returns follow an extreme power law. Airbnb, Coinbase, DoorDash, Instacart, and Rigetti Computing account for nearly three-quarters of all verified YC portfolio value — and none of them were named as Demo Day press picks.
             </p>
           </Reveal>
 
@@ -878,10 +877,10 @@ export default function Home() {
             <Reveal delay={100}>
               <div className="space-y-4">
                 {[
-                  { n: "0.23%", label: "of YC companies are decacorns", sub: "12 of 5,157 verified companies, >$10B" },
-                  { n: "2.7%", label: "become unicorns at all", sub: "137 of 5,157 verified companies" },
+                  { n: "0.19%", label: "of YC companies are decacorns", sub: "10 of 5,157 verified companies, >$10B" },
+                  { n: "2.6%", label: "become unicorns at all", sub: "136 of 5,157 verified companies" },
                   { n: "1,039", label: "companies confirmed inactive", sub: "20% of the full verified population" },
-                  { n: "4/5", label: "of the top 5 were confirmed sleepers", sub: "Coinbase, DoorDash, Instacart, Cruise — Airbnb's batch predates available press coverage" },
+                  { n: "5/5", label: "of the top 5 had no Demo Day press pick", sub: "Coinbase, DoorDash, Instacart, Rigetti Computing confirmed overlooked — Airbnb's batch predates available press coverage" },
                 ].map((s, i) => (
                   <div key={i} className="flex gap-4 items-start">
                     <span className="text-2xl font-bold text-[#FF6600] tabular-nums shrink-0 w-16 text-right">{s.n}</span>
@@ -1334,9 +1333,9 @@ export default function Home() {
                 </thead>
                 <tbody>
                   {[
-                    { metric: "Unicorn rate", ours: "2.7% (137 of 5,157)", other: "1.8% – 4.5%, depending on cohort maturity" },
+                    { metric: "Unicorn rate", ours: "2.6% (136 of 5,157)", other: "1.8% – 4.5%, depending on cohort maturity" },
                     { metric: "Failure / shutdown rate", ours: "20.1%, verified per company", other: "13%, self-reported estimate" },
-                    { metric: "Mature-cohort unicorn rate", ours: "5.9% (batches ≤2019)", other: "5% – 6.5%, using paid valuation databases" },
+                    { metric: "Mature-cohort unicorn rate", ours: "5.8% (batches ≤2019)", other: "5% – 6.5%, using paid valuation databases" },
                   ].map((row) => (
                     <tr key={row.metric} className="border-b border-neutral-50">
                       <td className="px-4 py-2.5 font-medium text-yc-dark">{row.metric}</td>

@@ -1264,6 +1264,7 @@ export default function Home() {
                     { dep: "failed / shut down", or: "0.78", p: "0.107", r2: "0.006", verdict: "not significant", sig: false },
                     { dep: "IPO", or: "2.19", p: "0.145", r2: "0.005", verdict: "not significant", sig: false },
                     { dep: "acquired", or: "1.44", p: "0.016", r2: "0.001", verdict: "significant", sig: true },
+                    { dep: "reached Growth stage (era-adj.)", or: "1.44", p: "0.008", r2: "0.075", verdict: "significant", sig: true },
                   ].map((row) => (
                     <tr key={row.dep} className="border-b border-white/5">
                       <td className="px-4 py-2.5 text-white/80">{row.dep}</td>
@@ -1279,18 +1280,27 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={200}>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div className="mt-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
+              <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">The one real, significant finding</p>
+              <p className="text-white/80 text-sm sm:text-base mt-2 leading-relaxed">
+                Press coverage doesn&apos;t predict who becomes a unicorn — but it does predict who scales. Press-covered companies have <strong className="text-emerald-400">22% bigger teams</strong> (p=0.011) and are <strong className="text-emerald-400">1.44x more likely to reach YC&apos;s &quot;Growth&quot; stage</strong> (p=0.008), both holding after controlling for batch era. Hype is a real, measurable scaling signal — it just doesn&apos;t reliably predict the extreme, rare outcome of hitting $1B+.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={250}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
               <div className="rounded-xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Robustness: mature batches only</p>
-                <p className="text-white/70 text-sm mt-2">Restricting to batches ≤ 2019 (9+ years to mature): OR(unicorn) = 1.28, p = 0.44. Same conclusion — no reliable hype effect.</p>
+                <p className="text-white/70 text-sm mt-2">Restricting to batches ≤ 2019 (9+ years to mature): OR(unicorn) = 1.28, p = 0.44. Same conclusion — no reliable hype effect on unicorn odds specifically.</p>
               </div>
               <div className="rounded-xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Sample construction</p>
                 <p className="text-white/70 text-sm mt-2">132 companies excluded — no surviving contemporaneous press exists for their batch (7 batches, mostly pre-2012). Excluded, not mislabeled.</p>
               </div>
               <div className="rounded-xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Why R² is so low</p>
-                <p className="text-white/70 text-sm mt-2">Startup outcomes are power-law distributed — a handful of decacorns dominate total value. Binary hype labels can&apos;t explain variance dominated by a few extreme outliers.</p>
+                <p className="text-xs uppercase tracking-widest text-white/40 font-bold">Why R² is so low for unicorn odds</p>
+                <p className="text-white/70 text-sm mt-2">Startup outcomes are power-law distributed — a handful of decacorns dominate total value. Binary hype labels can&apos;t explain variance dominated by a few extreme outliers, even when they do explain scale.</p>
               </div>
             </div>
           </Reveal>
@@ -1302,9 +1312,9 @@ export default function Home() {
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-5xl font-bold text-yc-dark">The signal isn&apos;t in the sizzle.</h2>
-            <p className="text-xl sm:text-2xl text-[#FF6600] font-semibold mt-4">And it&apos;s barely in the survival either.</p>
+            <p className="text-xl sm:text-2xl text-[#FF6600] font-semibold mt-4">It&apos;s in the scale — just not the outliers.</p>
             <p className="text-neutral-600 text-base sm:text-lg mt-8 leading-relaxed max-w-xl mx-auto">
-              We verified 5,025 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels. The raw numbers show hot-covered companies with a modest edge (unicorn odds ratio 1.47), but once we control for the era each batch launched in, that edge mostly disappears (odds ratio 0.92, not statistically significant). The honest takeaway: Demo Day hype does not reliably predict which companies become unicorns. Any apparent effect is much more about which years produced strong cohorts than about which companies got picked as favorites.
+              We verified 5,025 YC companies across 20 years against genuine, contemporaneous press coverage — not hindsight labels. The raw numbers show hot-covered companies with a modest edge on unicorn odds (odds ratio 1.64), but once we control for the era each batch launched in, that edge nearly vanishes (odds ratio 1.04, not statistically significant). Demo Day press coverage does not reliably predict which companies become unicorns. But it does predict something real: press-covered companies end up with meaningfully bigger teams and are significantly more likely to reach growth stage, even after controlling for era. Hype is a genuine scaling signal — it just can&apos;t pick the handful of extreme, power-law outliers that end up dominating total portfolio value.
             </p>
           </div>
         </Reveal>
@@ -1359,7 +1369,16 @@ Once you control for cohort maturity, our number converges almost exactly with e
       {/* ── SOURCES ── */}
       <section className="border-t border-neutral-200 bg-white">
         <div className="max-w-5xl mx-auto px-6 sm:px-8 py-12">
-          <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-4">Sources &amp; Methodology</h3>
+          <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+            <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-widest">Sources &amp; Methodology</h3>
+            <a
+              href="/yc-full-dataset.csv"
+              download
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yc-dark text-white text-xs font-bold hover:bg-neutral-800 transition-colors"
+            >
+              ⬇ Download full dataset (5,157 companies, CSV)
+            </a>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
             {[
               "Y Combinator's public company directory (all 5,157 companies, batches S05–S25)",

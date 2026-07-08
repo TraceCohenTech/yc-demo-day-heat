@@ -494,11 +494,6 @@ function ValuationBar({ company, maxVal }: { company: Company; maxVal: number })
           <span className="absolute left-2 top-1/2 -translate-y-1/2 text-xs font-bold text-red-500">$0 — Failed</span>
         )}
       </div>
-      <div className="hidden sm:block w-20 shrink-0">
-        <span className="company-badge text-xs" style={{ backgroundColor: meta.bg, color: meta.color }}>
-          {meta.label}
-        </span>
-      </div>
     </div>
   );
 }
@@ -757,6 +752,42 @@ export default function Home() {
           <p className="text-neutral-500 mt-2 text-sm sm:text-base">An illustrative subset of the full 5,022-company verified dataset, labeled using real hot/unicorn signal. Search by name, industry, or batch. Filter by category.</p>
         </Reveal>
 
+        <Reveal delay={100}>
+          <div className="mt-10 rounded-2xl border border-neutral-200 p-5 sm:p-6">
+            <h3 className="text-sm font-bold text-yc-dark mb-1">Outcome status — all 5,154 companies</h3>
+            <p className="text-xs text-neutral-500 mb-4">Full verified population, not just the illustrative subset below</p>
+            <div style={{ width: "100%", height: 180 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={[
+                    { status: "Active", count: 3305, color: "#10b981" },
+                    { status: "Acquired", count: 774, color: "#f59e0b" },
+                    { status: "Dead / Inactive", count: 1038, color: "#ef4444" },
+                    { status: "Public (IPO)", count: 37, color: "#3b82f6" },
+                  ]}
+                  layout="vertical"
+                  margin={{ left: 100, right: 30, top: 10, bottom: 10 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f0f0f0" />
+                  <XAxis type="number" tick={{ fontSize: 11, fill: "#a3a3a3" }} axisLine={false} tickLine={false} />
+                  <YAxis type="category" dataKey="status" tick={{ fontSize: 12, fill: "#525252", fontWeight: 600 }} axisLine={false} tickLine={false} width={95} />
+                  <Tooltip formatter={(v) => [`${Number(v).toLocaleString()} companies`, ""]} cursor={{ fill: "#fafafa" }} />
+                  <Bar dataKey="count" radius={[0, 6, 6, 0]}>
+                    {[
+                      { status: "Active", count: 3305, color: "#10b981" },
+                      { status: "Acquired", count: 774, color: "#f59e0b" },
+                      { status: "Dead / Inactive", count: 1038, color: "#ef4444" },
+                      { status: "Public (IPO)", count: 37, color: "#3b82f6" },
+                    ].map((d) => (
+                      <Cell key={d.status} fill={d.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </Reveal>
+
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <input
             type="text"
@@ -797,7 +828,6 @@ export default function Home() {
                   { key: "batch", label: "Batch", align: "text-left", cls: "px-3 py-3" },
                   { key: "valuation", label: "Valuation", align: "text-right", cls: "px-3 py-3" },
                   { key: "industry", label: "Industry", align: "text-left", cls: "px-3 py-3 hidden sm:table-cell" },
-                  { key: "category", label: "Category", align: "text-left", cls: "px-3 py-3 hidden md:table-cell" },
                   { key: "status", label: "Status", align: "text-left", cls: "px-3 py-3 hidden lg:table-cell" },
                 ] as const).map((col) => (
                   <th key={col.key} className={`${col.align} ${col.cls} font-semibold text-neutral-500 text-xs uppercase tracking-wider select-none`}>
@@ -816,7 +846,6 @@ export default function Home() {
             </thead>
             <tbody>
               {sorted.slice(0, 50).map((c, i) => {
-                const meta = getCompanyMeta(c);
                 return (
                   <tr key={c.name} className={`border-b border-neutral-50 hover:bg-neutral-50 transition ${i % 2 === 0 ? "" : "bg-neutral-25"}`}>
                     <td className="px-4 py-2.5">
@@ -827,9 +856,6 @@ export default function Home() {
                       {c.valuation > 0 ? <span className="text-yc-dark">${c.valuation}B</span> : <span className="text-red-500">$0</span>}
                     </td>
                     <td className="px-3 py-2.5 text-neutral-500 text-xs hidden sm:table-cell">{c.industry}</td>
-                    <td className="px-3 py-2.5 hidden md:table-cell">
-                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold" style={{ backgroundColor: meta.bg, color: meta.color }}>{meta.label}</span>
-                    </td>
                     <td className="px-3 py-2.5 text-xs hidden lg:table-cell">
                       <span className={`${c.status === "dead" ? "text-red-500" : c.status === "public" ? "text-blue-600" : c.status === "acquired" ? "text-amber-600" : "text-green-600"}`}>
                         {c.status === "dead" ? "Dead" : c.status === "public" ? "Public" : c.status === "acquired" ? "Acquired" : "Active"}

@@ -656,6 +656,32 @@ export default function Home() {
 
       <div className="gradient-line" />
 
+      {/* ── TL;DR ── */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+        <Reveal>
+          <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 sm:p-8">
+            <div className="flex items-center gap-2 mb-5">
+              <span className="inline-block px-3 py-1 rounded-full bg-yc-dark text-white text-xs font-bold uppercase tracking-widest">TL;DR</span>
+              <span className="text-xs text-neutral-400 font-medium">30-second version</span>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-5 sm:gap-8">
+              <div>
+                <p className="text-sm font-bold text-yc-dark mb-1">Press hype doesn&apos;t pick unicorns</p>
+                <p className="text-sm text-neutral-600 leading-relaxed">Odds ratio 1.05 after controlling for era + industry — not statistically significant. Most decacorns were never a Demo Day press pick.</p>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-yc-dark mb-1">But it does predict scale</p>
+                <p className="text-sm text-neutral-600 leading-relaxed">Press-covered companies build meaningfully bigger teams, are more likely to reach growth stage, and raise ~1.3x more capital (N=930, replicated).</p>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-yc-dark mb-1">Power law dominates everything</p>
+                <p className="text-sm text-neutral-600 leading-relaxed">A handful of extreme outliers generate most of the portfolio value — and hype can&apos;t tell you in advance which companies those will be.</p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
       {/* ── THE THESIS ── */}
       <section className="max-w-5xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
         <Reveal>

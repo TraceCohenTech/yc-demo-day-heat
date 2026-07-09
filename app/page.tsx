@@ -905,9 +905,9 @@ export default function Home() {
 
           <div>
             <Reveal>
-              <div className="inline-block px-3 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-bold uppercase tracking-widest mb-3">The Graveyard</div>
+              <div className="inline-block px-3 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-bold uppercase tracking-widest mb-3">Hyped, Not Unicorns</div>
               <h2 className="text-2xl sm:text-3xl font-bold text-yc-dark">Everyone fought over them.</h2>
-              <p className="text-neutral-500 mt-1 text-sm">Hottest at Demo Day. VCs piled in. All dead.</p>
+              <p className="text-neutral-500 mt-1 text-sm">Hottest at Demo Day. VCs piled in. Never hit unicorn scale — status varies below.</p>
             </Reveal>
             <div className="mt-4 space-y-3">
               {[...hotFailed].sort((a, b) => {
@@ -921,12 +921,17 @@ export default function Home() {
                       <span className="font-bold text-yc-dark">{c.name}</span>
                       <span className="text-xs text-neutral-400 ml-2 font-mono">{c.batch}</span>
                     </div>
-                    <span className="text-xs font-bold text-red-500 bg-red-100 px-2 py-0.5 rounded-full">Raised {c.raised}</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${c.status === "dead" ? "text-red-500 bg-red-100" : c.status === "public" ? "text-blue-600 bg-blue-100" : c.status === "acquired" ? "text-amber-600 bg-amber-100" : "text-green-600 bg-green-100"}`}>
+                        {c.status === "dead" ? "Dead" : c.status === "public" ? "Public" : c.status === "acquired" ? "Acquired" : "Active"}
+                      </span>
+                      <span className="text-xs font-bold text-red-500 bg-red-100 px-2 py-0.5 rounded-full">Raised {c.raised}</span>
+                    </div>
                   </div>
                   <p className="text-xs text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">{c.story}</p>
                 </div>
               ))}
-              <p className="text-xs text-neutral-400 text-center mt-2">+ {hotFailed.length - 6} more failures in the full directory</p>
+              <p className="text-xs text-neutral-400 text-center mt-2">+ {hotFailed.length - 6} more in the full directory</p>
             </div>
           </div>
         </div>
